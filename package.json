@@ -12,6 +12,6 @@
     "check": "node --check src/deobfuscate.js"
   },
   "dependencies": {
-    "@openai/codex-sdk": "^0.91.0"
+    "@openai/codex-sdk": "^0.148.0"
   }
 }
