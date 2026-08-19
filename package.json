@@ -1,0 +1,17 @@
+{
+  "name": "majadeo",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Deobfuscate JavaScript with Codex",
+  "engines": {
+    "node": ">=18"
+  },
+  "scripts": {
+    "deobfuscate": "node src/deobfuscate.js",
+    "check": "node --check src/deobfuscate.js"
+  },
+  "dependencies": {
+    "@openai/codex-sdk": "^0.91.0"
+  }
+}
