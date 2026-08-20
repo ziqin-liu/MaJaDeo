@@ -268,7 +268,8 @@ def evaluate_deobfuscation(prediction_file: str,
     
     # log 
     print(json.dumps(metrics, indent=4))
-
+    save_to = fp + '.summary' + ext
+    save_solution(metrics, save_to)
     # save prediction with metrics
     if save_with_metrics:
         fp, ext = os.path.splitext(prediction_file)
