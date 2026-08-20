@@ -18,8 +18,14 @@ def _read_file(path):
 def _write_file(dataset, path):
     if path.endswith('.jsonl'):
         with jsonlines.open(path, 'w') as writer:
-            for data in dataset:
-                writer.write(data)
+            if isinstance(dataset, dict):
+                # A single aggregate record (e.g. the summary metrics dict) -
+                # iterating a dict yields its keys, not records, so write it
+                # as one line instead of silently dropping every value.
+                writer.write(dataset)
+            else:
+                for data in dataset:
+                    writer.write(data)
     elif path.endswith('.json'):
         with open(path, 'w') as writer:
             json.dump(dataset, writer, indent=4)

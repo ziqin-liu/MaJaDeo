@@ -1,7 +1,1 @@
-"syntax_pass"
-"exe_pass"
-"code_bleu_codebleu"
-"code_bleu_ngram_match_score"
-"code_bleu_weighted_ngram_match_score"
-"code_bleu_syntax_match_score"
-"code_bleu_dataflow_match_score"
+{"syntax_pass":0.72,"exe_pass":0.5,"code_bleu_codebleu":0.2830520357465172,"code_bleu_ngram_match_score":0.04489459614715114,"code_bleu_weighted_ngram_match_score":0.05373175356088889,"code_bleu_syntax_match_score":0.19616475789920151,"code_bleu_dataflow_match_score":0.1151948131566053}
