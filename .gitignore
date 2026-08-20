@@ -1,8 +1,9 @@
 node_modules/
-deobfuscated/
-jsfuck/
 *.deobfuscated.js
 dataset
 .env
 *.obf.js
 original-selected
+__pycache__/
+*.py[cod]
+*$py.class

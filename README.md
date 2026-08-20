@@ -28,6 +28,34 @@ The selector searches recursively and matches CodeNet IDs, so names such as
 `codenet_p00048_1.js` and `codenet_p00048_1.obf.js` are both supported. It
 aborts and reports details if an ID is missing or has multiple matches.
 
+Filter CodeNet metadata with the same manifest:
+
+```sh
+npm run filter:metadata -- original-selected/Project_CodeNet_selected.jsonl
+```
+
+This writes `Project_CodeNet_selected.filtered.jsonl`, retaining the selected
+records but removing their top-level `obfuscated` field. To replace the input
+atomically while retaining a `.bak` backup:
+
+```sh
+npm run filter:metadata -- original-selected/Project_CodeNet_selected.jsonl --in-place
+```
+
+Add file contents to a field in each matching metadata record:
+
+```sh
+npm run add:metadata-field -- \
+  original-selected/Project_CodeNet_selected.filtered.jsonl \
+  path/to/obfuscated-folder \
+  obfuscated
+```
+
+This recursively matches JavaScript files by CodeNet ID and writes a new JSONL
+whose name ends with `.with-obfuscated.jsonl`. Supply an explicit output path as
+the fourth argument, or use `--in-place` to replace the input while creating a
+`.bak` backup. Missing or duplicate matches abort the update.
+
 ### Obfuscate with JSFuck
 
 Obfuscate one JavaScript file:
@@ -84,6 +112,15 @@ npm run deobfuscate -- path/to/obfuscated-folder path/to/obfuscated-folder/clean
 Folder mode skips `.git`, `node_modules`, its output directory, and files whose
 names already contain `.deobfuscated`. Each source file gets a separate Codex
 thread; processing continues if one file fails and reports a summary at the end.
+If the expected output file already exists, that source is skipped so rerunning
+the command does not spend another Codex call on completed work.
+
+The input folder must contain exactly one source `.jsonl` file. After all files
+have been processed, folder mode writes `<metadata-name>.deobfuscated.jsonl` in
+the same folder. Each matching record receives the source text in `obfuscated`
+and the generated text in `deobfuscated`. When a file fails, its `deobfuscated`
+value is `null`. The source metadata file is not overwritten, and generated
+`.deobfuscated.jsonl` files are ignored on later runs.
 
 ## Run telemetry
 
@@ -149,3 +186,23 @@ Completions) for third-party providers, or whether it now requires the
 Responses API and a translation proxy (e.g. LiteLLM) in front of
 Chat-Completions-only providers like DeepSeek. Test with a throwaway file and
 check the run's `.run.json` log before trusting it for real work.
+
+## Evaluation
+
+The evaluation is based on the JsDeObsBench
+
+### Setup environment
+
+```sh
+export PYTHONPATH="${PYTHONPATH}:/Users/ZacharyKimLiu/Projects/MaJaDeo"
+
+cd evaluators
+```
+
+(if dont have a venv, install uv, and init a vm, by command: uv venv)
+
+```sh
+source .venv/bin/activate
+uv pip install fire, codebleu, jsonlines, tqdm
+uv pip install tree-sitter-javascript==0.21
+```

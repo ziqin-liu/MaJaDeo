@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-import { access, mkdir, readdir, stat, writeFile } from "node:fs/promises";
+import { access, mkdir, readFile, readdir, rename, stat, writeFile } from "node:fs/promises";
 import path from "node:path";
 import process from "node:process";
 import { Codex } from "@openai/codex-sdk";
@@ -69,6 +69,89 @@ function isJavaScriptFile(filePath) {
 
 function isGeneratedFile(filePath) {
   return /\.deobfuscated\.(?:js|mjs|cjs)$/i.test(filePath);
+}
+
+function codeNetId(value) {
+  return String(value).match(/(?:codenet_)?(p\d+_\d+)/)?.[1] || null;
+}
+
+async function findMetadataFile(inputDirectory) {
+  const candidates = (await readdir(inputDirectory, { withFileTypes: true }))
+    .filter((entry) => entry.isFile()
+      && entry.name.toLowerCase().endsWith(".jsonl")
+      && !entry.name.toLowerCase().endsWith(".deobfuscated.jsonl"))
+    .map((entry) => path.join(inputDirectory, entry.name));
+
+  if (candidates.length !== 1) {
+    throw new Error(
+      `Folder deobfuscation requires exactly one source JSONL in ${inputDirectory}; found ${candidates.length}.`
+    );
+  }
+  return candidates[0];
+}
+
+function metadataOutputPath(metadataPath) {
+  return metadataPath.replace(/\.jsonl$/i, ".deobfuscated.jsonl");
+}
+
+async function fileExists(filePath) {
+  try {
+    await access(filePath);
+    return true;
+  } catch {
+    return false;
+  }
+}
+
+async function writeDatasetJsonl(metadataPath, inputDirectory, outputDirectory, sourceFiles) {
+  const sourcesById = new Map();
+  for (const sourcePath of sourceFiles) {
+    const identifier = codeNetId(sourcePath);
+    if (!identifier) continue;
+    if (sourcesById.has(identifier)) throw new Error(`Duplicate input files for ${identifier}`);
+    sourcesById.set(identifier, sourcePath);
+  }
+
+  const outputsById = new Map();
+  for (const sourcePath of sourceFiles) {
+    const identifier = codeNetId(sourcePath);
+    const outputPath = path.join(outputDirectory, path.relative(inputDirectory, sourcePath));
+    if (identifier && await fileExists(outputPath)) outputsById.set(identifier, outputPath);
+  }
+
+  const outputLines = [];
+  const matchedIds = new Set();
+  for (const [index, line] of (await readFile(metadataPath, "utf8")).split(/\r?\n/).entries()) {
+    if (!line.trim()) continue;
+    let record;
+    try {
+      record = JSON.parse(line);
+    } catch (error) {
+      throw new Error(`Invalid JSON in ${metadataPath} on line ${index + 1}: ${error.message}`);
+    }
+
+    const identifier = codeNetId(record.filename ?? record.id ?? record.task_id ?? "");
+    if (!identifier) throw new Error(`No CodeNet ID in metadata line ${index + 1}`);
+    const sourcePath = sourcesById.get(identifier);
+    if (sourcePath) {
+      matchedIds.add(identifier);
+      record.obfuscated = await readFile(sourcePath, "utf8");
+      const outputPath = outputsById.get(identifier);
+      record.deobfuscated = outputPath ? await readFile(outputPath, "utf8") : null;
+    }
+    outputLines.push(JSON.stringify(record));
+  }
+
+  const unmatchedIds = [...sourcesById.keys()].filter((identifier) => !matchedIds.has(identifier));
+  if (unmatchedIds.length > 0) {
+    throw new Error(`${unmatchedIds.length} input file(s) have no matching metadata record.`);
+  }
+
+  const outputPath = metadataOutputPath(metadataPath);
+  const temporaryPath = `${outputPath}.tmp`;
+  await writeFile(temporaryPath, `${outputLines.join("\n")}\n`, "utf8");
+  await rename(temporaryPath, outputPath);
+  return outputPath;
 }
 
 async function findJavaScriptFiles(directory, excludedDirectory) {
@@ -268,17 +351,30 @@ async function main() {
     throw new Error("Folder output must be a subdirectory of the input folder.");
   }
 
+  const metadataPath = await findMetadataFile(inputPath);
+
   const inputFiles = await findJavaScriptFiles(inputPath, outputDirectory);
   if (inputFiles.length === 0) {
     console.error(`No JavaScript files found in ${inputPath}`);
     return;
   }
 
-  console.error(`Found ${inputFiles.length} JavaScript file(s).`);
+  const pendingFiles = [];
+  for (const sourcePath of inputFiles) {
+    const destinationPath = path.join(outputDirectory, path.relative(inputPath, sourcePath));
+    if (await fileExists(destinationPath)) {
+      console.error(`Skipping ${sourcePath}: output already exists.`);
+    } else {
+      pendingFiles.push(sourcePath);
+    }
+  }
+
+  const skipped = inputFiles.length - pendingFiles.length;
+  console.error(`Found ${inputFiles.length} JavaScript file(s): ${pendingFiles.length} pending, ${skipped} already deobfuscated.`);
   let failures = 0;
   const reports = [];
   const telemetryDirectory = path.join(outputDirectory, ".majadeo-runs");
-  for (const sourcePath of inputFiles) {
+  for (const sourcePath of pendingFiles) {
     const destinationPath = path.join(outputDirectory, path.relative(inputPath, sourcePath));
     const logPath = path.join(telemetryDirectory, `${path.relative(inputPath, sourcePath)}.run.json`);
     try {
@@ -302,7 +398,9 @@ async function main() {
     model: MODEL,
     generatedAt: new Date().toISOString(),
     filesDiscovered: inputFiles.length,
-    filesSucceeded: inputFiles.length - failures,
+    filesAttempted: pendingFiles.length,
+    filesSkipped: skipped,
+    filesSucceeded: pendingFiles.length - failures,
     filesFailed: failures,
     totalEstimatedCostUsd: totalEstimatedCost,
     runs: reports.map(({ inputPath: runInput, outputPath: runOutput, status, usage, estimatedCostUsd, durationMs }) => ({
@@ -315,9 +413,12 @@ async function main() {
     }))
   });
 
-  console.error(`Finished: ${inputFiles.length - failures} succeeded, ${failures} failed.`);
+  const datasetJsonlPath = await writeDatasetJsonl(metadataPath, inputPath, outputDirectory, inputFiles);
+
+  console.error(`Finished: ${pendingFiles.length - failures} succeeded, ${skipped} skipped, ${failures} failed.`);
   console.error(`Total estimated cost: $${totalEstimatedCost.toFixed(6)}`);
   console.error(`Telemetry: ${telemetryDirectory}`);
+  console.error(`Dataset JSONL: ${datasetJsonlPath}`);
   if (failures > 0) {
     process.exitCode = 1;
   }
