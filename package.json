@@ -9,7 +9,8 @@
   },
   "scripts": {
     "deobfuscate": "node src/deobfuscate.js",
-    "check": "node --check src/deobfuscate.js"
+    "select": "node src/select-files.js",
+    "check": "node --check src/deobfuscate.js && node --check src/select-files.js"
   },
   "dependencies": {
     "@openai/codex-sdk": "^0.148.0"

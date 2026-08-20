@@ -15,6 +15,19 @@ npm install
 
 ## Usage
 
+### Select the benchmark files
+
+Use `selected_50.txt` to copy the selected CodeNet programs from any folder:
+
+```sh
+npm run select -- path/to/source-folder path/to/output-folder
+```
+
+If the output folder is omitted, files are copied to `<source-folder>/selected`.
+The selector searches recursively and matches CodeNet IDs, so names such as
+`codenet_p00048_1.js` and `codenet_p00048_1.obf.js` are both supported. It
+aborts and reports details if an ID is missing or has multiple matches.
+
 ### One file
 
 ```sh
