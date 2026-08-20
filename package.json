@@ -9,9 +9,12 @@
   },
   "scripts": {
     "deobfuscate": "node src/deobfuscate.js",
-    "check": "node --check src/deobfuscate.js"
+    "obfuscate:jsfuck": "node src/obfuscate-jsfuck.js",
+    "select": "node src/select-files.js",
+    "check": "node --check src/deobfuscate.js && node --check src/select-files.js && node --check src/obfuscate-jsfuck.js"
   },
   "dependencies": {
-    "@openai/codex-sdk": "^0.148.0"
+    "@openai/codex-sdk": "^0.148.0",
+    "jsfuck": "^0.4.0"
   }
 }
