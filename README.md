@@ -28,6 +28,19 @@ The selector searches recursively and matches CodeNet IDs, so names such as
 `codenet_p00048_1.js` and `codenet_p00048_1.obf.js` are both supported. It
 aborts and reports details if an ID is missing or has multiple matches.
 
+Filter CodeNet metadata with the same manifest:
+
+```sh
+npm run filter:metadata -- original-selected/Project_CodeNet_selected.jsonl
+```
+
+This writes `Project_CodeNet_selected.filtered.jsonl`. To replace the input
+atomically while retaining a `.bak` backup:
+
+```sh
+npm run filter:metadata -- original-selected/Project_CodeNet_selected.jsonl --in-place
+```
+
 ### Obfuscate with JSFuck
 
 Obfuscate one JavaScript file:
