@@ -2,3 +2,4 @@ node_modules/
 deobfuscated/
 *.deobfuscated.js
 dataset
+.env
