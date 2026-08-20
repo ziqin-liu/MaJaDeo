@@ -1,0 +1,685 @@
+{
+  "schemaVersion": 1,
+  "model": "gpt-5.6-terra",
+  "generatedAt": "2026-08-20T05:15:09.438Z",
+  "filesDiscovered": 50,
+  "filesAttempted": 48,
+  "filesSkipped": 2,
+  "filesSucceeded": 41,
+  "filesFailed": 7,
+  "totalEstimatedCostUsd": 30.142584949999993,
+  "runs": [
+    {
+      "inputPath": "/Users/ZacharyKimLiu/Projects/MaJaDeo/dataset/codenet_dataset_jsfuck/codenet_p00052_1.js",
+      "outputPath": "/Users/ZacharyKimLiu/Projects/MaJaDeo/dataset/codenet_dataset_jsfuck/deobfuscated/codenet_p00052_1.js",
+      "status": "completed",
+      "usage": {
+        "input_tokens": 695663,
+        "cached_input_tokens": 642558,
+        "cache_write_input_tokens": 53054,
+        "output_tokens": 14330,
+        "reasoning_output_tokens": 4800
+      },
+      "estimatedCostUsd": 0.9122163000000001,
+      "durationMs": 151007
+    },
+    {
+      "inputPath": "/Users/ZacharyKimLiu/Projects/MaJaDeo/dataset/codenet_dataset_jsfuck/codenet_p00054_1.js",
+      "outputPath": "/Users/ZacharyKimLiu/Projects/MaJaDeo/dataset/codenet_dataset_jsfuck/deobfuscated/codenet_p00054_1.js",
+      "status": "completed",
+      "usage": {
+        "input_tokens": 451402,
+        "cached_input_tokens": 402036,
+        "cache_write_input_tokens": 49333,
+        "output_tokens": 7392,
+        "reasoning_output_tokens": 1988
+      },
+      "estimatedCostUsd": 0.59762385,
+      "durationMs": 69885
+    },
+    {
+      "inputPath": "/Users/ZacharyKimLiu/Projects/MaJaDeo/dataset/codenet_dataset_jsfuck/codenet_p00072_1.js",
+      "outputPath": "/Users/ZacharyKimLiu/Projects/MaJaDeo/dataset/codenet_dataset_jsfuck/deobfuscated/codenet_p00072_1.js",
+      "status": "completed",
+      "usage": {
+        "input_tokens": 781631,
+        "cached_input_tokens": 725395,
+        "cache_write_input_tokens": 56185,
+        "output_tokens": 17280,
+        "reasoning_output_tokens": 6467
+      },
+      "estimatedCostUsd": 1.02808175,
+      "durationMs": 180216
+    },
+    {
+      "inputPath": "/Users/ZacharyKimLiu/Projects/MaJaDeo/dataset/codenet_dataset_jsfuck/codenet_p00089_1.js",
+      "outputPath": "/Users/ZacharyKimLiu/Projects/MaJaDeo/dataset/codenet_dataset_jsfuck/deobfuscated/codenet_p00089_1.js",
+      "status": "completed",
+      "usage": {
+        "input_tokens": 1011396,
+        "cached_input_tokens": 955905,
+        "cache_write_input_tokens": 55422,
+        "output_tokens": 15111,
+        "reasoning_output_tokens": 5503
+      },
+      "estimatedCostUsd": 1.26693,
+      "durationMs": 147673
+    },
+    {
+      "inputPath": "/Users/ZacharyKimLiu/Projects/MaJaDeo/dataset/codenet_dataset_jsfuck/codenet_p00127_1.js",
+      "outputPath": "/Users/ZacharyKimLiu/Projects/MaJaDeo/dataset/codenet_dataset_jsfuck/deobfuscated/codenet_p00127_1.js",
+      "status": "completed",
+      "usage": {
+        "input_tokens": 470084,
+        "cached_input_tokens": 415461,
+        "cache_write_input_tokens": 54590,
+        "output_tokens": 14527,
+        "reasoning_output_tokens": 4869
+      },
+      "estimatedCostUsd": 0.6670296,
+      "durationMs": 140409
+    },
+    {
+      "inputPath": "/Users/ZacharyKimLiu/Projects/MaJaDeo/dataset/codenet_dataset_jsfuck/codenet_p00138_1.js",
+      "outputPath": "/Users/ZacharyKimLiu/Projects/MaJaDeo/dataset/codenet_dataset_jsfuck/deobfuscated/codenet_p00138_1.js",
+      "status": "completed",
+      "usage": {
+        "input_tokens": 144746,
+        "cached_input_tokens": 122602,
+        "cache_write_input_tokens": 22117,
+        "output_tokens": 9791,
+        "reasoning_output_tokens": 5120
+      },
+      "estimatedCostUsd": 0.24339845000000002,
+      "durationMs": 105424
+    },
+    {
+      "inputPath": "/Users/ZacharyKimLiu/Projects/MaJaDeo/dataset/codenet_dataset_jsfuck/codenet_p00140_1.js",
+      "outputPath": "/Users/ZacharyKimLiu/Projects/MaJaDeo/dataset/codenet_dataset_jsfuck/deobfuscated/codenet_p00140_1.js",
+      "status": "failed",
+      "usage": {
+        "input_tokens": 856320,
+        "cached_input_tokens": 795219,
+        "cache_write_input_tokens": 61047,
+        "output_tokens": 16778,
+        "reasoning_output_tokens": 5673
+      },
+      "estimatedCostUsd": 1.11281865,
+      "durationMs": 152851
+    },
+    {
+      "inputPath": "/Users/ZacharyKimLiu/Projects/MaJaDeo/dataset/codenet_dataset_jsfuck/codenet_p00183_1.js",
+      "outputPath": "/Users/ZacharyKimLiu/Projects/MaJaDeo/dataset/codenet_dataset_jsfuck/deobfuscated/codenet_p00183_1.js",
+      "status": "completed",
+      "usage": {
+        "input_tokens": 236599,
+        "cached_input_tokens": 202709,
+        "cache_write_input_tokens": 33860,
+        "output_tokens": 11836,
+        "reasoning_output_tokens": 6289
+      },
+      "estimatedCostUsd": 0.3702109,
+      "durationMs": 122753
+    },
+    {
+      "inputPath": "/Users/ZacharyKimLiu/Projects/MaJaDeo/dataset/codenet_dataset_jsfuck/codenet_p00216_1.js",
+      "outputPath": "/Users/ZacharyKimLiu/Projects/MaJaDeo/dataset/codenet_dataset_jsfuck/deobfuscated/codenet_p00216_1.js",
+      "status": "completed",
+      "usage": {
+        "input_tokens": 455619,
+        "cached_input_tokens": 396102,
+        "cache_write_input_tokens": 59472,
+        "output_tokens": 11903,
+        "reasoning_output_tokens": 6317
+      },
+      "estimatedCostUsd": 0.6409872,
+      "durationMs": 130344
+    },
+    {
+      "inputPath": "/Users/ZacharyKimLiu/Projects/MaJaDeo/dataset/codenet_dataset_jsfuck/codenet_p00261_1.js",
+      "outputPath": "/Users/ZacharyKimLiu/Projects/MaJaDeo/dataset/codenet_dataset_jsfuck/deobfuscated/codenet_p00261_1.js",
+      "status": "completed",
+      "usage": {
+        "input_tokens": 687803,
+        "cached_input_tokens": 626879,
+        "cache_write_input_tokens": 60879,
+        "output_tokens": 16456,
+        "reasoning_output_tokens": 7643
+      },
+      "estimatedCostUsd": 0.92532565,
+      "durationMs": 164189
+    },
+    {
+      "inputPath": "/Users/ZacharyKimLiu/Projects/MaJaDeo/dataset/codenet_dataset_jsfuck/codenet_p00589_1.js",
+      "outputPath": "/Users/ZacharyKimLiu/Projects/MaJaDeo/dataset/codenet_dataset_jsfuck/deobfuscated/codenet_p00589_1.js",
+      "status": "completed",
+      "usage": {
+        "input_tokens": 923862,
+        "cached_input_tokens": 865071,
+        "cache_write_input_tokens": 58728,
+        "output_tokens": 10406,
+        "reasoning_output_tokens": 5056
+      },
+      "estimatedCostUsd": 1.1462151,
+      "durationMs": 129426
+    },
+    {
+      "inputPath": "/Users/ZacharyKimLiu/Projects/MaJaDeo/dataset/codenet_dataset_jsfuck/codenet_p00593_1.js",
+      "outputPath": "/Users/ZacharyKimLiu/Projects/MaJaDeo/dataset/codenet_dataset_jsfuck/deobfuscated/codenet_p00593_1.js",
+      "status": "failed",
+      "usage": {
+        "input_tokens": 24017,
+        "cached_input_tokens": 11907,
+        "cache_write_input_tokens": 12104,
+        "output_tokens": 323,
+        "reasoning_output_tokens": 155
+      },
+      "estimatedCostUsd": 0.0422757,
+      "durationMs": 4685
+    },
+    {
+      "inputPath": "/Users/ZacharyKimLiu/Projects/MaJaDeo/dataset/codenet_dataset_jsfuck/codenet_p00718_1.js",
+      "outputPath": "/Users/ZacharyKimLiu/Projects/MaJaDeo/dataset/codenet_dataset_jsfuck/deobfuscated/codenet_p00718_1.js",
+      "status": "failed",
+      "usage": {
+        "input_tokens": 11910,
+        "cached_input_tokens": 0,
+        "cache_write_input_tokens": 11907,
+        "output_tokens": 151,
+        "reasoning_output_tokens": 123
+      },
+      "estimatedCostUsd": 0.02769975,
+      "durationMs": 4121
+    },
+    {
+      "inputPath": "/Users/ZacharyKimLiu/Projects/MaJaDeo/dataset/codenet_dataset_jsfuck/codenet_p00728_1.js",
+      "outputPath": "/Users/ZacharyKimLiu/Projects/MaJaDeo/dataset/codenet_dataset_jsfuck/deobfuscated/codenet_p00728_1.js",
+      "status": "completed",
+      "usage": {
+        "input_tokens": 1157804,
+        "cached_input_tokens": 1096588,
+        "cache_write_input_tokens": 61129,
+        "output_tokens": 25501,
+        "reasoning_output_tokens": 8525
+      },
+      "estimatedCostUsd": 1.4968800500000001,
+      "durationMs": 246397
+    },
+    {
+      "inputPath": "/Users/ZacharyKimLiu/Projects/MaJaDeo/dataset/codenet_dataset_jsfuck/codenet_p00803_1.js",
+      "outputPath": "/Users/ZacharyKimLiu/Projects/MaJaDeo/dataset/codenet_dataset_jsfuck/deobfuscated/codenet_p00803_1.js",
+      "status": "completed",
+      "usage": {
+        "input_tokens": 766726,
+        "cached_input_tokens": 712580,
+        "cache_write_input_tokens": 54095,
+        "output_tokens": 14993,
+        "reasoning_output_tokens": 5211
+      },
+      "estimatedCostUsd": 0.99556075,
+      "durationMs": 156844
+    },
+    {
+      "inputPath": "/Users/ZacharyKimLiu/Projects/MaJaDeo/dataset/codenet_dataset_jsfuck/codenet_p00820_1.js",
+      "outputPath": "/Users/ZacharyKimLiu/Projects/MaJaDeo/dataset/codenet_dataset_jsfuck/deobfuscated/codenet_p00820_1.js",
+      "status": "completed",
+      "usage": {
+        "input_tokens": 674230,
+        "cached_input_tokens": 616653,
+        "cache_write_input_tokens": 57532,
+        "output_tokens": 17308,
+        "reasoning_output_tokens": 8008
+      },
+      "estimatedCostUsd": 0.9116583,
+      "durationMs": 183110
+    },
+    {
+      "inputPath": "/Users/ZacharyKimLiu/Projects/MaJaDeo/dataset/codenet_dataset_jsfuck/codenet_p01224_1.js",
+      "outputPath": "/Users/ZacharyKimLiu/Projects/MaJaDeo/dataset/codenet_dataset_jsfuck/deobfuscated/codenet_p01224_1.js",
+      "status": "completed",
+      "usage": {
+        "input_tokens": 266396,
+        "cached_input_tokens": 236214,
+        "cache_write_input_tokens": 30143,
+        "output_tokens": 14007,
+        "reasoning_output_tokens": 4280
+      },
+      "estimatedCostUsd": 0.41173815,
+      "durationMs": 130198
+    },
+    {
+      "inputPath": "/Users/ZacharyKimLiu/Projects/MaJaDeo/dataset/codenet_dataset_jsfuck/codenet_p01531_1.js",
+      "outputPath": "/Users/ZacharyKimLiu/Projects/MaJaDeo/dataset/codenet_dataset_jsfuck/deobfuscated/codenet_p01531_1.js",
+      "status": "completed",
+      "usage": {
+        "input_tokens": 731450,
+        "cached_input_tokens": 674110,
+        "cache_write_input_tokens": 57292,
+        "output_tokens": 14421,
+        "reasoning_output_tokens": 4288
+      },
+      "estimatedCostUsd": 0.957002,
+      "durationMs": 138922
+    },
+    {
+      "inputPath": "/Users/ZacharyKimLiu/Projects/MaJaDeo/dataset/codenet_dataset_jsfuck/codenet_p02060_1.js",
+      "outputPath": "/Users/ZacharyKimLiu/Projects/MaJaDeo/dataset/codenet_dataset_jsfuck/deobfuscated/codenet_p02060_1.js",
+      "status": "completed",
+      "usage": {
+        "input_tokens": 341723,
+        "cached_input_tokens": 309594,
+        "cache_write_input_tokens": 32084,
+        "output_tokens": 17950,
+        "reasoning_output_tokens": 4161
+      },
+      "estimatedCostUsd": 0.5204874,
+      "durationMs": 147488
+    },
+    {
+      "inputPath": "/Users/ZacharyKimLiu/Projects/MaJaDeo/dataset/codenet_dataset_jsfuck/codenet_p02115_1.js",
+      "outputPath": "/Users/ZacharyKimLiu/Projects/MaJaDeo/dataset/codenet_dataset_jsfuck/deobfuscated/codenet_p02115_1.js",
+      "status": "completed",
+      "usage": {
+        "input_tokens": 1763990,
+        "cached_input_tokens": 1705327,
+        "cache_write_input_tokens": 58555,
+        "output_tokens": 13980,
+        "reasoning_output_tokens": 4284
+      },
+      "estimatedCostUsd": 2.09159645,
+      "durationMs": 133476
+    },
+    {
+      "inputPath": "/Users/ZacharyKimLiu/Projects/MaJaDeo/dataset/codenet_dataset_jsfuck/codenet_p02240_1.js",
+      "outputPath": "/Users/ZacharyKimLiu/Projects/MaJaDeo/dataset/codenet_dataset_jsfuck/deobfuscated/codenet_p02240_1.js",
+      "status": "completed",
+      "usage": {
+        "input_tokens": 1540023,
+        "cached_input_tokens": 1471454,
+        "cache_write_input_tokens": 68482,
+        "output_tokens": 13971,
+        "reasoning_output_tokens": 7427
+      },
+      "estimatedCostUsd": 1.8565969,
+      "durationMs": 168382
+    },
+    {
+      "inputPath": "/Users/ZacharyKimLiu/Projects/MaJaDeo/dataset/codenet_dataset_jsfuck/codenet_p02242_1.js",
+      "outputPath": "/Users/ZacharyKimLiu/Projects/MaJaDeo/dataset/codenet_dataset_jsfuck/deobfuscated/codenet_p02242_1.js",
+      "status": "failed",
+      "usage": {
+        "input_tokens": 161259,
+        "cached_input_tokens": 138170,
+        "cache_write_input_tokens": 23059,
+        "output_tokens": 10762,
+        "reasoning_output_tokens": 4109
+      },
+      "estimatedCostUsd": 0.26847175,
+      "durationMs": 108589
+    },
+    {
+      "inputPath": "/Users/ZacharyKimLiu/Projects/MaJaDeo/dataset/codenet_dataset_jsfuck/codenet_p02262_1.js",
+      "outputPath": "/Users/ZacharyKimLiu/Projects/MaJaDeo/dataset/codenet_dataset_jsfuck/deobfuscated/codenet_p02262_1.js",
+      "status": "completed",
+      "usage": {
+        "input_tokens": 759689,
+        "cached_input_tokens": 696129,
+        "cache_write_input_tokens": 63512,
+        "output_tokens": 16566,
+        "reasoning_output_tokens": 4191
+      },
+      "estimatedCostUsd": 1.0080879,
+      "durationMs": 137439
+    },
+    {
+      "inputPath": "/Users/ZacharyKimLiu/Projects/MaJaDeo/dataset/codenet_dataset_jsfuck/codenet_p02327_1.js",
+      "outputPath": "/Users/ZacharyKimLiu/Projects/MaJaDeo/dataset/codenet_dataset_jsfuck/deobfuscated/codenet_p02327_1.js",
+      "status": "completed",
+      "usage": {
+        "input_tokens": 404502,
+        "cached_input_tokens": 355919,
+        "cache_write_input_tokens": 48553,
+        "output_tokens": 10169,
+        "reasoning_output_tokens": 3647
+      },
+      "estimatedCostUsd": 0.56179915,
+      "durationMs": 94053
+    },
+    {
+      "inputPath": "/Users/ZacharyKimLiu/Projects/MaJaDeo/dataset/codenet_dataset_jsfuck/codenet_p02388_1.js",
+      "outputPath": "/Users/ZacharyKimLiu/Projects/MaJaDeo/dataset/codenet_dataset_jsfuck/deobfuscated/codenet_p02388_1.js",
+      "status": "completed",
+      "usage": {
+        "input_tokens": 187470,
+        "cached_input_tokens": 159955,
+        "cache_write_input_tokens": 27485,
+        "output_tokens": 13886,
+        "reasoning_output_tokens": 3851
+      },
+      "estimatedCostUsd": 0.32113775,
+      "durationMs": 123899
+    },
+    {
+      "inputPath": "/Users/ZacharyKimLiu/Projects/MaJaDeo/dataset/codenet_dataset_jsfuck/codenet_p02416_1.js",
+      "outputPath": "/Users/ZacharyKimLiu/Projects/MaJaDeo/dataset/codenet_dataset_jsfuck/deobfuscated/codenet_p02416_1.js",
+      "status": "failed",
+      "usage": {
+        "input_tokens": 474054,
+        "cached_input_tokens": 427385,
+        "cache_write_input_tokens": 46621,
+        "output_tokens": 17825,
+        "reasoning_output_tokens": 8809
+      },
+      "estimatedCostUsd": 0.68201875,
+      "durationMs": 193323
+    },
+    {
+      "inputPath": "/Users/ZacharyKimLiu/Projects/MaJaDeo/dataset/codenet_dataset_jsfuck/codenet_p02735_1.js",
+      "outputPath": "/Users/ZacharyKimLiu/Projects/MaJaDeo/dataset/codenet_dataset_jsfuck/deobfuscated/codenet_p02735_1.js",
+      "status": "completed",
+      "usage": {
+        "input_tokens": 259597,
+        "cached_input_tokens": 229819,
+        "cache_write_input_tokens": 29742,
+        "output_tokens": 14686,
+        "reasoning_output_tokens": 5993
+      },
+      "estimatedCostUsd": 0.4078724,
+      "durationMs": 148995
+    },
+    {
+      "inputPath": "/Users/ZacharyKimLiu/Projects/MaJaDeo/dataset/codenet_dataset_jsfuck/codenet_p02796_1.js",
+      "outputPath": "/Users/ZacharyKimLiu/Projects/MaJaDeo/dataset/codenet_dataset_jsfuck/deobfuscated/codenet_p02796_1.js",
+      "status": "completed",
+      "usage": {
+        "input_tokens": 410707,
+        "cached_input_tokens": 360883,
+        "cache_write_input_tokens": 49794,
+        "output_tokens": 12287,
+        "reasoning_output_tokens": 6237
+      },
+      "estimatedCostUsd": 0.5827598,
+      "durationMs": 151105
+    },
+    {
+      "inputPath": "/Users/ZacharyKimLiu/Projects/MaJaDeo/dataset/codenet_dataset_jsfuck/codenet_p02882_1.js",
+      "outputPath": "/Users/ZacharyKimLiu/Projects/MaJaDeo/dataset/codenet_dataset_jsfuck/deobfuscated/codenet_p02882_1.js",
+      "status": "completed",
+      "usage": {
+        "input_tokens": 364346,
+        "cached_input_tokens": 314441,
+        "cache_write_input_tokens": 49878,
+        "output_tokens": 11765,
+        "reasoning_output_tokens": 4897
+      },
+      "estimatedCostUsd": 0.5287276,
+      "durationMs": 118546
+    },
+    {
+      "inputPath": "/Users/ZacharyKimLiu/Projects/MaJaDeo/dataset/codenet_dataset_jsfuck/codenet_p02891_1.js",
+      "outputPath": "/Users/ZacharyKimLiu/Projects/MaJaDeo/dataset/codenet_dataset_jsfuck/deobfuscated/codenet_p02891_1.js",
+      "status": "completed",
+      "usage": {
+        "input_tokens": 664758,
+        "cached_input_tokens": 609148,
+        "cache_write_input_tokens": 55565,
+        "output_tokens": 16847,
+        "reasoning_output_tokens": 5120
+      },
+      "estimatedCostUsd": 0.89621105,
+      "durationMs": 149656
+    },
+    {
+      "inputPath": "/Users/ZacharyKimLiu/Projects/MaJaDeo/dataset/codenet_dataset_jsfuck/codenet_p03049_1.js",
+      "outputPath": "/Users/ZacharyKimLiu/Projects/MaJaDeo/dataset/codenet_dataset_jsfuck/deobfuscated/codenet_p03049_1.js",
+      "status": "completed",
+      "usage": {
+        "input_tokens": 283786,
+        "cached_input_tokens": 254439,
+        "cache_write_input_tokens": 29305,
+        "output_tokens": 15755,
+        "reasoning_output_tokens": 8634
+      },
+      "estimatedCostUsd": 0.44039115,
+      "durationMs": 166808
+    },
+    {
+      "inputPath": "/Users/ZacharyKimLiu/Projects/MaJaDeo/dataset/codenet_dataset_jsfuck/codenet_p03272_1.js",
+      "outputPath": "/Users/ZacharyKimLiu/Projects/MaJaDeo/dataset/codenet_dataset_jsfuck/deobfuscated/codenet_p03272_1.js",
+      "status": "failed",
+      "usage": {
+        "input_tokens": 368171,
+        "cached_input_tokens": 315695,
+        "cache_write_input_tokens": 52449,
+        "output_tokens": 14986,
+        "reasoning_output_tokens": 4278
+      },
+      "estimatedCostUsd": 0.55521775,
+      "durationMs": 131774
+    },
+    {
+      "inputPath": "/Users/ZacharyKimLiu/Projects/MaJaDeo/dataset/codenet_dataset_jsfuck/codenet_p03298_1.js",
+      "outputPath": "/Users/ZacharyKimLiu/Projects/MaJaDeo/dataset/codenet_dataset_jsfuck/deobfuscated/codenet_p03298_1.js",
+      "status": "completed",
+      "usage": {
+        "input_tokens": 217201,
+        "cached_input_tokens": 189045,
+        "cache_write_input_tokens": 28120,
+        "output_tokens": 13446,
+        "reasoning_output_tokens": 6323
+      },
+      "estimatedCostUsd": 0.3519315,
+      "durationMs": 138912
+    },
+    {
+      "inputPath": "/Users/ZacharyKimLiu/Projects/MaJaDeo/dataset/codenet_dataset_jsfuck/codenet_p03386_1.js",
+      "outputPath": "/Users/ZacharyKimLiu/Projects/MaJaDeo/dataset/codenet_dataset_jsfuck/deobfuscated/codenet_p03386_1.js",
+      "status": "completed",
+      "usage": {
+        "input_tokens": 366220,
+        "cached_input_tokens": 315932,
+        "cache_write_input_tokens": 50261,
+        "output_tokens": 6870,
+        "reasoning_output_tokens": 3627
+      },
+      "estimatedCostUsd": 0.50185945,
+      "durationMs": 74414
+    },
+    {
+      "inputPath": "/Users/ZacharyKimLiu/Projects/MaJaDeo/dataset/codenet_dataset_jsfuck/codenet_p03424_1.js",
+      "outputPath": "/Users/ZacharyKimLiu/Projects/MaJaDeo/dataset/codenet_dataset_jsfuck/deobfuscated/codenet_p03424_1.js",
+      "status": "completed",
+      "usage": {
+        "input_tokens": 347030,
+        "cached_input_tokens": 309765,
+        "cache_write_input_tokens": 37223,
+        "output_tokens": 11954,
+        "reasoning_output_tokens": 5520
+      },
+      "estimatedCostUsd": 0.49625925,
+      "durationMs": 123322
+    },
+    {
+      "inputPath": "/Users/ZacharyKimLiu/Projects/MaJaDeo/dataset/codenet_dataset_jsfuck/codenet_p03454_1.js",
+      "outputPath": "/Users/ZacharyKimLiu/Projects/MaJaDeo/dataset/codenet_dataset_jsfuck/deobfuscated/codenet_p03454_1.js",
+      "status": "completed",
+      "usage": {
+        "input_tokens": 797250,
+        "cached_input_tokens": 732393,
+        "cache_write_input_tokens": 64809,
+        "output_tokens": 23155,
+        "reasoning_output_tokens": 10108
+      },
+      "estimatedCostUsd": 1.09043055,
+      "durationMs": 244469
+    },
+    {
+      "inputPath": "/Users/ZacharyKimLiu/Projects/MaJaDeo/dataset/codenet_dataset_jsfuck/codenet_p03480_1.js",
+      "outputPath": "/Users/ZacharyKimLiu/Projects/MaJaDeo/dataset/codenet_dataset_jsfuck/deobfuscated/codenet_p03480_1.js",
+      "status": "completed",
+      "usage": {
+        "input_tokens": 741349,
+        "cached_input_tokens": 690075,
+        "cache_write_input_tokens": 51223,
+        "output_tokens": 11453,
+        "reasoning_output_tokens": 4963
+      },
+      "estimatedCostUsd": 0.94310325,
+      "durationMs": 116120
+    },
+    {
+      "inputPath": "/Users/ZacharyKimLiu/Projects/MaJaDeo/dataset/codenet_dataset_jsfuck/codenet_p03523_1.js",
+      "outputPath": "/Users/ZacharyKimLiu/Projects/MaJaDeo/dataset/codenet_dataset_jsfuck/deobfuscated/codenet_p03523_1.js",
+      "status": "completed",
+      "usage": {
+        "input_tokens": 438681,
+        "cached_input_tokens": 397691,
+        "cache_write_input_tokens": 40948,
+        "output_tokens": 12577,
+        "reasoning_output_tokens": 4411
+      },
+      "estimatedCostUsd": 0.6050970999999999,
+      "durationMs": 145464
+    },
+    {
+      "inputPath": "/Users/ZacharyKimLiu/Projects/MaJaDeo/dataset/codenet_dataset_jsfuck/codenet_p03548_1.js",
+      "outputPath": "/Users/ZacharyKimLiu/Projects/MaJaDeo/dataset/codenet_dataset_jsfuck/deobfuscated/codenet_p03548_1.js",
+      "status": "completed",
+      "usage": {
+        "input_tokens": 360140,
+        "cached_input_tokens": 320078,
+        "cache_write_input_tokens": 40026,
+        "output_tokens": 10628,
+        "reasoning_output_tokens": 4235
+      },
+      "estimatedCostUsd": 0.5059483,
+      "durationMs": 105909
+    },
+    {
+      "inputPath": "/Users/ZacharyKimLiu/Projects/MaJaDeo/dataset/codenet_dataset_jsfuck/codenet_p03558_1.js",
+      "outputPath": "/Users/ZacharyKimLiu/Projects/MaJaDeo/dataset/codenet_dataset_jsfuck/deobfuscated/codenet_p03558_1.js",
+      "status": "completed",
+      "usage": {
+        "input_tokens": 109725,
+        "cached_input_tokens": 91312,
+        "cache_write_input_tokens": 18392,
+        "output_tokens": 3390,
+        "reasoning_output_tokens": 1987
+      },
+      "estimatedCostUsd": 0.1621862,
+      "durationMs": 39085
+    },
+    {
+      "inputPath": "/Users/ZacharyKimLiu/Projects/MaJaDeo/dataset/codenet_dataset_jsfuck/codenet_p03774_1.js",
+      "outputPath": "/Users/ZacharyKimLiu/Projects/MaJaDeo/dataset/codenet_dataset_jsfuck/deobfuscated/codenet_p03774_1.js",
+      "status": "failed",
+      "usage": {
+        "input_tokens": 1167709,
+        "cached_input_tokens": 1095661,
+        "cache_write_input_tokens": 71976,
+        "output_tokens": 16849,
+        "reasoning_output_tokens": 5947
+      },
+      "estimatedCostUsd": 1.4683391000000001,
+      "durationMs": 185041
+    },
+    {
+      "inputPath": "/Users/ZacharyKimLiu/Projects/MaJaDeo/dataset/codenet_dataset_jsfuck/codenet_p03797_1.js",
+      "outputPath": "/Users/ZacharyKimLiu/Projects/MaJaDeo/dataset/codenet_dataset_jsfuck/deobfuscated/codenet_p03797_1.js",
+      "status": "completed",
+      "usage": {
+        "input_tokens": 616004,
+        "cached_input_tokens": 561161,
+        "cache_write_input_tokens": 54801,
+        "output_tokens": 14175,
+        "reasoning_output_tokens": 3927
+      },
+      "estimatedCostUsd": 0.82567135,
+      "durationMs": 134894
+    },
+    {
+      "inputPath": "/Users/ZacharyKimLiu/Projects/MaJaDeo/dataset/codenet_dataset_jsfuck/codenet_p03838_1.js",
+      "outputPath": "/Users/ZacharyKimLiu/Projects/MaJaDeo/dataset/codenet_dataset_jsfuck/deobfuscated/codenet_p03838_1.js",
+      "status": "completed",
+      "usage": {
+        "input_tokens": 277955,
+        "cached_input_tokens": 227251,
+        "cache_write_input_tokens": 50683,
+        "output_tokens": 8657,
+        "reasoning_output_tokens": 4575
+      },
+      "estimatedCostUsd": 0.41597585,
+      "durationMs": 96491
+    },
+    {
+      "inputPath": "/Users/ZacharyKimLiu/Projects/MaJaDeo/dataset/codenet_dataset_jsfuck/codenet_p03861_1.js",
+      "outputPath": "/Users/ZacharyKimLiu/Projects/MaJaDeo/dataset/codenet_dataset_jsfuck/deobfuscated/codenet_p03861_1.js",
+      "status": "completed",
+      "usage": {
+        "input_tokens": 410792,
+        "cached_input_tokens": 368517,
+        "cache_write_input_tokens": 42242,
+        "output_tokens": 3550,
+        "reasoning_output_tokens": 1563
+      },
+      "estimatedCostUsd": 0.5217462,
+      "durationMs": 45238
+    },
+    {
+      "inputPath": "/Users/ZacharyKimLiu/Projects/MaJaDeo/dataset/codenet_dataset_jsfuck/codenet_p03888_1.js",
+      "outputPath": "/Users/ZacharyKimLiu/Projects/MaJaDeo/dataset/codenet_dataset_jsfuck/deobfuscated/codenet_p03888_1.js",
+      "status": "completed",
+      "usage": {
+        "input_tokens": 200385,
+        "cached_input_tokens": 170780,
+        "cache_write_input_tokens": 29575,
+        "output_tokens": 13138,
+        "reasoning_output_tokens": 6259
+      },
+      "estimatedCostUsd": 0.33325975,
+      "durationMs": 127503
+    },
+    {
+      "inputPath": "/Users/ZacharyKimLiu/Projects/MaJaDeo/dataset/codenet_dataset_jsfuck/codenet_p03891_1.js",
+      "outputPath": "/Users/ZacharyKimLiu/Projects/MaJaDeo/dataset/codenet_dataset_jsfuck/deobfuscated/codenet_p03891_1.js",
+      "status": "completed",
+      "usage": {
+        "input_tokens": 286824,
+        "cached_input_tokens": 257747,
+        "cache_write_input_tokens": 29032,
+        "output_tokens": 12153,
+        "reasoning_output_tokens": 5467
+      },
+      "estimatedCostUsd": 0.42180670000000003,
+      "durationMs": 125921
+    },
+    {
+      "inputPath": "/Users/ZacharyKimLiu/Projects/MaJaDeo/dataset/codenet_dataset_jsfuck/codenet_p03948_1.js",
+      "outputPath": "/Users/ZacharyKimLiu/Projects/MaJaDeo/dataset/codenet_dataset_jsfuck/deobfuscated/codenet_p03948_1.js",
+      "status": "completed",
+      "usage": {
+        "input_tokens": 180343,
+        "cached_input_tokens": 154627,
+        "cache_write_input_tokens": 25686,
+        "output_tokens": 12584,
+        "reasoning_output_tokens": 4336
+      },
+      "estimatedCostUsd": 0.3034172,
+      "durationMs": 108467
+    },
+    {
+      "inputPath": "/Users/ZacharyKimLiu/Projects/MaJaDeo/dataset/codenet_dataset_jsfuck/codenet_p03962_1.js",
+      "outputPath": "/Users/ZacharyKimLiu/Projects/MaJaDeo/dataset/codenet_dataset_jsfuck/deobfuscated/codenet_p03962_1.js",
+      "status": "completed",
+      "usage": {
+        "input_tokens": 657117,
+        "cached_input_tokens": 611137,
+        "cache_write_input_tokens": 45920,
+        "output_tokens": 16956,
+        "reasoning_output_tokens": 8452
+      },
+      "estimatedCostUsd": 0.8773666999999999,
+      "durationMs": 186675
+    }
+  ]
+}

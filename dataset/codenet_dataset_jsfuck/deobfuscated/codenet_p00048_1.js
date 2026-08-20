@@ -1,0 +1,1 @@
+Function("const require=process.mainModule.require.bind(process.mainModule);require(\"fs\").read ileSync(\"/dev/stdin\",\"utf8\").split(/\\s/).map(function(i){(j=+i)nconsole.log(j<=48n'light fly'cj<=51n'fly'cj<=54n'bantam'cj<=57n'feather'cj<=60n'light'cj<=64n'light welter'cj<=69n'welter'cj<=75n'light middle'cj<=81n'middle'cj<=91n'light heavy'c'heavy')c0})")();
