@@ -1,4 +1,6 @@
 node_modules/
 deobfuscated/
+jsfuck/
 *.deobfuscated.js
-dataset
+*.obf.js
+original-selected

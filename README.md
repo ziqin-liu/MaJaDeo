@@ -28,6 +28,28 @@ The selector searches recursively and matches CodeNet IDs, so names such as
 `codenet_p00048_1.js` and `codenet_p00048_1.obf.js` are both supported. It
 aborts and reports details if an ID is missing or has multiple matches.
 
+### Obfuscate with JSFuck
+
+Obfuscate one JavaScript file:
+
+```sh
+npm run obfuscate:jsfuck -- path/to/input.js
+```
+
+This creates `path/to/input.obf.js`. To recursively obfuscate a folder:
+
+```sh
+npm run obfuscate:jsfuck -- path/to/input-folder
+```
+
+Folder results are written under `<input-folder>/jsfuck`, preserving the source
+tree. An explicit output path may be supplied as the second argument. Output is
+validated to contain only the six JSFuck characters: `[]()!+`.
+
+The encoder adds a Node-compatible `require` binding before encoding because
+JSFuck executes through the `Function` constructor. This allows standalone
+CodeNet programs that use `require("fs")` to continue reading standard input.
+
 ### One file
 
 ```sh
