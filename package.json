@@ -8,10 +8,12 @@
     "node": ">=18"
   },
   "scripts": {
+    "add:metadata-field": "node src/add-file-field.js",
     "deobfuscate": "node src/deobfuscate.js",
+    "filter:metadata": "node src/filter-metadata.js",
     "obfuscate:jsfuck": "node src/obfuscate-jsfuck.js",
     "select": "node src/select-files.js",
-    "check": "node --check src/deobfuscate.js && node --check src/select-files.js && node --check src/obfuscate-jsfuck.js"
+    "check": "node --check src/deobfuscate.js && node --check src/select-files.js && node --check src/obfuscate-jsfuck.js && node --check src/filter-metadata.js && node --check src/add-file-field.js"
   },
   "dependencies": {
     "@openai/codex-sdk": "^0.148.0",

@@ -61,7 +61,16 @@ function metadataOutputPath(metadataPath) {
   return metadataPath.replace(/\.jsonl$/i, ".deobfuscated.jsonl");
 }
 
-async function writeDatasetJsonl(metadataPath, sourceFiles, completedReports) {
+async function fileExists(filePath) {
+  try {
+    await access(filePath);
+    return true;
+  } catch {
+    return false;
+  }
+}
+
+async function writeDatasetJsonl(metadataPath, inputDirectory, outputDirectory, sourceFiles) {
   const sourcesById = new Map();
   for (const sourcePath of sourceFiles) {
     const identifier = codeNetId(sourcePath);
@@ -71,9 +80,10 @@ async function writeDatasetJsonl(metadataPath, sourceFiles, completedReports) {
   }
 
   const outputsById = new Map();
-  for (const report of completedReports) {
-    const identifier = codeNetId(report.inputPath);
-    if (identifier) outputsById.set(identifier, report.outputPath);
+  for (const sourcePath of sourceFiles) {
+    const identifier = codeNetId(sourcePath);
+    const outputPath = path.join(outputDirectory, path.relative(inputDirectory, sourcePath));
+    if (identifier && await fileExists(outputPath)) outputsById.set(identifier, outputPath);
   }
 
   const outputLines = [];
@@ -315,11 +325,22 @@ async function main() {
     return;
   }
 
-  console.error(`Found ${inputFiles.length} JavaScript file(s).`);
+  const pendingFiles = [];
+  for (const sourcePath of inputFiles) {
+    const destinationPath = path.join(outputDirectory, path.relative(inputPath, sourcePath));
+    if (await fileExists(destinationPath)) {
+      console.error(`Skipping ${sourcePath}: output already exists.`);
+    } else {
+      pendingFiles.push(sourcePath);
+    }
+  }
+
+  const skipped = inputFiles.length - pendingFiles.length;
+  console.error(`Found ${inputFiles.length} JavaScript file(s): ${pendingFiles.length} pending, ${skipped} already deobfuscated.`);
   let failures = 0;
   const reports = [];
   const telemetryDirectory = path.join(outputDirectory, ".majadeo-runs");
-  for (const sourcePath of inputFiles) {
+  for (const sourcePath of pendingFiles) {
     const destinationPath = path.join(outputDirectory, path.relative(inputPath, sourcePath));
     const logPath = path.join(telemetryDirectory, `${path.relative(inputPath, sourcePath)}.run.json`);
     try {
@@ -343,7 +364,9 @@ async function main() {
     model: MODEL,
     generatedAt: new Date().toISOString(),
     filesDiscovered: inputFiles.length,
-    filesSucceeded: inputFiles.length - failures,
+    filesAttempted: pendingFiles.length,
+    filesSkipped: skipped,
+    filesSucceeded: pendingFiles.length - failures,
     filesFailed: failures,
     totalEstimatedCostUsd: totalEstimatedCost,
     runs: reports.map(({ inputPath: runInput, outputPath: runOutput, status, usage, estimatedCostUsd, durationMs }) => ({
@@ -356,9 +379,9 @@ async function main() {
     }))
   });
 
-  const datasetJsonlPath = await writeDatasetJsonl(metadataPath, inputFiles, completedReports);
+  const datasetJsonlPath = await writeDatasetJsonl(metadataPath, inputPath, outputDirectory, inputFiles);
 
-  console.error(`Finished: ${inputFiles.length - failures} succeeded, ${failures} failed.`);
+  console.error(`Finished: ${pendingFiles.length - failures} succeeded, ${skipped} skipped, ${failures} failed.`);
   console.error(`Total estimated cost: $${totalEstimatedCost.toFixed(6)}`);
   console.error(`Telemetry: ${telemetryDirectory}`);
   console.error(`Dataset JSONL: ${datasetJsonlPath}`);
