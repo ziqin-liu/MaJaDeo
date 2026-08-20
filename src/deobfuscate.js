@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-import { access, mkdir, readdir, stat, writeFile } from "node:fs/promises";
+import { access, mkdir, readFile, readdir, rename, stat, writeFile } from "node:fs/promises";
 import path from "node:path";
 import process from "node:process";
 import { Codex } from "@openai/codex-sdk";
@@ -36,6 +36,79 @@ function isJavaScriptFile(filePath) {
 
 function isGeneratedFile(filePath) {
   return /\.deobfuscated\.(?:js|mjs|cjs)$/i.test(filePath);
+}
+
+function codeNetId(value) {
+  return String(value).match(/(?:codenet_)?(p\d+_\d+)/)?.[1] || null;
+}
+
+async function findMetadataFile(inputDirectory) {
+  const candidates = (await readdir(inputDirectory, { withFileTypes: true }))
+    .filter((entry) => entry.isFile()
+      && entry.name.toLowerCase().endsWith(".jsonl")
+      && !entry.name.toLowerCase().endsWith(".deobfuscated.jsonl"))
+    .map((entry) => path.join(inputDirectory, entry.name));
+
+  if (candidates.length !== 1) {
+    throw new Error(
+      `Folder deobfuscation requires exactly one source JSONL in ${inputDirectory}; found ${candidates.length}.`
+    );
+  }
+  return candidates[0];
+}
+
+function metadataOutputPath(metadataPath) {
+  return metadataPath.replace(/\.jsonl$/i, ".deobfuscated.jsonl");
+}
+
+async function writeDatasetJsonl(metadataPath, sourceFiles, completedReports) {
+  const sourcesById = new Map();
+  for (const sourcePath of sourceFiles) {
+    const identifier = codeNetId(sourcePath);
+    if (!identifier) continue;
+    if (sourcesById.has(identifier)) throw new Error(`Duplicate input files for ${identifier}`);
+    sourcesById.set(identifier, sourcePath);
+  }
+
+  const outputsById = new Map();
+  for (const report of completedReports) {
+    const identifier = codeNetId(report.inputPath);
+    if (identifier) outputsById.set(identifier, report.outputPath);
+  }
+
+  const outputLines = [];
+  const matchedIds = new Set();
+  for (const [index, line] of (await readFile(metadataPath, "utf8")).split(/\r?\n/).entries()) {
+    if (!line.trim()) continue;
+    let record;
+    try {
+      record = JSON.parse(line);
+    } catch (error) {
+      throw new Error(`Invalid JSON in ${metadataPath} on line ${index + 1}: ${error.message}`);
+    }
+
+    const identifier = codeNetId(record.filename ?? record.id ?? record.task_id ?? "");
+    if (!identifier) throw new Error(`No CodeNet ID in metadata line ${index + 1}`);
+    const sourcePath = sourcesById.get(identifier);
+    if (sourcePath) {
+      matchedIds.add(identifier);
+      record.obfuscated = await readFile(sourcePath, "utf8");
+      const outputPath = outputsById.get(identifier);
+      record.deobfuscated = outputPath ? await readFile(outputPath, "utf8") : null;
+    }
+    outputLines.push(JSON.stringify(record));
+  }
+
+  const unmatchedIds = [...sourcesById.keys()].filter((identifier) => !matchedIds.has(identifier));
+  if (unmatchedIds.length > 0) {
+    throw new Error(`${unmatchedIds.length} input file(s) have no matching metadata record.`);
+  }
+
+  const outputPath = metadataOutputPath(metadataPath);
+  const temporaryPath = `${outputPath}.tmp`;
+  await writeFile(temporaryPath, `${outputLines.join("\n")}\n`, "utf8");
+  await rename(temporaryPath, outputPath);
+  return outputPath;
 }
 
 async function findJavaScriptFiles(directory, excludedDirectory) {
@@ -234,6 +307,8 @@ async function main() {
     throw new Error("Folder output must be a subdirectory of the input folder.");
   }
 
+  const metadataPath = await findMetadataFile(inputPath);
+
   const inputFiles = await findJavaScriptFiles(inputPath, outputDirectory);
   if (inputFiles.length === 0) {
     console.error(`No JavaScript files found in ${inputPath}`);
@@ -281,9 +356,12 @@ async function main() {
     }))
   });
 
+  const datasetJsonlPath = await writeDatasetJsonl(metadataPath, inputFiles, completedReports);
+
   console.error(`Finished: ${inputFiles.length - failures} succeeded, ${failures} failed.`);
   console.error(`Total estimated cost: $${totalEstimatedCost.toFixed(6)}`);
   console.error(`Telemetry: ${telemetryDirectory}`);
+  console.error(`Dataset JSONL: ${datasetJsonlPath}`);
   if (failures > 0) {
     process.exitCode = 1;
   }

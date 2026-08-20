@@ -64,7 +64,8 @@ async function main() {
     if (!identifier || !selectedIds.has(identifier)) continue;
     if (foundIds.has(identifier)) throw new Error(`Duplicate metadata record for ${identifier}`);
     foundIds.add(identifier);
-    kept.push(JSON.stringify(record));
+    const { obfuscated: _obfuscated, ...filteredRecord } = record;
+    kept.push(JSON.stringify(filteredRecord));
   }
 
   const missingIds = [...selectedIds].filter((identifier) => !foundIds.has(identifier));
