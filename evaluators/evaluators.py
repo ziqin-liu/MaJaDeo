@@ -207,8 +207,9 @@ class SafeCodeEvaluator(Evaluator):
 def evaluate_deobfuscation(prediction_file: str, 
                            save_with_metrics: bool = True,
                            contrainer_name: str = "eval_js_container"):
+    fp, ext = os.path.splitext(prediction_file)
+
     if save_with_metrics:
-        fp, ext = os.path.splitext(prediction_file)
         save_to = fp+'.metrics'+ext
         if os.path.exists(save_to):
             logging.info(f"[!] Delete: {save_to}")
@@ -269,10 +270,11 @@ def evaluate_deobfuscation(prediction_file: str,
     # log 
     print(json.dumps(metrics, indent=4))
     save_to = fp + '.summary' + ext
-    save_solution(metrics, save_to)
+    summary = [metrics] if ext == '.jsonl' else metrics
+    logging.info(f"[+] Save metrics summary into file: {save_to}")
+    save_solution(summary, save_to)
     # save prediction with metrics
     if save_with_metrics:
-        fp, ext = os.path.splitext(prediction_file)
         save_to = fp+'.metrics'+ext
         logging.info(f"[+] Save metrics into file: {save_to}")
         save_solution(dataset, save_to)
