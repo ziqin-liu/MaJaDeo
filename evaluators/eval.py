@@ -2,7 +2,7 @@ import os
 import fire
 import shutil
 import logging
-from evaluators.evaluators import evaluate_deobfuscation
+from evaluators import evaluate_deobfuscation
 os.environ['TOKENIZERS_PARALLELISM'] = "true"
 logging.basicConfig(level=logging.INFO, format='%(asctime)s | %(levelname)s | %(message)s', datefmt='%m-%d %H:%M:%S')
 
@@ -12,6 +12,7 @@ def main(
         ):
     
     # check 
+    assert shutil.which("node"), "[!] Please install Node.js first"
     assert shutil.which("escomplex"), "[!] Please install escomplex first"
     assert shutil.which("halstead"), "[!] Please install halstead first"
     

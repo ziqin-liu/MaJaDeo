@@ -1,7 +1,7 @@
 from collections import defaultdict
 from codebleu import calc_codebleu
 from eval_code_with_docker import create_docker_container, restart_container, stop_docker_container, compile_and_run_JS_code_in_docker
-from build_dataset.data import TEST_CMD_TAG, read_solution, save_solution
+from data import TEST_CMD_TAG, read_solution, save_solution
 from tqdm import tqdm
 import subprocess
 import logging
@@ -49,8 +49,12 @@ class ComplexityEvaluator(Evaluator):
             assert run_process.returncode == 0 and run_process.stderr.decode()=="", f"[!] Failed to run escomplex,\n{run_process.stderr.decode()}"
             run_process2 = subprocess.run("halstead", input=code.encode(), shell=True, capture_output=True)
             assert run_process2.returncode == 0 and run_process2.stderr.decode()=="", f"[!] Failed to run halstead,\n{run_process2.stderr.decode()}"
-            metrics = json.loads(run_process.stdout.decode())
-            metrics2 = json.loads(run_process2.stdout.decode())
+            run_process_str = run_process.stdout.decode()
+            run_process2_str = run_process2.stdout.decode()
+            CACHE[code]['escomplex'] = run_process_str
+            CACHE[code]['halstead'] = run_process2_str
+            metrics = json.loads(run_process_str)
+            metrics2 = json.loads(run_process2_str)
         return {
             "physical_loc": metrics['aggregate']['sloc']['physical'],
             "logical_loc": metrics['aggregate']['sloc']['logical'],
@@ -107,13 +111,14 @@ class SyntaxEvaluator(Evaluator):
     def is_valid_js(self, code: str) -> bool:
         if code is None or code.strip() == "":
             return False
-        run_process = subprocess.run("escomplex --json", input=code.encode(), shell=True, capture_output=True)
-        run_process2 = subprocess.run("halstead", input=code.encode(), shell=True, capture_output=True)
-        if run_process.returncode == 0 and run_process.stderr.decode()=="" and run_process2.returncode == 0 and run_process2.stderr.decode()=="":
-            CACHE[code]['escomplex'] = run_process.stdout.decode()
-            CACHE[code]['halstead'] = run_process.stdout.decode()
-            return True
-        else:
+        try:
+            run_process = subprocess.run(
+                ["node", "--check"],
+                input=code.encode(),
+                capture_output=True,
+            )
+            return run_process.returncode == 0
+        except OSError:
             return False
 
     def evaluate(self, data) -> dict:
@@ -123,17 +128,7 @@ class SyntaxEvaluator(Evaluator):
         if prediction is None or prediction.strip() == "":
             result = 0
         else:
-            try:
-                run_process = subprocess.run("escomplex --json", input=prediction.encode(), shell=True, capture_output=True)
-                run_process2 = subprocess.run("halstead", input=prediction.encode(), shell=True, capture_output=True)
-                if run_process.returncode == 0 and run_process.stderr.decode()=="" and run_process2.returncode == 0 and run_process2.stderr.decode()=="":
-                    CACHE[prediction]['escomplex'] = run_process.stdout.decode()
-                    CACHE[prediction]['halstead'] = run_process.stdout.decode()
-                    result = 1
-                else:
-                    result = 0
-            except Exception as e:
-                result = 0
+            result = int(self.is_valid_js(prediction))
         data['syntax_pass'] = result
         return {'pass': result}
 
@@ -225,7 +220,7 @@ def evaluate_deobfuscation(prediction_file: str,
     
     # create evaluators
     syntax_evaluator = SyntaxEvaluator()
-    complexity_evaluator = ComplexityEvaluator()
+    # complexity_evaluator = ComplexityEvaluator()
     safe_code_evaluator = SafeCodeEvaluator(contrainer_name=contrainer_name)
     code_bleu_evaluator = CodeBLEUEvaluator()
     
@@ -234,7 +229,7 @@ def evaluate_deobfuscation(prediction_file: str,
     syntax_pass_cnt = 0
 
     # drop data with invalid obf code, if already checked in obfuscation stage, can be skipped
-    dataset = [data for data in tqdm(dataset,desc="filter") if syntax_evaluator.is_valid_js(data['obfuscated']) and syntax_evaluator.is_valid_js(data['original'])]
+    # dataset = [data for data in tqdm(dataset,desc="filter") if syntax_evaluator.is_valid_js(data['obfuscated']) and syntax_evaluator.is_valid_js(data['original'])]
 
     # eval syntax
     for data in tqdm(dataset, desc="syntax evaluation"):
@@ -255,9 +250,9 @@ def evaluate_deobfuscation(prediction_file: str,
         for submetric, v in res_bleu.items():
             metrics[f'code_bleu_{submetric}'] += v
 
-        res_cpx = complexity_evaluator.evaluate(data)
-        for submetric, v in res_cpx.items():
-            metrics[f'code_complexity_{submetric}'] += v
+        # res_cpx = complexity_evaluator.evaluate(data)
+        # for submetric, v in res_cpx.items():
+        #     metrics[f'code_complexity_{submetric}'] += v
 
     safe_code_evaluator.stop_container()
 
