@@ -1,6 +1,4 @@
 node_modules/
-deobfuscated/
-jsfuck/
 *.deobfuscated.js
 *.obf.js
 original-selected

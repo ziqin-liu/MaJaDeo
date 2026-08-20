@@ -34,12 +34,27 @@ Filter CodeNet metadata with the same manifest:
 npm run filter:metadata -- original-selected/Project_CodeNet_selected.jsonl
 ```
 
-This writes `Project_CodeNet_selected.filtered.jsonl`. To replace the input
+This writes `Project_CodeNet_selected.filtered.jsonl`, retaining the selected
+records but removing their top-level `obfuscated` field. To replace the input
 atomically while retaining a `.bak` backup:
 
 ```sh
 npm run filter:metadata -- original-selected/Project_CodeNet_selected.jsonl --in-place
 ```
+
+Add file contents to a field in each matching metadata record:
+
+```sh
+npm run add:metadata-field -- \
+  original-selected/Project_CodeNet_selected.filtered.jsonl \
+  path/to/obfuscated-folder \
+  obfuscated
+```
+
+This recursively matches JavaScript files by CodeNet ID and writes a new JSONL
+whose name ends with `.with-obfuscated.jsonl`. Supply an explicit output path as
+the fourth argument, or use `--in-place` to replace the input while creating a
+`.bak` backup. Missing or duplicate matches abort the update.
 
 ### Obfuscate with JSFuck
 
@@ -97,6 +112,15 @@ npm run deobfuscate -- path/to/obfuscated-folder path/to/obfuscated-folder/clean
 Folder mode skips `.git`, `node_modules`, its output directory, and files whose
 names already contain `.deobfuscated`. Each source file gets a separate Codex
 thread; processing continues if one file fails and reports a summary at the end.
+If the expected output file already exists, that source is skipped so rerunning
+the command does not spend another Codex call on completed work.
+
+The input folder must contain exactly one source `.jsonl` file. After all files
+have been processed, folder mode writes `<metadata-name>.deobfuscated.jsonl` in
+the same folder. Each matching record receives the source text in `obfuscated`
+and the generated text in `deobfuscated`. When a file fails, its `deobfuscated`
+value is `null`. The source metadata file is not overwritten, and generated
+`.deobfuscated.jsonl` files are ignored on later runs.
 
 ## Run telemetry
 
@@ -123,3 +147,23 @@ and command output, so treat them as potentially sensitive.
 The input is treated as untrusted and is analyzed statically; the prompt tells
 Codex not to execute it. Review and test the generated file before using it in
 production.
+
+## Evaluation
+
+The evaluation is based on the JsDeObsBench
+
+### Setup environment
+
+```sh
+export PYTHONPATH="${PYTHONPATH}:/Users/ZacharyKimLiu/Projects/MaJaDeo"
+
+cd evaluators
+```
+
+(if dont have a venv, install uv, and init a vm, by command: uv venv)
+
+```sh
+source .venv/bin/activate
+uv pip install fire, codebleu, jsonlines, tqdm
+uv pip install tree-sitter-javascript==0.21
+```
