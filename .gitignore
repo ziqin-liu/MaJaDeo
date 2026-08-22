@@ -7,3 +7,5 @@ original-selected
 __pycache__/
 *.py[cod]
 *$py.class
+MAST/
+MAST-Data/
