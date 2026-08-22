@@ -1,0 +1,37 @@
+% RQ1 (overall capability) -- preliminary results, single harness/model cell.
+% Harness: Codex CLI (MaJaDeo), sandboxMode=danger-full-access, approvalPolicy=never
+% Model:   gpt-5.6-terra
+% Data:    dataset/codenet_dataset_high-obf-low-perf-selected (obfuscator.io, n=50)
+%          dataset/codenet_dataset_jsfuck (JSFuck, n=50)
+% Regenerate the two source numbers with:
+%   dataset/*/Project_CodeNet_selecte.deobfuscated.summary.jsonl (per-dataset aggregate metrics)
+%   dataset/*/deobfuscated/.majadeo-runs/summary.json (harness-reported completion/cost)
+% NOTE: this is a single harness x model cell (RQ2 needs more of these) and only
+% one run per file (no repeats), so treat percentages as point estimates.
+
+\begin{table}[h]
+  \centering
+  \small
+  \begin{tabular}{lccccc}
+    \toprule
+    Dataset & Reported & Syntax & Behavior\textsuperscript{*} & CodeBLEU & Cost (USD) \\
+    \midrule
+    obfuscator.io & 47/50 (94\%) & 94\% & 32\% & 0.348 & \$21.75 \\
+    jsfuck        & 41/50 (82\%) & 72\% & 36\% & 0.283 & \$30.14 \\
+    \bottomrule
+  \end{tabular}
+  \caption{%
+    Codex CLI harness driving \texttt{gpt-5.6-terra} on two 50-file JavaScript
+    deobfuscation benchmarks (\texttt{codenet\_dataset\_high-obf-low-perf-selected}
+    and \texttt{codenet\_dataset\_jsfuck}). ``Reported'' is the harness's own
+    completion status; ``Syntax'' is the fraction producing syntactically valid
+    JavaScript; \textsuperscript{*}``Behavior'' is the fraction that is both
+    syntax-valid \emph{and} passes the functional test suite (JsDeObsBench-style
+    exe\_pass, conditioned on syntax passing). CodeBLEU is computed against the
+    original (pre-obfuscation) source. Reported success is a weak proxy for
+    correctness: 41 jsfuck runs were reported ``completed,'' but only 36
+    produced syntactically valid JavaScript, and only 18 (36\%) were
+    behaviorally correct.
+  }
+  \label{tab:rq1-codex-gpt56terra}
+\end{table}
