@@ -38,7 +38,12 @@ mechanism, followed by controlled harness-component ablations --- for
 answering it. This draft reports a preliminary single-model comparison
 between an agent harness (Codex CLI) and a standalone, tool-free LLM call
 on the same model and the same two 50-file benchmarks, as a first data
-point toward that comparison. \todo{finalize abstract once RQ1 numbers are in}
+point toward that comparison. The two conditions produce similarly
+syntax-valid code, but the harness is markedly better at preserving
+program behavior (32\%/36\% vs.\ 8\%/0\% on our two benchmarks) at
+roughly 3--10$\times$ the cost, a first indication that harness capability
+matters for this task and a concrete target for the mechanism analysis
+this work sets up.
 \end{abstract}
 
 \section{Introduction}
@@ -181,9 +186,10 @@ $\sim$180K input tokens, via eight shell-based tool calls rather than a
 single inlined prompt. This is a concrete, task-level instance of the
 dynamic-environment-interaction mechanism motivating this study
 (Section~\ref{sec:intro}): the harness's ability to read/process input
-incrementally rather than requiring it to fit in one context window.
-\todo{quantify how many of the 50 jsfuck files exceed the context ceiling
-once the full baseline run completes.}
+incrementally rather than requiring it to fit in one context window. Across
+the full 50-file jsfuck benchmark, exactly one file (the largest, 1.5\,MB)
+exceeds the ceiling under the baseline condition; the harness has no
+analogous failure mode on this benchmark.
 
 \section{Results}
 \label{sec:results}
@@ -196,10 +202,34 @@ on the same two benchmarks and model.
 
 \input{baseline_gpt-5.6-terra.tex}
 
-\todo{Add a comparison paragraph once the baseline table is populated:
-harness-vs-baseline deltas on Syntax/Behavior/CodeBLEU, cost ratio, and
-whether the context-length failures observed on jsfuck materially explain
-any gap.}
+The two conditions diverge sharply on \emph{behavioral} correctness while
+producing similarly (or, on obfuscator.io, more often) syntactically valid
+code. On obfuscator.io the standalone baseline is perfectly syntax-valid
+(100\% vs.\ the harness's 94\%) yet only 8\% of outputs are behaviorally
+correct, a fourfold drop from the harness's 32\%. On jsfuck the gap is
+starker still: the baseline reaches 0\% behavioral correctness against the
+harness's 36\%, despite comparable syntax-validity rates (98\% vs.\ 72\%).
+CodeBLEU tracks the same pattern less dramatically (0.360 vs.\ 0.348 on
+obfuscator.io; 0.256 vs.\ 0.283 on jsfuck), suggesting the standalone
+model's output is textually similar to the original source without being
+functionally equivalent to it --- consistent with a model that can produce
+plausible-looking, readable JavaScript without correctly recovering the
+program's actual logic, a distinction CodeBLEU's surface/AST-level
+similarity does not fully capture. Cost is the one axis where the baseline
+is unambiguously cheaper: \$2.24 vs.\ \$21.75 on obfuscator.io and \$22.25
+vs.\ \$30.14 on jsfuck, a large gap that narrows substantially on jsfuck
+because inlining near-worst-case files into a single prompt is itself
+expensive in input tokens.
+
+This pattern is consistent with, though does not yet isolate, the
+mechanism hypothesized in Section~\ref{sec:intro}: the harness's dynamic
+tool use (reading files incrementally, and --- per its eight shell-based
+tool calls on the largest jsfuck file --- plausibly also verifying its own
+output, e.g.\ via \texttt{node --check}, before finishing) may let it
+detect and correct behaviorally-wrong output that the single-shot baseline
+has no opportunity to revise. Confirming that requires the trace analysis
+and harness-component ablations described in
+Section~\ref{sec:discussion}, not a two-condition comparison alone.
 
 \section{Discussion and Limitations}
 \label{sec:discussion}

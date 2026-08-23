@@ -13,7 +13,7 @@ import path from "node:path";
 import process from "node:process";
 
 const MODEL = process.env.BASELINE_MODEL || "gpt-5.6-terra";
-const MAX_OUTPUT_TOKENS = Number(process.env.BASELINE_MAX_OUTPUT_TOKENS || 8000);
+const MAX_OUTPUT_TOKENS = Number(process.env.BASELINE_MAX_OUTPUT_TOKENS || 20000);
 const FILE_LIMIT = process.env.BASELINE_LIMIT ? Number(process.env.BASELINE_LIMIT) : Infinity;
 const PRICE_PER_MILLION_TOKENS = {
   "gpt-5.6-terra": {
