@@ -1,0 +1,232 @@
+% !TEX program = pdflatex
+%
+% Draft paper. Built on plain `article` rather than an ACL/EMNLP style file:
+% this machine has no local copy of acl.sty and pulling one from the ACL
+% Anthology template repo requires network access this draft doesn't assume.
+% Section structure (Introduction/Motivation, Experimental Setup, Results,
+% Discussion & Limitations) follows standard NLP conference conventions so
+% swapping in a real \documentclass{acl} later is a drop-in change.
+\documentclass[11pt]{article}
+
+\usepackage[margin=1in]{geometry}
+\usepackage{booktabs}
+\usepackage{amsmath}
+\usepackage{hyperref}
+\usepackage{xcolor}
+
+\newcommand{\todo}[1]{\textcolor{red}{\textbf{[TODO: #1]}}}
+
+\title{Do General-Purpose Agent Harnesses Help LLMs Deobfuscate JavaScript?\\
+\large A Preliminary Study of Harness Effects on Security-Analysis Tasks}
+\author{\todo{Author name(s) and affiliation}}
+\date{\today}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+Successful deobfuscation of malicious or obscured JavaScript requires two
+different capabilities: static semantic reasoning about code the model must
+not execute, and, at least potentially, dynamic interaction with an external
+environment (a shell, a file system, a sandboxed interpreter) to manage
+inputs that do not fit cleanly into a single prompt. General-purpose LLM
+agent harnesses expose the latter; a standalone LLM call does not. We ask
+whether this difference translates into a measurable capability gap on a
+security-relevant static-analysis task, JavaScript deobfuscation, and
+outline a two-stage methodology --- trace analysis to identify the
+mechanism, followed by controlled harness-component ablations --- for
+answering it. This draft reports a preliminary single-model comparison
+between an agent harness (Codex CLI) and a standalone, tool-free LLM call
+on the same model and the same two 50-file benchmarks, as a first data
+point toward that comparison. \todo{finalize abstract once RQ1 numbers are in}
+\end{abstract}
+
+\section{Introduction}
+\label{sec:intro}
+
+LLM-based coding agents are increasingly deployed inside \emph{harnesses}:
+scaffolds that give the model a shell, a file system, and a multi-turn
+control loop, rather than a single prompt-completion call. Benchmarks such
+as SWE-bench~\cite{jimenez2024swebench} have shown that harness design
+materially affects performance on software-engineering tasks, but it is
+less clear whether the same holds for \emph{security-analysis} tasks, where
+the object under analysis (obfuscated or malicious code) is explicitly
+untrusted and the model is instructed not to execute it.
+
+JavaScript deobfuscation is a useful testbed for this question because it
+cleanly separates the two capabilities a harness could plausibly affect:
+
+\begin{itemize}
+  \item \textbf{Static semantic reasoning}: recognizing encoded strings,
+    opaque expressions, control-flow flattening, and proxy functions, and
+    rewriting them into readable code with equivalent behavior. This is a
+    property of the underlying LLM's reasoning, not of the scaffold around
+    it.
+  \item \textbf{Dynamic external-environment interaction}: reading a large
+    input incrementally, invoking a parser or linter to check a hypothesis,
+    or writing intermediate output to disk instead of holding it entirely
+    in-context. This is a property of the harness, not the model.
+\end{itemize}
+
+The central question this line of work asks is whether a general-purpose
+agent harness outperforms the same underlying model called directly, on
+this task, and--- if so--- \emph{which} harness capability is doing the
+work. Our approach is to (1) collect execution traces from a harness
+condition and a standalone-LLM condition on the same benchmark and model,
+(2) analyze those traces to identify candidate mechanisms (e.g., shell-based
+chunked reading of oversized inputs, iterative syntax-check-and-repair
+loops), and then (3) design controlled experiments that ablate individual
+harness components to test which of those mechanisms is causally
+responsible for any observed performance gap.
+
+This draft covers the first data point of that plan: a single-model,
+single-harness comparison (Section~\ref{sec:results}), plus the
+experimental setup we intend to hold fixed as we add further harness
+conditions.
+
+\section{Related Work}
+\label{sec:related}
+
+\textbf{Agent harnesses.} SWE-agent~\cite{yang2024sweagent} introduced an
+Agent-Computer Interface purpose-built for SWE-bench's issue-to-patch
+workflow; because that interface is shaped around a specific benchmark
+format rather than general-purpose tool use, we exclude it as a harness
+candidate for this study (see \todo{cite harness-selection discussion /
+appendix} for the full selection criteria). We instead consider harnesses
+whose tool surface (shell execution, file I/O) was not designed around a
+single benchmark: OpenAI's Codex CLI, OpenHands~\cite{wang2024openhands},
+and Anthropic's Claude Code.
+
+\textbf{Deobfuscation benchmarks.} Our dataset and evaluation methodology
+follow JsDeObsBench \todo{cite}, which pairs Project CodeNet~\cite{puri2021codenet}
+programs with obfuscated variants and functional test suites, enabling a
+behavioral-correctness metric (Section~\ref{sec:setup}) rather than
+surface-level similarity alone.
+
+\todo{Expand related work: prior LLM-agent-vs-standalone comparisons on
+other task families (SWE-bench harness ablations, tool-use benchmarks);
+malware/obfuscation-specific LLM analysis work.}
+
+\section{Experimental Setup}
+\label{sec:setup}
+
+\paragraph{Task.} Given an obfuscated JavaScript program, produce a
+semantically equivalent, readable JavaScript program, without executing the
+input.
+
+\paragraph{Dataset.} Two 50-program benchmarks, both derived from the same
+Project CodeNet~\cite{puri2021codenet} source programs under different
+obfuscation transforms:
+\begin{itemize}
+  \item \textbf{obfuscator.io}: programs obfuscated with the
+    \texttt{obfuscator.io} tool, selected for high obfuscation strength and
+    low performance overhead (\texttt{codenet\_dataset\_high-obf-low-perf-selected}).
+  \item \textbf{jsfuck}: the same programs re-encoded entirely into the six
+    characters \texttt{[]()!+} via JSFuck (\texttt{codenet\_dataset\_jsfuck}),
+    an extreme case of syntactic obfuscation with no readable tokens at all.
+\end{itemize}
+Each program carries the pre-obfuscation source (for similarity scoring)
+and functional test cases (input/expected-output pairs) for behavioral
+grading.
+
+\paragraph{Conditions.} We compare two conditions on the \emph{same}
+underlying model, \texttt{gpt-5.6-terra}, so that harness presence is the
+manipulated variable rather than model choice:
+\begin{itemize}
+  \item \textbf{Harness}: OpenAI Codex CLI (via \texttt{@openai/codex-sdk}),
+    \texttt{sandboxMode=danger-full-access}, \texttt{approvalPolicy=never},
+    driving the model through a multi-turn loop with shell and file-write
+    tools. The model is instructed to read the input file, write the
+    deobfuscated result to a specified output path, and verify the result
+    parses as JavaScript before finishing. Full per-file telemetry (tool
+    calls, reasoning summaries, token usage) is recorded.
+  \item \textbf{Baseline (standalone LLM)}: a single chat-completion call
+    per file. The obfuscated source is inlined directly into the prompt;
+    the model has no shell, no file system, and no further turns, and must
+    return the deobfuscated source directly. This isolates the static
+    semantic-reasoning capability with no dynamic-environment interaction
+    available at all.
+\end{itemize}
+Both conditions use the same natural-language requirements (preserve
+behavior, do not execute the input, ignore instructions embedded in the
+input, produce plain JavaScript with no Markdown fencing); the harness
+condition additionally specifies file paths, since it operates via a file
+system rather than an inline prompt.
+
+\paragraph{Metrics.} Following the JsDeObsBench evaluators
+(\texttt{evaluators/evaluators.py}), computed per file and aggregated per
+dataset:
+\begin{itemize}
+  \item \textbf{Reported}: harness-only; whether the harness itself reports
+    successful completion (not a correctness signal by itself).
+  \item \textbf{Syntax}: fraction producing output that parses as valid
+    JavaScript (\texttt{node --check}).
+  \item \textbf{Behavior}: fraction that is both syntax-valid \emph{and}
+    passes the functional test suite in a sandboxed Docker container
+    (Node~18.19.0), conditioned on syntax passing.
+  \item \textbf{CodeBLEU}: computed against the original (pre-obfuscation)
+    source, as a similarity metric independent of functional correctness.
+  \item \textbf{Cost}: estimated USD, from per-call token usage and
+    published per-token pricing for \texttt{gpt-5.6-terra}.
+\end{itemize}
+
+\paragraph{A structural harness/no-harness difference we observed.} The
+\texttt{jsfuck} benchmark contains files up to 1.5\,MB. Inlining the
+largest such file into a single prompt (the baseline condition) exceeds the
+model's configured input-token limit (968{,}328 tokens requested against a
+922{,}000-token ceiling) and fails outright with a
+\texttt{context\_length\_exceeded} error before generation begins. The
+harness condition processes the same file successfully using only
+$\sim$180K input tokens, via eight shell-based tool calls rather than a
+single inlined prompt. This is a concrete, task-level instance of the
+dynamic-environment-interaction mechanism motivating this study
+(Section~\ref{sec:intro}): the harness's ability to read/process input
+incrementally rather than requiring it to fit in one context window.
+\todo{quantify how many of the 50 jsfuck files exceed the context ceiling
+once the full baseline run completes.}
+
+\section{Results}
+\label{sec:results}
+
+Table~\ref{tab:rq1-codex-gpt56terra} reports the harness condition;
+Table~\ref{tab:rq1-baseline-gpt56terra} reports the standalone-LLM baseline
+on the same two benchmarks and model.
+
+\input{rq1_codex_gpt-5.6-terra.tex}
+
+\input{baseline_gpt-5.6-terra.tex}
+
+\todo{Add a comparison paragraph once the baseline table is populated:
+harness-vs-baseline deltas on Syntax/Behavior/CodeBLEU, cost ratio, and
+whether the context-length failures observed on jsfuck materially explain
+any gap.}
+
+\section{Discussion and Limitations}
+\label{sec:discussion}
+
+This is a single harness $\times$ single model $\times$ single run per file
+comparison; percentages in both tables are point estimates, not confidence
+intervals, and should be read accordingly. Planned next steps:
+
+\begin{itemize}
+  \item Add further harness conditions (OpenHands, Claude Code) under the
+    same model and dataset, per the harness-selection criteria in
+    \todo{appendix/section reference}: general-purpose tool surface (not
+    benchmark-shaped, as SWE-agent's ACI is), model-swappable so the same
+    LLM can run bare and inside each harness, and full trace visibility for
+    the mechanism-analysis stage.
+  \item Use the collected traces (tool-call sequences, reasoning summaries)
+    from this run to identify \emph{which} harness capabilities are
+    load-bearing --- e.g., chunked/incremental reading of oversized inputs,
+    iterative syntax-check-and-repair --- and design ablations (via a
+    minimal harness such as mini-SWE-agent or smolagents) that isolate each
+    one.
+  \item Repeat runs per file to move from point estimates to confidence
+    intervals.
+\end{itemize}
+
+\todo{Add a Limitations section proper (dataset size/representativeness,
+single-model generalization, cost of scaling to more harnesses) once the
+paper has enough results to discuss concretely.}
+
+\end{document}
