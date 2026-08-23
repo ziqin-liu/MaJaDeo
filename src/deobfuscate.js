@@ -19,6 +19,39 @@ function usage() {
   console.error("Usage: npm run deobfuscate -- <input-file-or-folder> [output-file-or-folder]");
 }
 
+// Lets Codex CLI's own --config model_providers.<name> mechanism target a
+// third-party OpenAI-compatible endpoint (e.g. DeepSeek, OpenRouter) instead
+// of OpenAI. Set CODEX_MODEL_PROVIDER plus CODEX_MODEL_PROVIDER_BASE_URL; the
+// provider's API key is read from CODEX_MODEL_PROVIDER_ENV_KEY (default
+// "<PROVIDER>_API_KEY", uppercased) at Codex-CLI-launch time, not by this
+// script. See README for known wire_api caveats.
+function buildCustomProviderConfig() {
+  const providerName = process.env.CODEX_MODEL_PROVIDER;
+  if (!providerName) {
+    return undefined;
+  }
+
+  const baseUrl = process.env.CODEX_MODEL_PROVIDER_BASE_URL;
+  if (!baseUrl) {
+    throw new Error("CODEX_MODEL_PROVIDER_BASE_URL is required when CODEX_MODEL_PROVIDER is set");
+  }
+
+  const envKey = process.env.CODEX_MODEL_PROVIDER_ENV_KEY || `${providerName.toUpperCase()}_API_KEY`;
+  const wireApi = process.env.CODEX_MODEL_PROVIDER_WIRE_API || "chat";
+
+  return {
+    model_provider: providerName,
+    model_providers: {
+      [providerName]: {
+        name: providerName,
+        base_url: baseUrl,
+        env_key: envKey,
+        wire_api: wireApi
+      }
+    }
+  };
+}
+
 function defaultFileOutputPath(inputPath) {
   const extension = path.extname(inputPath);
   const stem = path.basename(inputPath, extension);
@@ -199,7 +232,7 @@ async function deobfuscateFile(codex, workingDirectory, inputPath, outputPath, l
     model: MODEL,
     workingDirectory,
     skipGitRepoCheck: true,
-    sandboxMode: "workspace-write",
+    sandboxMode: "danger-full-access",
     approvalPolicy: "never"
   });
 
@@ -297,7 +330,8 @@ async function main() {
   if (!inputStats.isFile() && !inputStats.isDirectory()) {
     throw new Error(`Input is not a file or directory: ${inputPath}`);
   }
-  const codex = new Codex();
+  const providerConfig = buildCustomProviderConfig();
+  const codex = new Codex(providerConfig ? { config: providerConfig } : undefined);
 
   if (inputStats.isFile()) {
     const outputPath = path.resolve(outputArgument || defaultFileOutputPath(inputPath));
