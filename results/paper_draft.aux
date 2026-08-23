@@ -1,0 +1,30 @@
+\relax 
+\providecommand\hyper@newdestlabel[2]{}
+\providecommand\HyField@AuxAddToFields[1]{}
+\providecommand\HyField@AuxAddToCoFields[2]{}
+\citation{jimenez2024swebench}
+\@writefile{toc}{\contentsline {section}{\numberline {1}Introduction}{1}{section.1}\protected@file@percent }
+\newlabel{sec:intro}{{1}{1}{Introduction}{section.1}{}}
+\citation{yang2024sweagent}
+\citation{wang2024openhands}
+\citation{puri2021codenet}
+\citation{puri2021codenet}
+\@writefile{toc}{\contentsline {section}{\numberline {2}Related Work}{2}{section.2}\protected@file@percent }
+\newlabel{sec:related}{{2}{2}{Related Work}{section.2}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {3}Experimental Setup}{2}{section.3}\protected@file@percent }
+\newlabel{sec:setup}{{3}{2}{Experimental Setup}{section.3}{}}
+\@writefile{toc}{\contentsline {paragraph}{Task.}{2}{section*.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Dataset.}{2}{section*.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Conditions.}{2}{section*.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Metrics.}{3}{section*.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{A structural harness/no-harness difference we observed.}{3}{section*.5}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {4}Results}{3}{section.4}\protected@file@percent }
+\newlabel{sec:results}{{4}{3}{Results}{section.4}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {1}{\ignorespaces Codex CLI harness driving \texttt  {gpt-5.6-terra} on two 50-file JavaScript deobfuscation benchmarks (\texttt  {codenet\_dataset\_high-obf-low-perf-selected} and \texttt  {codenet\_dataset\_jsfuck}). ``Reported'' is the harness's own completion status; ``Syntax'' is the fraction producing syntactically valid JavaScript; \textsuperscript  {*}``Behavior'' is the fraction that is both syntax-valid \emph  {and} passes the functional test suite (JsDeObsBench-style exe\_pass, conditioned on syntax passing). CodeBLEU is computed against the original (pre-obfuscation) source. Reported success is a weak proxy for correctness: 41 jsfuck runs were reported ``completed,'' but only 36 produced syntactically valid JavaScript, and only 18 (36\%) were behaviorally correct. }}{4}{table.1}\protected@file@percent }
+\newlabel{tab:rq1-codex-gpt56terra}{{1}{4}{Codex CLI harness driving \texttt {gpt-5.6-terra} on two 50-file JavaScript deobfuscation benchmarks (\texttt {codenet\_dataset\_high-obf-low-perf-selected} and \texttt {codenet\_dataset\_jsfuck}). ``Reported'' is the harness's own completion status; ``Syntax'' is the fraction producing syntactically valid JavaScript; \textsuperscript {*}``Behavior'' is the fraction that is both syntax-valid \emph {and} passes the functional test suite (JsDeObsBench-style exe\_pass, conditioned on syntax passing). CodeBLEU is computed against the original (pre-obfuscation) source. Reported success is a weak proxy for correctness: 41 jsfuck runs were reported ``completed,'' but only 36 produced syntactically valid JavaScript, and only 18 (36\%) were behaviorally correct}{table.1}{}}
+\@writefile{toc}{\contentsline {paragraph}{Reproducibility check.}{4}{section*.6}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {2}{\ignorespaces Standalone \texttt  {gpt-5.6-terra} (no agent harness: a single chat-completion call per file, obfuscated source inlined into the prompt, no tools, no further turns) on the same two 50-file JavaScript deobfuscation benchmarks as Table~\ref {tab:rq1-codex-gpt56terra}, using the same column definitions. The standalone model produces syntactically valid JavaScript almost as often as the harness (or more often, on obfuscator.io) but is dramatically worse at preserving behavior: 8\% vs.\ the harness's 32\% on obfuscator.io, and 0\% vs.\ 36\% on jsfuck. On jsfuck, one of 50 files (the largest, 1.5\,MB) exceeds the model's 922{,}000-token input limit and fails outright before generation begins; the harness processes the same file successfully using $\sim $180K tokens via eight shell-based tool calls rather than one inlined prompt (Section~\ref {sec:setup}). }}{5}{table.2}\protected@file@percent }
+\newlabel{tab:rq1-baseline-gpt56terra}{{2}{5}{Standalone \texttt {gpt-5.6-terra} (no agent harness: a single chat-completion call per file, obfuscated source inlined into the prompt, no tools, no further turns) on the same two 50-file JavaScript deobfuscation benchmarks as Table~\ref {tab:rq1-codex-gpt56terra}, using the same column definitions. The standalone model produces syntactically valid JavaScript almost as often as the harness (or more often, on obfuscator.io) but is dramatically worse at preserving behavior: 8\% vs.\ the harness's 32\% on obfuscator.io, and 0\% vs.\^^M36\% on jsfuck. On jsfuck, one of 50 files (the largest, 1.5\,MB) exceeds the model's 922{,}000-token input limit and fails outright before generation begins; the harness processes the same file successfully using $\sim $180K tokens via eight shell-based tool calls rather than one inlined prompt (Section~\ref {sec:setup})}{table.2}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {5}Discussion and Limitations}{5}{section.5}\protected@file@percent }
+\newlabel{sec:discussion}{{5}{5}{Discussion and Limitations}{section.5}{}}
+\gdef \@abspage@last{6}

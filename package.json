@@ -9,9 +9,23 @@
   },
   "scripts": {
     "deobfuscate": "node src/deobfuscate.js",
+<<<<<<< Updated upstream
     "check": "node --check src/deobfuscate.js"
   },
   "dependencies": {
     "@openai/codex-sdk": "^0.148.0"
+=======
+    "deobfuscate:baseline": "node src/deobfuscate-baseline.js",
+    "filter:metadata": "node src/filter-metadata.js",
+    "obfuscate:jsfuck": "node src/obfuscate-jsfuck.js",
+    "select": "node src/select-files.js",
+    "langsmith:sync": "node src/sync-langsmith.js",
+    "check": "node --check src/deobfuscate.js && node --check src/deobfuscate-baseline.js && node --check src/langsmith-telemetry.js && node --check src/sync-langsmith.js && node --check src/select-files.js && node --check src/obfuscate-jsfuck.js && node --check src/filter-metadata.js && node --check src/add-file-field.js"
+  },
+  "dependencies": {
+    "@openai/codex-sdk": "^0.148.0",
+    "jsfuck": "^0.4.0",
+    "langsmith": "^0.9.0"
+>>>>>>> Stashed changes
   }
 }
