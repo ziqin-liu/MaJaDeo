@@ -55,11 +55,20 @@ host/Docker load, so a borderline-slow-but-correct program can register as
 a false failure. We report the originally published figures above rather
 than overwrite them with a second, equally noisy sample, but readers should
 treat \textbf{Behavior} percentages as accurate to roughly $\pm$1--2 files
-out of 50 rather than as exact counts. Separately, the reproducibility run
-on jsfuck triggered an unrelated crash (a \texttt{MemoryError} inside
-CodeBLEU's AST subtree enumeration on one large/complex file) that,
+out of 50 rather than as exact counts.
+
+The jsfuck re-run confirms the same pattern: \textbf{Syntax} (72\%) and
+\textbf{CodeBLEU} ($0.283\to0.284$) reproduce closely, while
+\textbf{Behavior} moves from 36\% (18/50) to 34\% (17/50), a single file
+flipping --- the same $\sim$1--2-file magnitude of noise as
+obfuscator.io. This run also triggered an unrelated crash on first attempt
+(a \texttt{MemoryError} inside CodeBLEU's AST subtree enumeration on
+\texttt{p03948\_1}, the same 1.5\,MB file that separately exceeds the
+standalone baseline's context limit in Table~\ref{tab:rq1-baseline-gpt56terra}):
 because \texttt{evaluate\_deobfuscation} had no per-file error handling,
-aborted the batch and deleted the previous per-file metrics before new
-ones were written; we patched \texttt{evaluators.py} to catch and skip a
-failing file instead of losing the whole run, and are re-running to restore
-that data.
+the crash aborted the batch and deleted the previous per-file metrics
+before new ones were written, losing that data with no backup. We patched
+\texttt{evaluators.py} to catch and skip a failing file's evaluation
+instead of losing the whole run; \texttt{p03948\_1} is excluded from the
+CodeBLEU average above (35 of 36 syntax-valid files) and its
+\texttt{exe\_pass} result, computed before the crash, is retained.

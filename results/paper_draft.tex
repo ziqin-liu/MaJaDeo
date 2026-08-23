@@ -239,13 +239,15 @@ comparison; percentages in both tables are point estimates, not confidence
 intervals, and should be read accordingly. A reproducibility check
 (Section~\ref{sec:results}, paragraph following
 Table~\ref{tab:rq1-codex-gpt56terra}) reinforces this: re-scoring the same
-harness outputs with no code changes moved obfuscator.io's Behavior metric
-by 4 points (32\%$\to$28\%), traced to a 2-second execution timeout in the
+harness outputs with no code changes moved obfuscator.io's Behavior metric by 4 points (32\%$\to$28\%) and jsfuck's by
+2 points (36\%$\to$34\%), traced to a 2-second execution timeout in the
 functional-test harness that is sensitive to host load rather than to
 anything about the model or harness under test. The same check also
-surfaced and fixed a crash-safety bug in the evaluator itself (a single
-pathological file's CodeBLEU computation could abort an entire batch and
-destroy previously-computed results). Both are evaluator-infrastructure
+surfaced and fixed a crash-safety bug in the evaluator itself: one
+pathological file's CodeBLEU computation raised an unhandled
+\texttt{MemoryError} that aborted the entire batch and destroyed
+previously-computed per-file results with no backup, which we patched to
+catch and skip instead. Both are evaluator-infrastructure
 issues, not findings about harness-vs-standalone-LLM performance, but they
 matter for how tightly future work should read differences of a few
 percentage points, and argue for repeated runs (below) over point
