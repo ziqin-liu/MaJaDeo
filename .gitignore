@@ -10,3 +10,7 @@ __pycache__/
 MAST/
 MAST-Data/
 deepseek-harness/
+*.aux
+*.log
+*.out
+evaluators/.venv/
