@@ -243,17 +243,24 @@ def evaluate_deobfuscation(prediction_file: str,
     for data in tqdm(dataset, desc="evaluation"):
         if data['syntax_pass']==0: # jump other metrics if syntax check not pass
             continue
-        
-        res_exe = safe_code_evaluator.evaluate(data)
-        metrics['exe_pass'] += res_exe['pass']
 
-        res_bleu = code_bleu_evaluator.evaluate(data)
-        for submetric, v in res_bleu.items():
-            metrics[f'code_bleu_{submetric}'] += v
+        try:
+            res_exe = safe_code_evaluator.evaluate(data)
+            metrics['exe_pass'] += res_exe['pass']
 
-        # res_cpx = complexity_evaluator.evaluate(data)
-        # for submetric, v in res_cpx.items():
-        #     metrics[f'code_complexity_{submetric}'] += v
+            res_bleu = code_bleu_evaluator.evaluate(data)
+            for submetric, v in res_bleu.items():
+                metrics[f'code_bleu_{submetric}'] += v
+
+            # res_cpx = complexity_evaluator.evaluate(data)
+            # for submetric, v in res_cpx.items():
+            #     metrics[f'code_complexity_{submetric}'] += v
+        except Exception as e:
+            # A single pathological file (e.g. an AST large/complex enough to
+            # blow up CodeBLEU's syntax-match subtree enumeration) must not
+            # abort the whole batch and lose every other file's results.
+            logging.warning(f"[!] Skipping {data.get('filename')}: evaluation error: {e}")
+            continue
 
     safe_code_evaluator.stop_container()
 

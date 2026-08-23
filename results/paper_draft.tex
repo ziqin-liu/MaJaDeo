@@ -236,7 +236,20 @@ Section~\ref{sec:discussion}, not a two-condition comparison alone.
 
 This is a single harness $\times$ single model $\times$ single run per file
 comparison; percentages in both tables are point estimates, not confidence
-intervals, and should be read accordingly. Planned next steps:
+intervals, and should be read accordingly. A reproducibility check
+(Section~\ref{sec:results}, paragraph following
+Table~\ref{tab:rq1-codex-gpt56terra}) reinforces this: re-scoring the same
+harness outputs with no code changes moved obfuscator.io's Behavior metric
+by 4 points (32\%$\to$28\%), traced to a 2-second execution timeout in the
+functional-test harness that is sensitive to host load rather than to
+anything about the model or harness under test. The same check also
+surfaced and fixed a crash-safety bug in the evaluator itself (a single
+pathological file's CodeBLEU computation could abort an entire batch and
+destroy previously-computed results). Both are evaluator-infrastructure
+issues, not findings about harness-vs-standalone-LLM performance, but they
+matter for how tightly future work should read differences of a few
+percentage points, and argue for repeated runs (below) over point
+estimates specifically for the Behavior metric. Planned next steps:
 
 \begin{itemize}
   \item Add further harness conditions (OpenHands, Claude Code) under the

@@ -35,3 +35,31 @@
   }
   \label{tab:rq1-codex-gpt56terra}
 \end{table}
+
+\paragraph{Reproducibility check.} We re-ran the evaluator
+(\texttt{evaluators/eval.py}) against the same harness output files after
+fixing an unrelated bug in \texttt{evaluators/data.py} (a JSONL writer that
+silently dropped a single aggregate record instead of writing it), to
+confirm that fix did not change the numbers above. It did not: the
+obfuscator.io \textbf{Syntax} (94\%) and \textbf{CodeBLEU} ($0.348\to0.349$)
+reproduced almost exactly, and jsfuck's on-disk summary predated the bug fix
+but was already a single well-formed record matching the published numbers
+exactly, so it required no correction. \textbf{Behavior}, however, is not
+fully reproducible run-to-run: the same obfuscator.io outputs, re-scored
+with no code changes, yielded 28\% (14/50) rather than the 32\% (16/50)
+reported above --- 2 of 47 syntax-valid files flipped pass/fail between
+runs. This traces to \texttt{eval\_code\_with\_docker.py}'s functional-test
+harness, which runs each test case via \texttt{docker exec} under a
+2-second wall-clock timeout; that budget is tight enough to be sensitive to
+host/Docker load, so a borderline-slow-but-correct program can register as
+a false failure. We report the originally published figures above rather
+than overwrite them with a second, equally noisy sample, but readers should
+treat \textbf{Behavior} percentages as accurate to roughly $\pm$1--2 files
+out of 50 rather than as exact counts. Separately, the reproducibility run
+on jsfuck triggered an unrelated crash (a \texttt{MemoryError} inside
+CodeBLEU's AST subtree enumeration on one large/complex file) that,
+because \texttt{evaluate\_deobfuscation} had no per-file error handling,
+aborted the batch and deleted the previous per-file metrics before new
+ones were written; we patched \texttt{evaluators.py} to catch and skip a
+failing file instead of losing the whole run, and are re-running to restore
+that data.
