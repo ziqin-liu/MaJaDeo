@@ -15,6 +15,69 @@ npm install
 
 ## Usage
 
+### Select the benchmark files
+
+Use `selected_50.txt` to copy the selected CodeNet programs from any folder:
+
+```sh
+npm run select -- path/to/source-folder path/to/output-folder
+```
+
+If the output folder is omitted, files are copied to `<source-folder>/selected`.
+The selector searches recursively and matches CodeNet IDs, so names such as
+`codenet_p00048_1.js` and `codenet_p00048_1.obf.js` are both supported. It
+aborts and reports details if an ID is missing or has multiple matches.
+
+Filter CodeNet metadata with the same manifest:
+
+```sh
+npm run filter:metadata -- original-selected/Project_CodeNet_selected.jsonl
+```
+
+This writes `Project_CodeNet_selected.filtered.jsonl`, retaining the selected
+records but removing their top-level `obfuscated` field. To replace the input
+atomically while retaining a `.bak` backup:
+
+```sh
+npm run filter:metadata -- original-selected/Project_CodeNet_selected.jsonl --in-place
+```
+
+Add file contents to a field in each matching metadata record:
+
+```sh
+npm run add:metadata-field -- \
+  original-selected/Project_CodeNet_selected.filtered.jsonl \
+  path/to/obfuscated-folder \
+  obfuscated
+```
+
+This recursively matches JavaScript files by CodeNet ID and writes a new JSONL
+whose name ends with `.with-obfuscated.jsonl`. Supply an explicit output path as
+the fourth argument, or use `--in-place` to replace the input while creating a
+`.bak` backup. Missing or duplicate matches abort the update.
+
+### Obfuscate with JSFuck
+
+Obfuscate one JavaScript file:
+
+```sh
+npm run obfuscate:jsfuck -- path/to/input.js
+```
+
+This creates `path/to/input.obf.js`. To recursively obfuscate a folder:
+
+```sh
+npm run obfuscate:jsfuck -- path/to/input-folder
+```
+
+Folder results are written under `<input-folder>/jsfuck`, preserving the source
+tree. An explicit output path may be supplied as the second argument. Output is
+validated to contain only the six JSFuck characters: `[]()!+`.
+
+The encoder adds a Node-compatible `require` binding before encoding because
+JSFuck executes through the `Function` constructor. This allows standalone
+CodeNet programs that use `require("fs")` to continue reading standard input.
+
 ### One file
 
 ```sh
@@ -49,6 +112,15 @@ npm run deobfuscate -- path/to/obfuscated-folder path/to/obfuscated-folder/clean
 Folder mode skips `.git`, `node_modules`, its output directory, and files whose
 names already contain `.deobfuscated`. Each source file gets a separate Codex
 thread; processing continues if one file fails and reports a summary at the end.
+If the expected output file already exists, that source is skipped so rerunning
+the command does not spend another Codex call on completed work.
+
+The input folder must contain exactly one source `.jsonl` file. After all files
+have been processed, folder mode writes `<metadata-name>.deobfuscated.jsonl` in
+the same folder. Each matching record receives the source text in `obfuscated`
+and the generated text in `deobfuscated`. When a file fails, its `deobfuscated`
+value is `null`. The source metadata file is not overwritten, and generated
+`.deobfuscated.jsonl` files are ignored on later runs.
 
 ## Run telemetry
 
@@ -75,3 +147,62 @@ and command output, so treat them as potentially sensitive.
 The input is treated as untrusted and is analyzed statically; the prompt tells
 Codex not to execute it. Review and test the generated file before using it in
 production.
+
+## Sandbox mode
+
+Codex runs with `sandboxMode: "danger-full-access"` — the OS-level sandbox is
+disabled and only the prompt instruction stops Codex from executing the input.
+This was forced by a real failure: on this project's Windows dev machine,
+Codex's native `workspace-write` sandbox refused every shell command before
+it ran, so every turn failed without touching the file. Codex ships a
+`codex-windows-sandbox-setup.exe` alongside the CLI binary
+(`node_modules/@openai/codex-win32-x64/vendor/<target>/codex-resources/`)
+that's apparently meant to provision the native sandbox; it isn't run
+automatically by the SDK, and running it wasn't attempted here. If your setup
+has a working `workspace-write` sandbox, restoring that sandbox mode in
+`src/deobfuscate.js` is safer, since the process boundary is then enforced by
+the OS rather than only by the prompt.
+
+## Using a non-OpenAI model provider
+
+Codex CLI can target any OpenAI-compatible endpoint via its `model_providers`
+config. Set these environment variables to route through a third-party
+provider (e.g. DeepSeek):
+
+```sh
+CODEX_MODEL_PROVIDER=deepseek
+CODEX_MODEL_PROVIDER_BASE_URL=https://api.deepseek.com
+CODEX_MODEL_PROVIDER_ENV_KEY=DEEPSEEK_API_KEY   # optional, defaults to "<PROVIDER>_API_KEY"
+CODEX_MODEL_PROVIDER_WIRE_API=chat              # optional, defaults to "chat"
+CODEX_MODEL=deepseek-chat
+DEEPSEEK_API_KEY=...
+```
+
+The provider's API key must be in the environment variable named by
+`CODEX_MODEL_PROVIDER_ENV_KEY` — Codex CLI reads it directly, not this
+script. **This is unverified**: public sources disagree on whether the
+installed Codex CLI version still accepts `wire_api = "chat"` (Chat
+Completions) for third-party providers, or whether it now requires the
+Responses API and a translation proxy (e.g. LiteLLM) in front of
+Chat-Completions-only providers like DeepSeek. Test with a throwaway file and
+check the run's `.run.json` log before trusting it for real work.
+
+## Evaluation
+
+The evaluation is based on the JsDeObsBench
+
+### Setup environment
+
+```sh
+export PYTHONPATH="${PYTHONPATH}:/Users/ZacharyKimLiu/Projects/MaJaDeo"
+
+cd evaluators
+```
+
+(if dont have a venv, install uv, and init a vm, by command: uv venv)
+
+```sh
+source .venv/bin/activate
+uv pip install fire, codebleu, jsonlines, tqdm
+uv pip install tree-sitter-javascript==0.21
+```

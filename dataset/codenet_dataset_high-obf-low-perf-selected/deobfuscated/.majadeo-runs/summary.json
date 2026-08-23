@@ -1,0 +1,713 @@
+{
+  "schemaVersion": 1,
+  "model": "gpt-5.6-terra",
+  "generatedAt": "2026-08-20T14:24:49.353Z",
+  "filesDiscovered": 50,
+  "filesAttempted": 50,
+  "filesSkipped": 0,
+  "filesSucceeded": 47,
+  "filesFailed": 3,
+  "totalEstimatedCostUsd": 21.752098750000005,
+  "runs": [
+    {
+      "inputPath": "/Users/ZacharyKimLiu/Projects/MaJaDeo/dataset/codenet_dataset_high-obf-low-perf-selected/codenet_p00038_1.obf.js",
+      "outputPath": "/Users/ZacharyKimLiu/Projects/MaJaDeo/dataset/codenet_dataset_high-obf-low-perf-selected/deobfuscated/codenet_p00038_1.obf.js",
+      "status": "completed",
+      "usage": {
+        "input_tokens": 704009,
+        "cached_input_tokens": 649892,
+        "cache_write_input_tokens": 54069,
+        "output_tokens": 11327,
+        "reasoning_output_tokens": 6126
+      },
+      "estimatedCostUsd": 0.90454645,
+      "durationMs": 143026
+    },
+    {
+      "inputPath": "/Users/ZacharyKimLiu/Projects/MaJaDeo/dataset/codenet_dataset_high-obf-low-perf-selected/codenet_p00048_1.obf.js",
+      "outputPath": "/Users/ZacharyKimLiu/Projects/MaJaDeo/dataset/codenet_dataset_high-obf-low-perf-selected/deobfuscated/codenet_p00048_1.obf.js",
+      "status": "completed",
+      "usage": {
+        "input_tokens": 897343,
+        "cached_input_tokens": 834423,
+        "cache_write_input_tokens": 62866,
+        "output_tokens": 15359,
+        "reasoning_output_tokens": 7682
+      },
+      "estimatedCostUsd": 1.1515218,
+      "durationMs": 166581
+    },
+    {
+      "inputPath": "/Users/ZacharyKimLiu/Projects/MaJaDeo/dataset/codenet_dataset_high-obf-low-perf-selected/codenet_p00052_1.obf.js",
+      "outputPath": "/Users/ZacharyKimLiu/Projects/MaJaDeo/dataset/codenet_dataset_high-obf-low-perf-selected/deobfuscated/codenet_p00052_1.obf.js",
+      "status": "completed",
+      "usage": {
+        "input_tokens": 520008,
+        "cached_input_tokens": 476949,
+        "cache_write_input_tokens": 43008,
+        "output_tokens": 14228,
+        "reasoning_output_tokens": 6431
+      },
+      "estimatedCostUsd": 0.7068309,
+      "durationMs": 145241
+    },
+    {
+      "inputPath": "/Users/ZacharyKimLiu/Projects/MaJaDeo/dataset/codenet_dataset_high-obf-low-perf-selected/codenet_p00054_1.obf.js",
+      "outputPath": "/Users/ZacharyKimLiu/Projects/MaJaDeo/dataset/codenet_dataset_high-obf-low-perf-selected/deobfuscated/codenet_p00054_1.obf.js",
+      "status": "completed",
+      "usage": {
+        "input_tokens": 232497,
+        "cached_input_tokens": 187258,
+        "cache_write_input_tokens": 45218,
+        "output_tokens": 2552,
+        "reasoning_output_tokens": 1550
+      },
+      "estimatedCostUsd": 0.3230573,
+      "durationMs": 35833
+    },
+    {
+      "inputPath": "/Users/ZacharyKimLiu/Projects/MaJaDeo/dataset/codenet_dataset_high-obf-low-perf-selected/codenet_p00072_1.obf.js",
+      "outputPath": "/Users/ZacharyKimLiu/Projects/MaJaDeo/dataset/codenet_dataset_high-obf-low-perf-selected/deobfuscated/codenet_p00072_1.obf.js",
+      "status": "completed",
+      "usage": {
+        "input_tokens": 111489,
+        "cached_input_tokens": 81737,
+        "cache_write_input_tokens": 29737,
+        "output_tokens": 2122,
+        "reasoning_output_tokens": 987
+      },
+      "estimatedCostUsd": 0.16956595000000002,
+      "durationMs": 27060
+    },
+    {
+      "inputPath": "/Users/ZacharyKimLiu/Projects/MaJaDeo/dataset/codenet_dataset_high-obf-low-perf-selected/codenet_p00089_1.obf.js",
+      "outputPath": "/Users/ZacharyKimLiu/Projects/MaJaDeo/dataset/codenet_dataset_high-obf-low-perf-selected/deobfuscated/codenet_p00089_1.obf.js",
+      "status": "completed",
+      "usage": {
+        "input_tokens": 326039,
+        "cached_input_tokens": 254466,
+        "cache_write_input_tokens": 71555,
+        "output_tokens": 4366,
+        "reasoning_output_tokens": 3242
+      },
+      "estimatedCostUsd": 0.46712535,
+      "durationMs": 54529
+    },
+    {
+      "inputPath": "/Users/ZacharyKimLiu/Projects/MaJaDeo/dataset/codenet_dataset_high-obf-low-perf-selected/codenet_p00127_1.obf.js",
+      "outputPath": "/Users/ZacharyKimLiu/Projects/MaJaDeo/dataset/codenet_dataset_high-obf-low-perf-selected/deobfuscated/codenet_p00127_1.obf.js",
+      "status": "completed",
+      "usage": {
+        "input_tokens": 148806,
+        "cached_input_tokens": 116738,
+        "cache_write_input_tokens": 32050,
+        "output_tokens": 2558,
+        "reasoning_output_tokens": 1413
+      },
+      "estimatedCostUsd": 0.21589029999999998,
+      "durationMs": 30422
+    },
+    {
+      "inputPath": "/Users/ZacharyKimLiu/Projects/MaJaDeo/dataset/codenet_dataset_high-obf-low-perf-selected/codenet_p00138_1.obf.js",
+      "outputPath": "/Users/ZacharyKimLiu/Projects/MaJaDeo/dataset/codenet_dataset_high-obf-low-perf-selected/deobfuscated/codenet_p00138_1.obf.js",
+      "status": "failed",
+      "usage": {
+        "input_tokens": 11954,
+        "cached_input_tokens": 0,
+        "cache_write_input_tokens": 11951,
+        "output_tokens": 101,
+        "reasoning_output_tokens": 74
+      },
+      "estimatedCostUsd": 0.02749875,
+      "durationMs": 2933
+    },
+    {
+      "inputPath": "/Users/ZacharyKimLiu/Projects/MaJaDeo/dataset/codenet_dataset_high-obf-low-perf-selected/codenet_p00140_1.obf.js",
+      "outputPath": "/Users/ZacharyKimLiu/Projects/MaJaDeo/dataset/codenet_dataset_high-obf-low-perf-selected/deobfuscated/codenet_p00140_1.obf.js",
+      "status": "completed",
+      "usage": {
+        "input_tokens": 132940,
+        "cached_input_tokens": 104773,
+        "cache_write_input_tokens": 28149,
+        "output_tokens": 2773,
+        "reasoning_output_tokens": 1651
+      },
+      "estimatedCostUsd": 0.19524154999999999,
+      "durationMs": 35432
+    },
+    {
+      "inputPath": "/Users/ZacharyKimLiu/Projects/MaJaDeo/dataset/codenet_dataset_high-obf-low-perf-selected/codenet_p00183_1.obf.js",
+      "outputPath": "/Users/ZacharyKimLiu/Projects/MaJaDeo/dataset/codenet_dataset_high-obf-low-perf-selected/deobfuscated/codenet_p00183_1.obf.js",
+      "status": "completed",
+      "usage": {
+        "input_tokens": 122222,
+        "cached_input_tokens": 94021,
+        "cache_write_input_tokens": 28186,
+        "output_tokens": 1578,
+        "reasoning_output_tokens": 587
+      },
+      "estimatedCostUsd": 0.1763246,
+      "durationMs": 18176
+    },
+    {
+      "inputPath": "/Users/ZacharyKimLiu/Projects/MaJaDeo/dataset/codenet_dataset_high-obf-low-perf-selected/codenet_p00216_1.obf.js",
+      "outputPath": "/Users/ZacharyKimLiu/Projects/MaJaDeo/dataset/codenet_dataset_high-obf-low-perf-selected/deobfuscated/codenet_p00216_1.obf.js",
+      "status": "completed",
+      "usage": {
+        "input_tokens": 111064,
+        "cached_input_tokens": 88338,
+        "cache_write_input_tokens": 22708,
+        "output_tokens": 2671,
+        "reasoning_output_tokens": 1737
+      },
+      "estimatedCostUsd": 0.16430879999999998,
+      "durationMs": 36738
+    },
+    {
+      "inputPath": "/Users/ZacharyKimLiu/Projects/MaJaDeo/dataset/codenet_dataset_high-obf-low-perf-selected/codenet_p00261_1.obf.js",
+      "outputPath": "/Users/ZacharyKimLiu/Projects/MaJaDeo/dataset/codenet_dataset_high-obf-low-perf-selected/deobfuscated/codenet_p00261_1.obf.js",
+      "status": "completed",
+      "usage": {
+        "input_tokens": 362433,
+        "cached_input_tokens": 324109,
+        "cache_write_input_tokens": 38291,
+        "output_tokens": 7011,
+        "reasoning_output_tokens": 2881
+      },
+      "estimatedCostUsd": 0.48477365,
+      "durationMs": 87028
+    },
+    {
+      "inputPath": "/Users/ZacharyKimLiu/Projects/MaJaDeo/dataset/codenet_dataset_high-obf-low-perf-selected/codenet_p00589_1.obf.js",
+      "outputPath": "/Users/ZacharyKimLiu/Projects/MaJaDeo/dataset/codenet_dataset_high-obf-low-perf-selected/deobfuscated/codenet_p00589_1.obf.js",
+      "status": "completed",
+      "usage": {
+        "input_tokens": 598058,
+        "cached_input_tokens": 548967,
+        "cache_write_input_tokens": 49040,
+        "output_tokens": 17054,
+        "reasoning_output_tokens": 10037
+      },
+      "estimatedCostUsd": 0.8165787,
+      "durationMs": 224030
+    },
+    {
+      "inputPath": "/Users/ZacharyKimLiu/Projects/MaJaDeo/dataset/codenet_dataset_high-obf-low-perf-selected/codenet_p00593_1.obf.js",
+      "outputPath": "/Users/ZacharyKimLiu/Projects/MaJaDeo/dataset/codenet_dataset_high-obf-low-perf-selected/deobfuscated/codenet_p00593_1.obf.js",
+      "status": "completed",
+      "usage": {
+        "input_tokens": 656319,
+        "cached_input_tokens": 600130,
+        "cache_write_input_tokens": 56144,
+        "output_tokens": 10124,
+        "reasoning_output_tokens": 4599
+      },
+      "estimatedCostUsd": 0.847256,
+      "durationMs": 130474
+    },
+    {
+      "inputPath": "/Users/ZacharyKimLiu/Projects/MaJaDeo/dataset/codenet_dataset_high-obf-low-perf-selected/codenet_p00718_1.obf.js",
+      "outputPath": "/Users/ZacharyKimLiu/Projects/MaJaDeo/dataset/codenet_dataset_high-obf-low-perf-selected/deobfuscated/codenet_p00718_1.obf.js",
+      "status": "completed",
+      "usage": {
+        "input_tokens": 732100,
+        "cached_input_tokens": 671071,
+        "cache_write_input_tokens": 60984,
+        "output_tokens": 9925,
+        "reasoning_output_tokens": 5499
+      },
+      "estimatedCostUsd": 0.9349871,
+      "durationMs": 130110
+    },
+    {
+      "inputPath": "/Users/ZacharyKimLiu/Projects/MaJaDeo/dataset/codenet_dataset_high-obf-low-perf-selected/codenet_p00728_1.obf.js",
+      "outputPath": "/Users/ZacharyKimLiu/Projects/MaJaDeo/dataset/codenet_dataset_high-obf-low-perf-selected/deobfuscated/codenet_p00728_1.obf.js",
+      "status": "completed",
+      "usage": {
+        "input_tokens": 693757,
+        "cached_input_tokens": 627743,
+        "cache_write_input_tokens": 65972,
+        "output_tokens": 9039,
+        "reasoning_output_tokens": 4577
+      },
+      "estimatedCostUsd": 0.8932303,
+      "durationMs": 117776
+    },
+    {
+      "inputPath": "/Users/ZacharyKimLiu/Projects/MaJaDeo/dataset/codenet_dataset_high-obf-low-perf-selected/codenet_p00803_1.obf.js",
+      "outputPath": "/Users/ZacharyKimLiu/Projects/MaJaDeo/dataset/codenet_dataset_high-obf-low-perf-selected/deobfuscated/codenet_p00803_1.obf.js",
+      "status": "completed",
+      "usage": {
+        "input_tokens": 142886,
+        "cached_input_tokens": 109650,
+        "cache_write_input_tokens": 33221,
+        "output_tokens": 1542,
+        "reasoning_output_tokens": 807
+      },
+      "estimatedCostUsd": 0.20462925,
+      "durationMs": 24120
+    },
+    {
+      "inputPath": "/Users/ZacharyKimLiu/Projects/MaJaDeo/dataset/codenet_dataset_high-obf-low-perf-selected/codenet_p00820_1.obf.js",
+      "outputPath": "/Users/ZacharyKimLiu/Projects/MaJaDeo/dataset/codenet_dataset_high-obf-low-perf-selected/deobfuscated/codenet_p00820_1.obf.js",
+      "status": "completed",
+      "usage": {
+        "input_tokens": 252171,
+        "cached_input_tokens": 218972,
+        "cache_write_input_tokens": 33172,
+        "output_tokens": 7766,
+        "reasoning_output_tokens": 4719
+      },
+      "estimatedCostUsd": 0.3621292,
+      "durationMs": 97471
+    },
+    {
+      "inputPath": "/Users/ZacharyKimLiu/Projects/MaJaDeo/dataset/codenet_dataset_high-obf-low-perf-selected/codenet_p01224_1.obf.js",
+      "outputPath": "/Users/ZacharyKimLiu/Projects/MaJaDeo/dataset/codenet_dataset_high-obf-low-perf-selected/deobfuscated/codenet_p01224_1.obf.js",
+      "status": "completed",
+      "usage": {
+        "input_tokens": 519180,
+        "cached_input_tokens": 451393,
+        "cache_write_input_tokens": 67751,
+        "output_tokens": 7381,
+        "reasoning_output_tokens": 4899
+      },
+      "estimatedCostUsd": 0.69329405,
+      "durationMs": 109412
+    },
+    {
+      "inputPath": "/Users/ZacharyKimLiu/Projects/MaJaDeo/dataset/codenet_dataset_high-obf-low-perf-selected/codenet_p01531_1.obf.js",
+      "outputPath": "/Users/ZacharyKimLiu/Projects/MaJaDeo/dataset/codenet_dataset_high-obf-low-perf-selected/deobfuscated/codenet_p01531_1.obf.js",
+      "status": "completed",
+      "usage": {
+        "input_tokens": 268633,
+        "cached_input_tokens": 229613,
+        "cache_write_input_tokens": 38996,
+        "output_tokens": 4875,
+        "reasoning_output_tokens": 2196
+      },
+      "estimatedCostUsd": 0.3695893,
+      "durationMs": 63499
+    },
+    {
+      "inputPath": "/Users/ZacharyKimLiu/Projects/MaJaDeo/dataset/codenet_dataset_high-obf-low-perf-selected/codenet_p02060_1.obf.js",
+      "outputPath": "/Users/ZacharyKimLiu/Projects/MaJaDeo/dataset/codenet_dataset_high-obf-low-perf-selected/deobfuscated/codenet_p02060_1.obf.js",
+      "status": "completed",
+      "usage": {
+        "input_tokens": 111600,
+        "cached_input_tokens": 88798,
+        "cache_write_input_tokens": 22784,
+        "output_tokens": 2854,
+        "reasoning_output_tokens": 1970
+      },
+      "estimatedCostUsd": 0.16608379999999998,
+      "durationMs": 45018
+    },
+    {
+      "inputPath": "/Users/ZacharyKimLiu/Projects/MaJaDeo/dataset/codenet_dataset_high-obf-low-perf-selected/codenet_p02115_1.obf.js",
+      "outputPath": "/Users/ZacharyKimLiu/Projects/MaJaDeo/dataset/codenet_dataset_high-obf-low-perf-selected/deobfuscated/codenet_p02115_1.obf.js",
+      "status": "completed",
+      "usage": {
+        "input_tokens": 534943,
+        "cached_input_tokens": 486380,
+        "cache_write_input_tokens": 48518,
+        "output_tokens": 17049,
+        "reasoning_output_tokens": 7417
+      },
+      "estimatedCostUsd": 0.7465225,
+      "durationMs": 182491
+    },
+    {
+      "inputPath": "/Users/ZacharyKimLiu/Projects/MaJaDeo/dataset/codenet_dataset_high-obf-low-perf-selected/codenet_p02240_1.obf.js",
+      "outputPath": "/Users/ZacharyKimLiu/Projects/MaJaDeo/dataset/codenet_dataset_high-obf-low-perf-selected/deobfuscated/codenet_p02240_1.obf.js",
+      "status": "completed",
+      "usage": {
+        "input_tokens": 287193,
+        "cached_input_tokens": 248712,
+        "cache_write_input_tokens": 38451,
+        "output_tokens": 7472,
+        "reasoning_output_tokens": 4628
+      },
+      "estimatedCostUsd": 0.40495995,
+      "durationMs": 94235
+    },
+    {
+      "inputPath": "/Users/ZacharyKimLiu/Projects/MaJaDeo/dataset/codenet_dataset_high-obf-low-perf-selected/codenet_p02242_1.obf.js",
+      "outputPath": "/Users/ZacharyKimLiu/Projects/MaJaDeo/dataset/codenet_dataset_high-obf-low-perf-selected/deobfuscated/codenet_p02242_1.obf.js",
+      "status": "completed",
+      "usage": {
+        "input_tokens": 435646,
+        "cached_input_tokens": 401145,
+        "cache_write_input_tokens": 34453,
+        "output_tokens": 11370,
+        "reasoning_output_tokens": 4017
+      },
+      "estimatedCostUsd": 0.58704675,
+      "durationMs": 123722
+    },
+    {
+      "inputPath": "/Users/ZacharyKimLiu/Projects/MaJaDeo/dataset/codenet_dataset_high-obf-low-perf-selected/codenet_p02262_1.obf.js",
+      "outputPath": "/Users/ZacharyKimLiu/Projects/MaJaDeo/dataset/codenet_dataset_high-obf-low-perf-selected/deobfuscated/codenet_p02262_1.obf.js",
+      "status": "completed",
+      "usage": {
+        "input_tokens": 174628,
+        "cached_input_tokens": 135533,
+        "cache_write_input_tokens": 39077,
+        "output_tokens": 4398,
+        "reasoning_output_tokens": 3250
+      },
+      "estimatedCostUsd": 0.26341555,
+      "durationMs": 63958
+    },
+    {
+      "inputPath": "/Users/ZacharyKimLiu/Projects/MaJaDeo/dataset/codenet_dataset_high-obf-low-perf-selected/codenet_p02327_1.obf.js",
+      "outputPath": "/Users/ZacharyKimLiu/Projects/MaJaDeo/dataset/codenet_dataset_high-obf-low-perf-selected/deobfuscated/codenet_p02327_1.obf.js",
+      "status": "completed",
+      "usage": {
+        "input_tokens": 183625,
+        "cached_input_tokens": 158136,
+        "cache_write_input_tokens": 25462,
+        "output_tokens": 5960,
+        "reasoning_output_tokens": 3516
+      },
+      "estimatedCostUsd": 0.2670261,
+      "durationMs": 77684
+    },
+    {
+      "inputPath": "/Users/ZacharyKimLiu/Projects/MaJaDeo/dataset/codenet_dataset_high-obf-low-perf-selected/codenet_p02388_1.obf.js",
+      "outputPath": "/Users/ZacharyKimLiu/Projects/MaJaDeo/dataset/codenet_dataset_high-obf-low-perf-selected/deobfuscated/codenet_p02388_1.obf.js",
+      "status": "completed",
+      "usage": {
+        "input_tokens": 267082,
+        "cached_input_tokens": 223736,
+        "cache_write_input_tokens": 43322,
+        "output_tokens": 4086,
+        "reasoning_output_tokens": 2308
+      },
+      "estimatedCostUsd": 0.36812409999999995,
+      "durationMs": 67698
+    },
+    {
+      "inputPath": "/Users/ZacharyKimLiu/Projects/MaJaDeo/dataset/codenet_dataset_high-obf-low-perf-selected/codenet_p02416_1.obf.js",
+      "outputPath": "/Users/ZacharyKimLiu/Projects/MaJaDeo/dataset/codenet_dataset_high-obf-low-perf-selected/deobfuscated/codenet_p02416_1.obf.js",
+      "status": "completed",
+      "usage": {
+        "input_tokens": 125075,
+        "cached_input_tokens": 96047,
+        "cache_write_input_tokens": 29013,
+        "output_tokens": 2369,
+        "reasoning_output_tokens": 1544
+      },
+      "estimatedCostUsd": 0.18515995000000002,
+      "durationMs": 32470
+    },
+    {
+      "inputPath": "/Users/ZacharyKimLiu/Projects/MaJaDeo/dataset/codenet_dataset_high-obf-low-perf-selected/codenet_p02735_1.obf.js",
+      "outputPath": "/Users/ZacharyKimLiu/Projects/MaJaDeo/dataset/codenet_dataset_high-obf-low-perf-selected/deobfuscated/codenet_p02735_1.obf.js",
+      "status": "completed",
+      "usage": {
+        "input_tokens": 136370,
+        "cached_input_tokens": 103263,
+        "cache_write_input_tokens": 33092,
+        "output_tokens": 3973,
+        "reasoning_output_tokens": 2521
+      },
+      "estimatedCostUsd": 0.21189929999999998,
+      "durationMs": 52632
+    },
+    {
+      "inputPath": "/Users/ZacharyKimLiu/Projects/MaJaDeo/dataset/codenet_dataset_high-obf-low-perf-selected/codenet_p02796_1.obf.js",
+      "outputPath": "/Users/ZacharyKimLiu/Projects/MaJaDeo/dataset/codenet_dataset_high-obf-low-perf-selected/deobfuscated/codenet_p02796_1.obf.js",
+      "status": "completed",
+      "usage": {
+        "input_tokens": 129221,
+        "cached_input_tokens": 99435,
+        "cache_write_input_tokens": 29771,
+        "output_tokens": 1404,
+        "reasoning_output_tokens": 674
+      },
+      "estimatedCostUsd": 0.18480225,
+      "durationMs": 19326
+    },
+    {
+      "inputPath": "/Users/ZacharyKimLiu/Projects/MaJaDeo/dataset/codenet_dataset_high-obf-low-perf-selected/codenet_p02882_1.obf.js",
+      "outputPath": "/Users/ZacharyKimLiu/Projects/MaJaDeo/dataset/codenet_dataset_high-obf-low-perf-selected/deobfuscated/codenet_p02882_1.obf.js",
+      "status": "completed",
+      "usage": {
+        "input_tokens": 247353,
+        "cached_input_tokens": 214593,
+        "cache_write_input_tokens": 32733,
+        "output_tokens": 7715,
+        "reasoning_output_tokens": 4090
+      },
+      "estimatedCostUsd": 0.35601855,
+      "durationMs": 123129
+    },
+    {
+      "inputPath": "/Users/ZacharyKimLiu/Projects/MaJaDeo/dataset/codenet_dataset_high-obf-low-perf-selected/codenet_p02891_1.obf.js",
+      "outputPath": "/Users/ZacharyKimLiu/Projects/MaJaDeo/dataset/codenet_dataset_high-obf-low-perf-selected/deobfuscated/codenet_p02891_1.obf.js",
+      "status": "completed",
+      "usage": {
+        "input_tokens": 355189,
+        "cached_input_tokens": 314455,
+        "cache_write_input_tokens": 40701,
+        "output_tokens": 8800,
+        "reasoning_output_tokens": 4832
+      },
+      "estimatedCostUsd": 0.49031075,
+      "durationMs": 106000
+    },
+    {
+      "inputPath": "/Users/ZacharyKimLiu/Projects/MaJaDeo/dataset/codenet_dataset_high-obf-low-perf-selected/codenet_p03049_1.obf.js",
+      "outputPath": "/Users/ZacharyKimLiu/Projects/MaJaDeo/dataset/codenet_dataset_high-obf-low-perf-selected/deobfuscated/codenet_p03049_1.obf.js",
+      "status": "completed",
+      "usage": {
+        "input_tokens": 366571,
+        "cached_input_tokens": 323984,
+        "cache_write_input_tokens": 42557,
+        "output_tokens": 7289,
+        "reasoning_output_tokens": 3133
+      },
+      "estimatedCostUsd": 0.49589965,
+      "durationMs": 84245
+    },
+    {
+      "inputPath": "/Users/ZacharyKimLiu/Projects/MaJaDeo/dataset/codenet_dataset_high-obf-low-perf-selected/codenet_p03272_1.obf.js",
+      "outputPath": "/Users/ZacharyKimLiu/Projects/MaJaDeo/dataset/codenet_dataset_high-obf-low-perf-selected/deobfuscated/codenet_p03272_1.obf.js",
+      "status": "completed",
+      "usage": {
+        "input_tokens": 109755,
+        "cached_input_tokens": 87533,
+        "cache_write_input_tokens": 22204,
+        "output_tokens": 2423,
+        "reasoning_output_tokens": 1638
+      },
+      "estimatedCostUsd": 0.16080129999999998,
+      "durationMs": 33775
+    },
+    {
+      "inputPath": "/Users/ZacharyKimLiu/Projects/MaJaDeo/dataset/codenet_dataset_high-obf-low-perf-selected/codenet_p03298_1.obf.js",
+      "outputPath": "/Users/ZacharyKimLiu/Projects/MaJaDeo/dataset/codenet_dataset_high-obf-low-perf-selected/deobfuscated/codenet_p03298_1.obf.js",
+      "status": "completed",
+      "usage": {
+        "input_tokens": 234588,
+        "cached_input_tokens": 202499,
+        "cache_write_input_tokens": 32062,
+        "output_tokens": 5767,
+        "reasoning_output_tokens": 3546
+      },
+      "estimatedCostUsd": 0.3295174,
+      "durationMs": 71053
+    },
+    {
+      "inputPath": "/Users/ZacharyKimLiu/Projects/MaJaDeo/dataset/codenet_dataset_high-obf-low-perf-selected/codenet_p03386_1.obf.js",
+      "outputPath": "/Users/ZacharyKimLiu/Projects/MaJaDeo/dataset/codenet_dataset_high-obf-low-perf-selected/deobfuscated/codenet_p03386_1.obf.js",
+      "status": "completed",
+      "usage": {
+        "input_tokens": 157153,
+        "cached_input_tokens": 120011,
+        "cache_write_input_tokens": 37127,
+        "output_tokens": 2384,
+        "reasoning_output_tokens": 1492
+      },
+      "estimatedCostUsd": 0.22986685,
+      "durationMs": 35816
+    },
+    {
+      "inputPath": "/Users/ZacharyKimLiu/Projects/MaJaDeo/dataset/codenet_dataset_high-obf-low-perf-selected/codenet_p03424_1.obf.js",
+      "outputPath": "/Users/ZacharyKimLiu/Projects/MaJaDeo/dataset/codenet_dataset_high-obf-low-perf-selected/deobfuscated/codenet_p03424_1.obf.js",
+      "status": "completed",
+      "usage": {
+        "input_tokens": 336045,
+        "cached_input_tokens": 304573,
+        "cache_write_input_tokens": 31433,
+        "output_tokens": 9385,
+        "reasoning_output_tokens": 5082
+      },
+      "estimatedCostUsd": 0.46210355,
+      "durationMs": 118929
+    },
+    {
+      "inputPath": "/Users/ZacharyKimLiu/Projects/MaJaDeo/dataset/codenet_dataset_high-obf-low-perf-selected/codenet_p03454_1.obf.js",
+      "outputPath": "/Users/ZacharyKimLiu/Projects/MaJaDeo/dataset/codenet_dataset_high-obf-low-perf-selected/deobfuscated/codenet_p03454_1.obf.js",
+      "status": "completed",
+      "usage": {
+        "input_tokens": 1648460,
+        "cached_input_tokens": 1556383,
+        "cache_write_input_tokens": 91999,
+        "output_tokens": 16447,
+        "reasoning_output_tokens": 9366
+      },
+      "estimatedCostUsd": 2.01777905,
+      "durationMs": 225864
+    },
+    {
+      "inputPath": "/Users/ZacharyKimLiu/Projects/MaJaDeo/dataset/codenet_dataset_high-obf-low-perf-selected/codenet_p03480_1.obf.js",
+      "outputPath": "/Users/ZacharyKimLiu/Projects/MaJaDeo/dataset/codenet_dataset_high-obf-low-perf-selected/deobfuscated/codenet_p03480_1.obf.js",
+      "status": "completed",
+      "usage": {
+        "input_tokens": 92286,
+        "cached_input_tokens": 77646,
+        "cache_write_input_tokens": 14619,
+        "output_tokens": 2531,
+        "reasoning_output_tokens": 1039
+      },
+      "estimatedCostUsd": 0.13351035,
+      "durationMs": 31634
+    },
+    {
+      "inputPath": "/Users/ZacharyKimLiu/Projects/MaJaDeo/dataset/codenet_dataset_high-obf-low-perf-selected/codenet_p03523_1.obf.js",
+      "outputPath": "/Users/ZacharyKimLiu/Projects/MaJaDeo/dataset/codenet_dataset_high-obf-low-perf-selected/deobfuscated/codenet_p03523_1.obf.js",
+      "status": "completed",
+      "usage": {
+        "input_tokens": 338100,
+        "cached_input_tokens": 303696,
+        "cache_write_input_tokens": 34368,
+        "output_tokens": 8275,
+        "reasoning_output_tokens": 4672
+      },
+      "estimatedCostUsd": 0.4610796,
+      "durationMs": 114687
+    },
+    {
+      "inputPath": "/Users/ZacharyKimLiu/Projects/MaJaDeo/dataset/codenet_dataset_high-obf-low-perf-selected/codenet_p03548_1.obf.js",
+      "outputPath": "/Users/ZacharyKimLiu/Projects/MaJaDeo/dataset/codenet_dataset_high-obf-low-perf-selected/deobfuscated/codenet_p03548_1.obf.js",
+      "status": "completed",
+      "usage": {
+        "input_tokens": 170255,
+        "cached_input_tokens": 141633,
+        "cache_write_input_tokens": 28601,
+        "output_tokens": 5790,
+        "reasoning_output_tokens": 3019
+      },
+      "estimatedCostUsd": 0.25490955,
+      "durationMs": 69237
+    },
+    {
+      "inputPath": "/Users/ZacharyKimLiu/Projects/MaJaDeo/dataset/codenet_dataset_high-obf-low-perf-selected/codenet_p03558_1.obf.js",
+      "outputPath": "/Users/ZacharyKimLiu/Projects/MaJaDeo/dataset/codenet_dataset_high-obf-low-perf-selected/deobfuscated/codenet_p03558_1.obf.js",
+      "status": "completed",
+      "usage": {
+        "input_tokens": 354111,
+        "cached_input_tokens": 314336,
+        "cache_write_input_tokens": 39742,
+        "output_tokens": 6822,
+        "reasoning_output_tokens": 3478
+      },
+      "estimatedCostUsd": 0.47615409999999997,
+      "durationMs": 77787
+    },
+    {
+      "inputPath": "/Users/ZacharyKimLiu/Projects/MaJaDeo/dataset/codenet_dataset_high-obf-low-perf-selected/codenet_p03774_1.obf.js",
+      "outputPath": "/Users/ZacharyKimLiu/Projects/MaJaDeo/dataset/codenet_dataset_high-obf-low-perf-selected/deobfuscated/codenet_p03774_1.obf.js",
+      "status": "completed",
+      "usage": {
+        "input_tokens": 176412,
+        "cached_input_tokens": 133773,
+        "cache_write_input_tokens": 42624,
+        "output_tokens": 5181,
+        "reasoning_output_tokens": 4170
+      },
+      "estimatedCostUsd": 0.2741553,
+      "durationMs": 75395
+    },
+    {
+      "inputPath": "/Users/ZacharyKimLiu/Projects/MaJaDeo/dataset/codenet_dataset_high-obf-low-perf-selected/codenet_p03797_1.obf.js",
+      "outputPath": "/Users/ZacharyKimLiu/Projects/MaJaDeo/dataset/codenet_dataset_high-obf-low-perf-selected/deobfuscated/codenet_p03797_1.obf.js",
+      "status": "completed",
+      "usage": {
+        "input_tokens": 433349,
+        "cached_input_tokens": 386282,
+        "cache_write_input_tokens": 47034,
+        "output_tokens": 11122,
+        "reasoning_output_tokens": 7397
+      },
+      "estimatedCostUsd": 0.5975016999999999,
+      "durationMs": 135589
+    },
+    {
+      "inputPath": "/Users/ZacharyKimLiu/Projects/MaJaDeo/dataset/codenet_dataset_high-obf-low-perf-selected/codenet_p03838_1.obf.js",
+      "outputPath": "/Users/ZacharyKimLiu/Projects/MaJaDeo/dataset/codenet_dataset_high-obf-low-perf-selected/deobfuscated/codenet_p03838_1.obf.js",
+      "status": "completed",
+      "usage": {
+        "input_tokens": 182085,
+        "cached_input_tokens": 149536,
+        "cache_write_input_tokens": 32528,
+        "output_tokens": 2940,
+        "reasoning_output_tokens": 1668
+      },
+      "estimatedCostUsd": 0.2553386,
+      "durationMs": 46292
+    },
+    {
+      "inputPath": "/Users/ZacharyKimLiu/Projects/MaJaDeo/dataset/codenet_dataset_high-obf-low-perf-selected/codenet_p03861_1.obf.js",
+      "outputPath": "/Users/ZacharyKimLiu/Projects/MaJaDeo/dataset/codenet_dataset_high-obf-low-perf-selected/deobfuscated/codenet_p03861_1.obf.js",
+      "status": "completed",
+      "usage": {
+        "input_tokens": 206537,
+        "cached_input_tokens": 180026,
+        "cache_write_input_tokens": 26478,
+        "output_tokens": 6092,
+        "reasoning_output_tokens": 4258
+      },
+      "estimatedCostUsd": 0.2941891,
+      "durationMs": 81724
+    },
+    {
+      "inputPath": "/Users/ZacharyKimLiu/Projects/MaJaDeo/dataset/codenet_dataset_high-obf-low-perf-selected/codenet_p03888_1.obf.js",
+      "outputPath": "/Users/ZacharyKimLiu/Projects/MaJaDeo/dataset/codenet_dataset_high-obf-low-perf-selected/deobfuscated/codenet_p03888_1.obf.js",
+      "status": "failed",
+      "usage": {
+        "input_tokens": 11954,
+        "cached_input_tokens": 0,
+        "cache_write_input_tokens": 11951,
+        "output_tokens": 337,
+        "reasoning_output_tokens": 303
+      },
+      "estimatedCostUsd": 0.02891475,
+      "durationMs": 7010
+    },
+    {
+      "inputPath": "/Users/ZacharyKimLiu/Projects/MaJaDeo/dataset/codenet_dataset_high-obf-low-perf-selected/codenet_p03891_1.obf.js",
+      "outputPath": "/Users/ZacharyKimLiu/Projects/MaJaDeo/dataset/codenet_dataset_high-obf-low-perf-selected/deobfuscated/codenet_p03891_1.obf.js",
+      "status": "completed",
+      "usage": {
+        "input_tokens": 580935,
+        "cached_input_tokens": 530003,
+        "cache_write_input_tokens": 50890,
+        "output_tokens": 9786,
+        "reasoning_output_tokens": 5613
+      },
+      "estimatedCostUsd": 0.7562638,
+      "durationMs": 130980
+    },
+    {
+      "inputPath": "/Users/ZacharyKimLiu/Projects/MaJaDeo/dataset/codenet_dataset_high-obf-low-perf-selected/codenet_p03948_1.obf.js",
+      "outputPath": "/Users/ZacharyKimLiu/Projects/MaJaDeo/dataset/codenet_dataset_high-obf-low-perf-selected/deobfuscated/codenet_p03948_1.obf.js",
+      "status": "failed",
+      "usage": {
+        "input_tokens": 11954,
+        "cached_input_tokens": 0,
+        "cache_write_input_tokens": 11951,
+        "output_tokens": 182,
+        "reasoning_output_tokens": 150
+      },
+      "estimatedCostUsd": 0.02798475,
+      "durationMs": 4315
+    },
+    {
+      "inputPath": "/Users/ZacharyKimLiu/Projects/MaJaDeo/dataset/codenet_dataset_high-obf-low-perf-selected/codenet_p03962_1.obf.js",
+      "outputPath": "/Users/ZacharyKimLiu/Projects/MaJaDeo/dataset/codenet_dataset_high-obf-low-perf-selected/deobfuscated/codenet_p03962_1.obf.js",
+      "status": "completed",
+      "usage": {
+        "input_tokens": 172878,
+        "cached_input_tokens": 141350,
+        "cache_write_input_tokens": 31507,
+        "output_tokens": 2397,
+        "reasoning_output_tokens": 1399
+      },
+      "estimatedCostUsd": 0.24077875,
+      "durationMs": 31187
+    }
+  ]
+}

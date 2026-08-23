@@ -1,4 +1,16 @@
 node_modules/
-deobfuscated/
 *.deobfuscated.js
 dataset
+.env
+*.obf.js
+original-selected
+__pycache__/
+*.py[cod]
+*$py.class
+MAST/
+MAST-Data/
+deepseek-harness/
+*.aux
+*.log
+*.out
+evaluators/.venv/
