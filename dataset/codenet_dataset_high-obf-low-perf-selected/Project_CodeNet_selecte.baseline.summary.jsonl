@@ -1,0 +1,1 @@
+{"syntax_pass": 1.0, "exe_pass": 0.08, "code_bleu_codebleu": 0.3602714235784516, "code_bleu_ngram_match_score": 0.06608395647114902, "code_bleu_weighted_ngram_match_score": 0.09061800718429755, "code_bleu_syntax_match_score": 0.7496020881476533, "code_bleu_dataflow_match_score": 0.5147816425107062}
