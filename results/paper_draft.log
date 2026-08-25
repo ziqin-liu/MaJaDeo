@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.28 (MiKTeX 25.12) (preloaded format=pdflatex 2026.4.14)  23 AUG 2026 18:04
+This is pdfTeX, Version 3.141592653-2.6-1.40.28 (MiKTeX 25.12) (preloaded format=pdflatex 2026.4.14)  25 AUG 2026 00:14
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -418,18 +418,18 @@ terra\OT1/cmr/m/n/10.95 .
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-[3]) (baseline_gpt-5.6-terra.tex
+) (baseline_gpt-5.6-terra.tex
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-) [4]
-Overfull \hbox (7.20932pt too wide) in paragraph at lines 257--263
+) [3] [4]
+Overfull \hbox (7.20932pt too wide) in paragraph at lines 242--248
 \OT1/cmr/m/n/10.95 dataset, per the harness-selection cri-te-ria in []\OT1/cmr/
 bx/n/10.95 [TODO: ap-pendix/section ref-er-ence][]\OT1/cmr/m/n/10.95 : general-
 
  []
 
-[5] [6] (paper_draft.aux)
+[5] (paper_draft.aux)
  ***********
 LaTeX2e <2025-11-01>
 L3 programming layer <2025-12-24>
@@ -442,28 +442,30 @@ Package rerunfilecheck Info: File `paper_draft.out' has not changed.
 (rerunfilecheck)             Checksum: 6519C9A1AD5FB62DFB63A6257AF37A96;602.
  ) 
 Here is how much of TeX's memory you used:
- 9813 strings out of 467871
- 148200 string characters out of 5428423
- 586157 words of memory out of 5000000
- 38580 multiletter control sequences out of 15000+600000
- 635742 words of font info for 68 fonts, out of 8000000 for 9000
+ 9816 strings out of 467871
+ 148240 string characters out of 5428423
+ 586448 words of memory out of 5000000
+ 38583 multiletter control sequences out of 15000+600000
+ 636418 words of font info for 70 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 75i,12n,79p,1013b,524s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 75i,12n,79p,1332b,522s stack positions out of 10000i,1000n,20000p,200000b,200000s
  <C:\Users\Luis Mendez\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi60
-0\tcrm1000.pk> <C:\Users\Luis Mendez\AppData\Local\MiKTeX\fonts/pk/ljfour/jknap
-pen/ec/dpi600\tcrm1095.pk><C:/Program Files/MiKTeX/fonts/type1/public/amsfonts/
-cm/cmbx10.pfb><C:/Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx12.pf
-b><C:/Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi10.pfb><C:/Progra
-m Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Program Files/MiKTe
-X/fonts/type1/public/amsfonts/cm/cmr12.pfb><C:/Program Files/MiKTeX/fonts/type1
-/public/amsfonts/cm/cmr17.pfb><C:/Program Files/MiKTeX/fonts/type1/public/amsfo
-nts/cm/cmr7.pfb><C:/Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmr8.pf
-b><C:/Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Progra
-m Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmti10.pfb><C:/Program Files/MiKT
-eX/fonts/type1/public/amsfonts/cm/cmtt10.pfb>
-Output written on paper_draft.pdf (6 pages, 183221 bytes).
+0\tcrm0800.pk> <C:\Users\Luis Mendez\AppData\Local\MiKTeX\fonts/pk/ljfour/jknap
+pen/ec/dpi600\tcrm0700.pk> <C:\Users\Luis Mendez\AppData\Local\MiKTeX\fonts/pk/
+ljfour/jknappen/ec/dpi600\tcrm1000.pk> <C:\Users\Luis Mendez\AppData\Local\MiKT
+eX\fonts/pk/ljfour/jknappen/ec/dpi600\tcrm1095.pk><C:/Program Files/MiKTeX/font
+s/type1/public/amsfonts/cm/cmbx10.pfb><C:/Program Files/MiKTeX/fonts/type1/publ
+ic/amsfonts/cm/cmbx12.pfb><C:/Program Files/MiKTeX/fonts/type1/public/amsfonts/
+cm/cmr10.pfb><C:/Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmr12.pfb>
+<C:/Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmr17.pfb><C:/Program F
+iles/MiKTeX/fonts/type1/public/amsfonts/cm/cmr7.pfb><C:/Program Files/MiKTeX/fo
+nts/type1/public/amsfonts/cm/cmr8.pfb><C:/Program Files/MiKTeX/fonts/type1/publ
+ic/amsfonts/cm/cmsy10.pfb><C:/Program Files/MiKTeX/fonts/type1/public/amsfonts/
+cm/cmti10.pfb><C:/Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmtt10.pf
+b>
+Output written on paper_draft.pdf (5 pages, 170179 bytes).
 PDF statistics:
- 144 PDF objects out of 1000 (max. 8388607)
- 20 named destinations out of 1000 (max. 500000)
+ 140 PDF objects out of 1000 (max. 8388607)
+ 18 named destinations out of 1000 (max. 500000)
  41 words of extra memory for PDF output out of 10000 (max. 10000000)
 

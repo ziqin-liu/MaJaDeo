@@ -17,6 +17,20 @@
 % percentages as point estimates. The largest jsfuck file (1.5MB) exceeded
 % the model's 922K-token input limit and is counted as not Reported/not
 % Syntax/not Behavior; see Section~\ref{sec:setup} for discussion.
+% DATA NOTE (obfuscator.io only): a later single-file rerun of
+% codenet_p00038_1 overwrote Project_CodeNet_selecte.baseline.jsonl and
+% .majadeo-baseline-runs/summary.json in place (the script fully rewrites,
+% rather than merges, these aggregate outputs each invocation). The raw
+% deobfuscated JS text for the other 49/50 files from the original full run
+% is not recoverable from anything currently on disk or in git history --
+% only the per-file eval scores (Project_CodeNet_selecte.baseline.metrics.jsonl
+% and .summary.jsonl) survived as a frozen snapshot from before the
+% overwrite, and those are what the Syntax/Behavior/CodeBLEU columns below
+% are computed from. summary.json was reconstructed from the 50 individual
+% .run.json telemetry files to recover accurate cost/completion accounting;
+% its total ($2.2457) differs by a few cents from the original run because
+% file p00038's entry now reflects the later rerun rather than the original
+% call that produced its metrics row.
 
 \begin{table}[h]
   \centering
@@ -25,7 +39,7 @@
     \toprule
     Dataset & Reported & Syntax & Behavior\textsuperscript{*} & CodeBLEU & Cost (USD) \\
     \midrule
-    obfuscator.io & 50/50 (100\%) & 100\% & 8\%  & 0.360 & \$2.24 \\
+    obfuscator.io & 50/50 (100\%) & 100\% & 8\%  & 0.360 & \$2.25\textsuperscript{\textdagger} \\
     jsfuck        & 49/50 (98\%)  & 98\%  & 0\%  & 0.256 & \$22.25 \\
     \bottomrule
   \end{tabular}
@@ -43,6 +57,11 @@
     before generation begins; the harness processes the same file
     successfully using $\sim$180K tokens via eight shell-based tool calls
     rather than one inlined prompt (Section~\ref{sec:setup}).
+    \textsuperscript{\textdagger}Reconstructed from per-file telemetry after
+    a later single-file rerun overwrote the run's aggregate outputs in
+    place; the raw deobfuscated text for 49/50 obfuscator.io files no
+    longer exists (Syntax/Behavior/CodeBLEU are unaffected, from a frozen
+    eval snapshot predating the overwrite).
   }
   \label{tab:rq1-baseline-gpt56terra}
 \end{table}

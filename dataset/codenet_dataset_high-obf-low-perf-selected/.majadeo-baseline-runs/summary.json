@@ -1,11 +1,13 @@
 {
   "schemaVersion": 1,
   "model": "gpt-5.6-terra",
-  "generatedAt": "2026-08-23T23:38:30.848Z",
-  "filesAttempted": 1,
-  "filesSucceeded": 1,
+  "generatedAt": "2026-08-23T19:18:15.555Z",
+  "reconstructedAt": "2026-08-25T04:13:25.964Z",
+  "reconstructionNote": "Rebuilt from the 50 individual .run.json telemetry files after a later single-file rerun of codenet_p00038_1 overwrote this summary.json and Project_CodeNet_selecte.baseline.jsonl in place. See Project_CodeNet_selecte.baseline.metrics.jsonl/.summary.jsonl for the frozen per-file eval results that fed the paper (computed from the original, now-unrecoverable full run before the overwrite); this file was rebuilt from the currently available run.json cost/usage telemetry.",
+  "filesAttempted": 50,
+  "filesSucceeded": 50,
   "filesFailed": 0,
-  "totalEstimatedCostUsd": 0.0588365,
+  "totalEstimatedCostUsd": 2.2456709999999993,
   "runs": [
     {
       "inputPath": "G:\\broswer download\\MaJaDeo\\dataset\\codenet_dataset_high-obf-low-perf-selected\\codenet_p00038_1.obf.js",
@@ -27,6 +29,1035 @@
         }
       },
       "estimatedCostUsd": 0.0588365
+    },
+    {
+      "inputPath": "G:\\broswer download\\MaJaDeo\\dataset\\codenet_dataset_high-obf-low-perf-selected\\codenet_p00048_1.obf.js",
+      "status": "completed",
+      "usage": {
+        "prompt_tokens": 29046,
+        "completion_tokens": 3911,
+        "total_tokens": 32957,
+        "prompt_tokens_details": {
+          "cached_tokens": 0,
+          "cache_write_tokens": 29043,
+          "audio_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 3705,
+          "audio_tokens": 0,
+          "accepted_prediction_tokens": 0,
+          "rejected_prediction_tokens": 0
+        }
+      },
+      "estimatedCostUsd": 0.05977275
+    },
+    {
+      "inputPath": "G:\\broswer download\\MaJaDeo\\dataset\\codenet_dataset_high-obf-low-perf-selected\\codenet_p00052_1.obf.js",
+      "status": "completed",
+      "usage": {
+        "prompt_tokens": 16298,
+        "completion_tokens": 3052,
+        "total_tokens": 19350,
+        "prompt_tokens_details": {
+          "cached_tokens": 0,
+          "cache_write_tokens": 16295,
+          "audio_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 2934,
+          "audio_tokens": 0,
+          "accepted_prediction_tokens": 0,
+          "rejected_prediction_tokens": 0
+        }
+      },
+      "estimatedCostUsd": 0.03868375
+    },
+    {
+      "inputPath": "G:\\broswer download\\MaJaDeo\\dataset\\codenet_dataset_high-obf-low-perf-selected\\codenet_p00054_1.obf.js",
+      "status": "completed",
+      "usage": {
+        "prompt_tokens": 17610,
+        "completion_tokens": 3811,
+        "total_tokens": 21421,
+        "prompt_tokens_details": {
+          "cached_tokens": 0,
+          "cache_write_tokens": 17607,
+          "audio_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 3500,
+          "audio_tokens": 0,
+          "accepted_prediction_tokens": 0,
+          "rejected_prediction_tokens": 0
+        }
+      },
+      "estimatedCostUsd": 0.04487775
+    },
+    {
+      "inputPath": "G:\\broswer download\\MaJaDeo\\dataset\\codenet_dataset_high-obf-low-perf-selected\\codenet_p00072_1.obf.js",
+      "status": "completed",
+      "usage": {
+        "prompt_tokens": 15772,
+        "completion_tokens": 1990,
+        "total_tokens": 17762,
+        "prompt_tokens_details": {
+          "cached_tokens": 0,
+          "cache_write_tokens": 15769,
+          "audio_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 1536,
+          "audio_tokens": 0,
+          "accepted_prediction_tokens": 0,
+          "rejected_prediction_tokens": 0
+        }
+      },
+      "estimatedCostUsd": 0.03165425
+    },
+    {
+      "inputPath": "G:\\broswer download\\MaJaDeo\\dataset\\codenet_dataset_high-obf-low-perf-selected\\codenet_p00089_1.obf.js",
+      "status": "completed",
+      "usage": {
+        "prompt_tokens": 44864,
+        "completion_tokens": 2725,
+        "total_tokens": 47589,
+        "prompt_tokens_details": {
+          "cached_tokens": 0,
+          "cache_write_tokens": 44861,
+          "audio_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 2364,
+          "audio_tokens": 0,
+          "accepted_prediction_tokens": 0,
+          "rejected_prediction_tokens": 0
+        }
+      },
+      "estimatedCostUsd": 0.07242925
+    },
+    {
+      "inputPath": "G:\\broswer download\\MaJaDeo\\dataset\\codenet_dataset_high-obf-low-perf-selected\\codenet_p00127_1.obf.js",
+      "status": "completed",
+      "usage": {
+        "prompt_tokens": 17568,
+        "completion_tokens": 5065,
+        "total_tokens": 22633,
+        "prompt_tokens_details": {
+          "cached_tokens": 0,
+          "cache_write_tokens": 17565,
+          "audio_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 4738,
+          "audio_tokens": 0,
+          "accepted_prediction_tokens": 0,
+          "rejected_prediction_tokens": 0
+        }
+      },
+      "estimatedCostUsd": 0.05234925
+    },
+    {
+      "inputPath": "G:\\broswer download\\MaJaDeo\\dataset\\codenet_dataset_high-obf-low-perf-selected\\codenet_p00138_1.obf.js",
+      "status": "completed",
+      "usage": {
+        "prompt_tokens": 15255,
+        "completion_tokens": 2295,
+        "total_tokens": 17550,
+        "prompt_tokens_details": {
+          "cached_tokens": 0,
+          "cache_write_tokens": 15252,
+          "audio_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 1878,
+          "audio_tokens": 0,
+          "accepted_prediction_tokens": 0,
+          "rejected_prediction_tokens": 0
+        }
+      },
+      "estimatedCostUsd": 0.032838
+    },
+    {
+      "inputPath": "G:\\broswer download\\MaJaDeo\\dataset\\codenet_dataset_high-obf-low-perf-selected\\codenet_p00140_1.obf.js",
+      "status": "completed",
+      "usage": {
+        "prompt_tokens": 13656,
+        "completion_tokens": 2961,
+        "total_tokens": 16617,
+        "prompt_tokens_details": {
+          "cached_tokens": 0,
+          "cache_write_tokens": 13653,
+          "audio_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 2689,
+          "audio_tokens": 0,
+          "accepted_prediction_tokens": 0,
+          "rejected_prediction_tokens": 0
+        }
+      },
+      "estimatedCostUsd": 0.03483525
+    },
+    {
+      "inputPath": "G:\\broswer download\\MaJaDeo\\dataset\\codenet_dataset_high-obf-low-perf-selected\\codenet_p00183_1.obf.js",
+      "status": "completed",
+      "usage": {
+        "prompt_tokens": 14746,
+        "completion_tokens": 3480,
+        "total_tokens": 18226,
+        "prompt_tokens_details": {
+          "cached_tokens": 0,
+          "cache_write_tokens": 14743,
+          "audio_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 3056,
+          "audio_tokens": 0,
+          "accepted_prediction_tokens": 0,
+          "rejected_prediction_tokens": 0
+        }
+      },
+      "estimatedCostUsd": 0.03931175
+    },
+    {
+      "inputPath": "G:\\broswer download\\MaJaDeo\\dataset\\codenet_dataset_high-obf-low-perf-selected\\codenet_p00216_1.obf.js",
+      "status": "completed",
+      "usage": {
+        "prompt_tokens": 7934,
+        "completion_tokens": 3676,
+        "total_tokens": 11610,
+        "prompt_tokens_details": {
+          "cached_tokens": 0,
+          "cache_write_tokens": 7931,
+          "audio_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 3453,
+          "audio_tokens": 0,
+          "accepted_prediction_tokens": 0,
+          "rejected_prediction_tokens": 0
+        }
+      },
+      "estimatedCostUsd": 0.03197275
+    },
+    {
+      "inputPath": "G:\\broswer download\\MaJaDeo\\dataset\\codenet_dataset_high-obf-low-perf-selected\\codenet_p00261_1.obf.js",
+      "status": "completed",
+      "usage": {
+        "prompt_tokens": 19036,
+        "completion_tokens": 2702,
+        "total_tokens": 21738,
+        "prompt_tokens_details": {
+          "cached_tokens": 0,
+          "cache_write_tokens": 19033,
+          "audio_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 2331,
+          "audio_tokens": 0,
+          "accepted_prediction_tokens": 0,
+          "rejected_prediction_tokens": 0
+        }
+      },
+      "estimatedCostUsd": 0.04000625
+    },
+    {
+      "inputPath": "G:\\broswer download\\MaJaDeo\\dataset\\codenet_dataset_high-obf-low-perf-selected\\codenet_p00589_1.obf.js",
+      "status": "completed",
+      "usage": {
+        "prompt_tokens": 17287,
+        "completion_tokens": 3289,
+        "total_tokens": 20576,
+        "prompt_tokens_details": {
+          "cached_tokens": 0,
+          "cache_write_tokens": 17284,
+          "audio_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 3071,
+          "audio_tokens": 0,
+          "accepted_prediction_tokens": 0,
+          "rejected_prediction_tokens": 0
+        }
+      },
+      "estimatedCostUsd": 0.041342
+    },
+    {
+      "inputPath": "G:\\broswer download\\MaJaDeo\\dataset\\codenet_dataset_high-obf-low-perf-selected\\codenet_p00593_1.obf.js",
+      "status": "completed",
+      "usage": {
+        "prompt_tokens": 26200,
+        "completion_tokens": 8134,
+        "total_tokens": 34334,
+        "prompt_tokens_details": {
+          "cached_tokens": 0,
+          "cache_write_tokens": 26197,
+          "audio_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 7455,
+          "audio_tokens": 0,
+          "accepted_prediction_tokens": 0,
+          "rejected_prediction_tokens": 0
+        }
+      },
+      "estimatedCostUsd": 0.08155325
+    },
+    {
+      "inputPath": "G:\\broswer download\\MaJaDeo\\dataset\\codenet_dataset_high-obf-low-perf-selected\\codenet_p00718_1.obf.js",
+      "status": "completed",
+      "usage": {
+        "prompt_tokens": 30936,
+        "completion_tokens": 2466,
+        "total_tokens": 33402,
+        "prompt_tokens_details": {
+          "cached_tokens": 0,
+          "cache_write_tokens": 30933,
+          "audio_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 2085,
+          "audio_tokens": 0,
+          "accepted_prediction_tokens": 0,
+          "rejected_prediction_tokens": 0
+        }
+      },
+      "estimatedCostUsd": 0.05346525
+    },
+    {
+      "inputPath": "G:\\broswer download\\MaJaDeo\\dataset\\codenet_dataset_high-obf-low-perf-selected\\codenet_p00728_1.obf.js",
+      "status": "completed",
+      "usage": {
+        "prompt_tokens": 29919,
+        "completion_tokens": 5341,
+        "total_tokens": 35260,
+        "prompt_tokens_details": {
+          "cached_tokens": 0,
+          "cache_write_tokens": 29916,
+          "audio_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 5085,
+          "audio_tokens": 0,
+          "accepted_prediction_tokens": 0,
+          "rejected_prediction_tokens": 0
+        }
+      },
+      "estimatedCostUsd": 0.069444
+    },
+    {
+      "inputPath": "G:\\broswer download\\MaJaDeo\\dataset\\codenet_dataset_high-obf-low-perf-selected\\codenet_p00803_1.obf.js",
+      "status": "completed",
+      "usage": {
+        "prompt_tokens": 19836,
+        "completion_tokens": 1716,
+        "total_tokens": 21552,
+        "prompt_tokens_details": {
+          "cached_tokens": 0,
+          "cache_write_tokens": 19833,
+          "audio_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 1536,
+          "audio_tokens": 0,
+          "accepted_prediction_tokens": 0,
+          "rejected_prediction_tokens": 0
+        }
+      },
+      "estimatedCostUsd": 0.03509025
+    },
+    {
+      "inputPath": "G:\\broswer download\\MaJaDeo\\dataset\\codenet_dataset_high-obf-low-perf-selected\\codenet_p00820_1.obf.js",
+      "status": "completed",
+      "usage": {
+        "prompt_tokens": 13353,
+        "completion_tokens": 1868,
+        "total_tokens": 15221,
+        "prompt_tokens_details": {
+          "cached_tokens": 0,
+          "cache_write_tokens": 13350,
+          "audio_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 1536,
+          "audio_tokens": 0,
+          "accepted_prediction_tokens": 0,
+          "rejected_prediction_tokens": 0
+        }
+      },
+      "estimatedCostUsd": 0.0278985
+    },
+    {
+      "inputPath": "G:\\broswer download\\MaJaDeo\\dataset\\codenet_dataset_high-obf-low-perf-selected\\codenet_p01224_1.obf.js",
+      "status": "completed",
+      "usage": {
+        "prompt_tokens": 12870,
+        "completion_tokens": 4347,
+        "total_tokens": 17217,
+        "prompt_tokens_details": {
+          "cached_tokens": 0,
+          "cache_write_tokens": 12867,
+          "audio_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 4099,
+          "audio_tokens": 0,
+          "accepted_prediction_tokens": 0,
+          "rejected_prediction_tokens": 0
+        }
+      },
+      "estimatedCostUsd": 0.04216875
+    },
+    {
+      "inputPath": "G:\\broswer download\\MaJaDeo\\dataset\\codenet_dataset_high-obf-low-perf-selected\\codenet_p01531_1.obf.js",
+      "status": "completed",
+      "usage": {
+        "prompt_tokens": 22114,
+        "completion_tokens": 2755,
+        "total_tokens": 24869,
+        "prompt_tokens_details": {
+          "cached_tokens": 0,
+          "cache_write_tokens": 22111,
+          "audio_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 2463,
+          "audio_tokens": 0,
+          "accepted_prediction_tokens": 0,
+          "rejected_prediction_tokens": 0
+        }
+      },
+      "estimatedCostUsd": 0.04417175
+    },
+    {
+      "inputPath": "G:\\broswer download\\MaJaDeo\\dataset\\codenet_dataset_high-obf-low-perf-selected\\codenet_p02060_1.obf.js",
+      "status": "completed",
+      "usage": {
+        "prompt_tokens": 8196,
+        "completion_tokens": 1864,
+        "total_tokens": 10060,
+        "prompt_tokens_details": {
+          "cached_tokens": 0,
+          "cache_write_tokens": 8193,
+          "audio_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 1536,
+          "audio_tokens": 0,
+          "accepted_prediction_tokens": 0,
+          "rejected_prediction_tokens": 0
+        }
+      },
+      "estimatedCostUsd": 0.02142825
+    },
+    {
+      "inputPath": "G:\\broswer download\\MaJaDeo\\dataset\\codenet_dataset_high-obf-low-perf-selected\\codenet_p02115_1.obf.js",
+      "status": "completed",
+      "usage": {
+        "prompt_tokens": 16313,
+        "completion_tokens": 3691,
+        "total_tokens": 20004,
+        "prompt_tokens_details": {
+          "cached_tokens": 0,
+          "cache_write_tokens": 16310,
+          "audio_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 3469,
+          "audio_tokens": 0,
+          "accepted_prediction_tokens": 0,
+          "rejected_prediction_tokens": 0
+        }
+      },
+      "estimatedCostUsd": 0.0425365
+    },
+    {
+      "inputPath": "G:\\broswer download\\MaJaDeo\\dataset\\codenet_dataset_high-obf-low-perf-selected\\codenet_p02240_1.obf.js",
+      "status": "completed",
+      "usage": {
+        "prompt_tokens": 18825,
+        "completion_tokens": 4063,
+        "total_tokens": 22888,
+        "prompt_tokens_details": {
+          "cached_tokens": 0,
+          "cache_write_tokens": 18822,
+          "audio_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 3585,
+          "audio_tokens": 0,
+          "accepted_prediction_tokens": 0,
+          "rejected_prediction_tokens": 0
+        }
+      },
+      "estimatedCostUsd": 0.0479085
+    },
+    {
+      "inputPath": "G:\\broswer download\\MaJaDeo\\dataset\\codenet_dataset_high-obf-low-perf-selected\\codenet_p02242_1.obf.js",
+      "status": "completed",
+      "usage": {
+        "prompt_tokens": 7670,
+        "completion_tokens": 5473,
+        "total_tokens": 13143,
+        "prompt_tokens_details": {
+          "cached_tokens": 0,
+          "cache_write_tokens": 7667,
+          "audio_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 3898,
+          "audio_tokens": 0,
+          "accepted_prediction_tokens": 0,
+          "rejected_prediction_tokens": 0
+        }
+      },
+      "estimatedCostUsd": 0.04242475
+    },
+    {
+      "inputPath": "G:\\broswer download\\MaJaDeo\\dataset\\codenet_dataset_high-obf-low-perf-selected\\codenet_p02262_1.obf.js",
+      "status": "completed",
+      "usage": {
+        "prompt_tokens": 22446,
+        "completion_tokens": 2923,
+        "total_tokens": 25369,
+        "prompt_tokens_details": {
+          "cached_tokens": 0,
+          "cache_write_tokens": 22443,
+          "audio_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 2560,
+          "audio_tokens": 0,
+          "accepted_prediction_tokens": 0,
+          "rejected_prediction_tokens": 0
+        }
+      },
+      "estimatedCostUsd": 0.04559475
+    },
+    {
+      "inputPath": "G:\\broswer download\\MaJaDeo\\dataset\\codenet_dataset_high-obf-low-perf-selected\\codenet_p02327_1.obf.js",
+      "status": "completed",
+      "usage": {
+        "prompt_tokens": 6840,
+        "completion_tokens": 2538,
+        "total_tokens": 9378,
+        "prompt_tokens_details": {
+          "cached_tokens": 0,
+          "cache_write_tokens": 6837,
+          "audio_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 2500,
+          "audio_tokens": 0,
+          "accepted_prediction_tokens": 0,
+          "rejected_prediction_tokens": 0
+        }
+      },
+      "estimatedCostUsd": 0.02377725
+    },
+    {
+      "inputPath": "G:\\broswer download\\MaJaDeo\\dataset\\codenet_dataset_high-obf-low-perf-selected\\codenet_p02388_1.obf.js",
+      "status": "completed",
+      "usage": {
+        "prompt_tokens": 22585,
+        "completion_tokens": 2392,
+        "total_tokens": 24977,
+        "prompt_tokens_details": {
+          "cached_tokens": 0,
+          "cache_write_tokens": 22582,
+          "audio_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 2297,
+          "audio_tokens": 0,
+          "accepted_prediction_tokens": 0,
+          "rejected_prediction_tokens": 0
+        }
+      },
+      "estimatedCostUsd": 0.0425825
+    },
+    {
+      "inputPath": "G:\\broswer download\\MaJaDeo\\dataset\\codenet_dataset_high-obf-low-perf-selected\\codenet_p02416_1.obf.js",
+      "status": "completed",
+      "usage": {
+        "prompt_tokens": 14750,
+        "completion_tokens": 2640,
+        "total_tokens": 17390,
+        "prompt_tokens_details": {
+          "cached_tokens": 0,
+          "cache_write_tokens": 14747,
+          "audio_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 2497,
+          "audio_tokens": 0,
+          "accepted_prediction_tokens": 0,
+          "rejected_prediction_tokens": 0
+        }
+      },
+      "estimatedCostUsd": 0.03427675
+    },
+    {
+      "inputPath": "G:\\broswer download\\MaJaDeo\\dataset\\codenet_dataset_high-obf-low-perf-selected\\codenet_p02735_1.obf.js",
+      "status": "completed",
+      "usage": {
+        "prompt_tokens": 16669,
+        "completion_tokens": 4193,
+        "total_tokens": 20862,
+        "prompt_tokens_details": {
+          "cached_tokens": 0,
+          "cache_write_tokens": 16666,
+          "audio_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 3586,
+          "audio_tokens": 0,
+          "accepted_prediction_tokens": 0,
+          "rejected_prediction_tokens": 0
+        }
+      },
+      "estimatedCostUsd": 0.0459935
+    },
+    {
+      "inputPath": "G:\\broswer download\\MaJaDeo\\dataset\\codenet_dataset_high-obf-low-perf-selected\\codenet_p02796_1.obf.js",
+      "status": "completed",
+      "usage": {
+        "prompt_tokens": 16519,
+        "completion_tokens": 2455,
+        "total_tokens": 18974,
+        "prompt_tokens_details": {
+          "cached_tokens": 0,
+          "cache_write_tokens": 16516,
+          "audio_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 2268,
+          "audio_tokens": 0,
+          "accepted_prediction_tokens": 0,
+          "rejected_prediction_tokens": 0
+        }
+      },
+      "estimatedCostUsd": 0.035378
+    },
+    {
+      "inputPath": "G:\\broswer download\\MaJaDeo\\dataset\\codenet_dataset_high-obf-low-perf-selected\\codenet_p02882_1.obf.js",
+      "status": "completed",
+      "usage": {
+        "prompt_tokens": 13160,
+        "completion_tokens": 3870,
+        "total_tokens": 17030,
+        "prompt_tokens_details": {
+          "cached_tokens": 0,
+          "cache_write_tokens": 13157,
+          "audio_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 3496,
+          "audio_tokens": 0,
+          "accepted_prediction_tokens": 0,
+          "rejected_prediction_tokens": 0
+        }
+      },
+      "estimatedCostUsd": 0.03966925
+    },
+    {
+      "inputPath": "G:\\broswer download\\MaJaDeo\\dataset\\codenet_dataset_high-obf-low-perf-selected\\codenet_p02891_1.obf.js",
+      "status": "completed",
+      "usage": {
+        "prompt_tokens": 18910,
+        "completion_tokens": 2510,
+        "total_tokens": 21420,
+        "prompt_tokens_details": {
+          "cached_tokens": 0,
+          "cache_write_tokens": 18907,
+          "audio_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 2333,
+          "audio_tokens": 0,
+          "accepted_prediction_tokens": 0,
+          "rejected_prediction_tokens": 0
+        }
+      },
+      "estimatedCostUsd": 0.03869675
+    },
+    {
+      "inputPath": "G:\\broswer download\\MaJaDeo\\dataset\\codenet_dataset_high-obf-low-perf-selected\\codenet_p03049_1.obf.js",
+      "status": "completed",
+      "usage": {
+        "prompt_tokens": 23266,
+        "completion_tokens": 4168,
+        "total_tokens": 27434,
+        "prompt_tokens_details": {
+          "cached_tokens": 0,
+          "cache_write_tokens": 23263,
+          "audio_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 3769,
+          "audio_tokens": 0,
+          "accepted_prediction_tokens": 0,
+          "rejected_prediction_tokens": 0
+        }
+      },
+      "estimatedCostUsd": 0.05408975
+    },
+    {
+      "inputPath": "G:\\broswer download\\MaJaDeo\\dataset\\codenet_dataset_high-obf-low-perf-selected\\codenet_p03272_1.obf.js",
+      "status": "completed",
+      "usage": {
+        "prompt_tokens": 7817,
+        "completion_tokens": 2358,
+        "total_tokens": 10175,
+        "prompt_tokens_details": {
+          "cached_tokens": 0,
+          "cache_write_tokens": 7814,
+          "audio_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 2285,
+          "audio_tokens": 0,
+          "accepted_prediction_tokens": 0,
+          "rejected_prediction_tokens": 0
+        }
+      },
+      "estimatedCostUsd": 0.0239185
+    },
+    {
+      "inputPath": "G:\\broswer download\\MaJaDeo\\dataset\\codenet_dataset_high-obf-low-perf-selected\\codenet_p03298_1.obf.js",
+      "status": "completed",
+      "usage": {
+        "prompt_tokens": 14291,
+        "completion_tokens": 5459,
+        "total_tokens": 19750,
+        "prompt_tokens_details": {
+          "cached_tokens": 0,
+          "cache_write_tokens": 14288,
+          "audio_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 5090,
+          "audio_tokens": 0,
+          "accepted_prediction_tokens": 0,
+          "rejected_prediction_tokens": 0
+        }
+      },
+      "estimatedCostUsd": 0.050617
+    },
+    {
+      "inputPath": "G:\\broswer download\\MaJaDeo\\dataset\\codenet_dataset_high-obf-low-perf-selected\\codenet_p03386_1.obf.js",
+      "status": "completed",
+      "usage": {
+        "prompt_tokens": 22842,
+        "completion_tokens": 2094,
+        "total_tokens": 24936,
+        "prompt_tokens_details": {
+          "cached_tokens": 0,
+          "cache_write_tokens": 22839,
+          "audio_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 1875,
+          "audio_tokens": 0,
+          "accepted_prediction_tokens": 0,
+          "rejected_prediction_tokens": 0
+        }
+      },
+      "estimatedCostUsd": 0.04111575
+    },
+    {
+      "inputPath": "G:\\broswer download\\MaJaDeo\\dataset\\codenet_dataset_high-obf-low-perf-selected\\codenet_p03424_1.obf.js",
+      "status": "completed",
+      "usage": {
+        "prompt_tokens": 9734,
+        "completion_tokens": 4580,
+        "total_tokens": 14314,
+        "prompt_tokens_details": {
+          "cached_tokens": 0,
+          "cache_write_tokens": 9731,
+          "audio_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 4459,
+          "audio_tokens": 0,
+          "accepted_prediction_tokens": 0,
+          "rejected_prediction_tokens": 0
+        }
+      },
+      "estimatedCostUsd": 0.03964675
+    },
+    {
+      "inputPath": "G:\\broswer download\\MaJaDeo\\dataset\\codenet_dataset_high-obf-low-perf-selected\\codenet_p03454_1.obf.js",
+      "status": "completed",
+      "usage": {
+        "prompt_tokens": 39617,
+        "completion_tokens": 5567,
+        "total_tokens": 45184,
+        "prompt_tokens_details": {
+          "cached_tokens": 0,
+          "cache_write_tokens": 39614,
+          "audio_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 4998,
+          "audio_tokens": 0,
+          "accepted_prediction_tokens": 0,
+          "rejected_prediction_tokens": 0
+        }
+      },
+      "estimatedCostUsd": 0.0829225
+    },
+    {
+      "inputPath": "G:\\broswer download\\MaJaDeo\\dataset\\codenet_dataset_high-obf-low-perf-selected\\codenet_p03480_1.obf.js",
+      "status": "completed",
+      "usage": {
+        "prompt_tokens": 31333,
+        "completion_tokens": 3936,
+        "total_tokens": 35269,
+        "prompt_tokens_details": {
+          "cached_tokens": 0,
+          "cache_write_tokens": 31330,
+          "audio_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 3711,
+          "audio_tokens": 0,
+          "accepted_prediction_tokens": 0,
+          "rejected_prediction_tokens": 0
+        }
+      },
+      "estimatedCostUsd": 0.0627815
+    },
+    {
+      "inputPath": "G:\\broswer download\\MaJaDeo\\dataset\\codenet_dataset_high-obf-low-perf-selected\\codenet_p03523_1.obf.js",
+      "status": "completed",
+      "usage": {
+        "prompt_tokens": 13317,
+        "completion_tokens": 4900,
+        "total_tokens": 18217,
+        "prompt_tokens_details": {
+          "cached_tokens": 0,
+          "cache_write_tokens": 13314,
+          "audio_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 4456,
+          "audio_tokens": 0,
+          "accepted_prediction_tokens": 0,
+          "rejected_prediction_tokens": 0
+        }
+      },
+      "estimatedCostUsd": 0.0460455
+    },
+    {
+      "inputPath": "G:\\broswer download\\MaJaDeo\\dataset\\codenet_dataset_high-obf-low-perf-selected\\codenet_p03548_1.obf.js",
+      "status": "completed",
+      "usage": {
+        "prompt_tokens": 10923,
+        "completion_tokens": 2863,
+        "total_tokens": 13786,
+        "prompt_tokens_details": {
+          "cached_tokens": 0,
+          "cache_write_tokens": 10920,
+          "audio_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 2560,
+          "audio_tokens": 0,
+          "accepted_prediction_tokens": 0,
+          "rejected_prediction_tokens": 0
+        }
+      },
+      "estimatedCostUsd": 0.030831
+    },
+    {
+      "inputPath": "G:\\broswer download\\MaJaDeo\\dataset\\codenet_dataset_high-obf-low-perf-selected\\codenet_p03558_1.obf.js",
+      "status": "completed",
+      "usage": {
+        "prompt_tokens": 20273,
+        "completion_tokens": 3238,
+        "total_tokens": 23511,
+        "prompt_tokens_details": {
+          "cached_tokens": 0,
+          "cache_write_tokens": 20270,
+          "audio_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 3030,
+          "audio_tokens": 0,
+          "accepted_prediction_tokens": 0,
+          "rejected_prediction_tokens": 0
+        }
+      },
+      "estimatedCostUsd": 0.0447685
+    },
+    {
+      "inputPath": "G:\\broswer download\\MaJaDeo\\dataset\\codenet_dataset_high-obf-low-perf-selected\\codenet_p03774_1.obf.js",
+      "status": "completed",
+      "usage": {
+        "prompt_tokens": 25632,
+        "completion_tokens": 4046,
+        "total_tokens": 29678,
+        "prompt_tokens_details": {
+          "cached_tokens": 0,
+          "cache_write_tokens": 25629,
+          "audio_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 3709,
+          "audio_tokens": 0,
+          "accepted_prediction_tokens": 0,
+          "rejected_prediction_tokens": 0
+        }
+      },
+      "estimatedCostUsd": 0.05631525
+    },
+    {
+      "inputPath": "G:\\broswer download\\MaJaDeo\\dataset\\codenet_dataset_high-obf-low-perf-selected\\codenet_p03797_1.obf.js",
+      "status": "completed",
+      "usage": {
+        "prompt_tokens": 23953,
+        "completion_tokens": 3284,
+        "total_tokens": 27237,
+        "prompt_tokens_details": {
+          "cached_tokens": 0,
+          "cache_write_tokens": 23950,
+          "audio_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 2996,
+          "audio_tokens": 0,
+          "accepted_prediction_tokens": 0,
+          "rejected_prediction_tokens": 0
+        }
+      },
+      "estimatedCostUsd": 0.0496445
+    },
+    {
+      "inputPath": "G:\\broswer download\\MaJaDeo\\dataset\\codenet_dataset_high-obf-low-perf-selected\\codenet_p03838_1.obf.js",
+      "status": "completed",
+      "usage": {
+        "prompt_tokens": 17666,
+        "completion_tokens": 2314,
+        "total_tokens": 19980,
+        "prompt_tokens_details": {
+          "cached_tokens": 0,
+          "cache_write_tokens": 17663,
+          "audio_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 2049,
+          "audio_tokens": 0,
+          "accepted_prediction_tokens": 0,
+          "rejected_prediction_tokens": 0
+        }
+      },
+      "estimatedCostUsd": 0.03596575
+    },
+    {
+      "inputPath": "G:\\broswer download\\MaJaDeo\\dataset\\codenet_dataset_high-obf-low-perf-selected\\codenet_p03861_1.obf.js",
+      "status": "completed",
+      "usage": {
+        "prompt_tokens": 8619,
+        "completion_tokens": 4856,
+        "total_tokens": 13475,
+        "prompt_tokens_details": {
+          "cached_tokens": 0,
+          "cache_write_tokens": 8616,
+          "audio_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 4451,
+          "audio_tokens": 0,
+          "accepted_prediction_tokens": 0,
+          "rejected_prediction_tokens": 0
+        }
+      },
+      "estimatedCostUsd": 0.039909
+    },
+    {
+      "inputPath": "G:\\broswer download\\MaJaDeo\\dataset\\codenet_dataset_high-obf-low-perf-selected\\codenet_p03888_1.obf.js",
+      "status": "completed",
+      "usage": {
+        "prompt_tokens": 22388,
+        "completion_tokens": 3131,
+        "total_tokens": 25519,
+        "prompt_tokens_details": {
+          "cached_tokens": 0,
+          "cache_write_tokens": 22385,
+          "audio_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 2904,
+          "audio_tokens": 0,
+          "accepted_prediction_tokens": 0,
+          "rejected_prediction_tokens": 0
+        }
+      },
+      "estimatedCostUsd": 0.04677025
+    },
+    {
+      "inputPath": "G:\\broswer download\\MaJaDeo\\dataset\\codenet_dataset_high-obf-low-perf-selected\\codenet_p03891_1.obf.js",
+      "status": "completed",
+      "usage": {
+        "prompt_tokens": 22199,
+        "completion_tokens": 3876,
+        "total_tokens": 26075,
+        "prompt_tokens_details": {
+          "cached_tokens": 0,
+          "cache_write_tokens": 22196,
+          "audio_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 3582,
+          "audio_tokens": 0,
+          "accepted_prediction_tokens": 0,
+          "rejected_prediction_tokens": 0
+        }
+      },
+      "estimatedCostUsd": 0.051004
+    },
+    {
+      "inputPath": "G:\\broswer download\\MaJaDeo\\dataset\\codenet_dataset_high-obf-low-perf-selected\\codenet_p03948_1.obf.js",
+      "status": "completed",
+      "usage": {
+        "prompt_tokens": 31409,
+        "completion_tokens": 2847,
+        "total_tokens": 34256,
+        "prompt_tokens_details": {
+          "cached_tokens": 0,
+          "cache_write_tokens": 31406,
+          "audio_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 2561,
+          "audio_tokens": 0,
+          "accepted_prediction_tokens": 0,
+          "rejected_prediction_tokens": 0
+        }
+      },
+      "estimatedCostUsd": 0.0563425
+    },
+    {
+      "inputPath": "G:\\broswer download\\MaJaDeo\\dataset\\codenet_dataset_high-obf-low-perf-selected\\codenet_p03962_1.obf.js",
+      "status": "completed",
+      "usage": {
+        "prompt_tokens": 13739,
+        "completion_tokens": 3807,
+        "total_tokens": 17546,
+        "prompt_tokens_details": {
+          "cached_tokens": 0,
+          "cache_write_tokens": 13736,
+          "audio_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 3584,
+          "audio_tokens": 0,
+          "accepted_prediction_tokens": 0,
+          "rejected_prediction_tokens": 0
+        }
+      },
+      "estimatedCostUsd": 0.040015
     }
   ]
 }
