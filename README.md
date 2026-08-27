@@ -208,6 +208,24 @@ own work instead of just producing text:
 npm run verify -- path/to/obfuscated.js
 ```
 
+Pass a dataset folder instead to process every `.js`/`.mjs`/`.cjs` file in it
+(same layout as `deobfuscate.js`/`deobfuscate-baseline.js`: one source JSONL
+in the folder, `test_cases` field ignored by this pipeline itself but carried
+through). Results go to `<folder>/verify/` by default, mirroring
+`deobfuscate.js`'s `deobfuscated/` convention:
+
+```sh
+npm run verify -- path/to/dataset-folder
+```
+
+Folder mode is resumable: a file is skipped only if it already has a
+`verified` or `unverified` report (a completed run, whether or not it
+converged); a `failed` report (e.g. a transient API error) is retried on the
+next invocation rather than left stuck. Writes `<metadata>.verify.jsonl`
+(same `obfuscated`/`deobfuscated` shape as the other two scripts, plus
+`verifyStatus`/`verifyAttempts`/`verifyEstimatedCostUsd`) and
+`verify/.majadeo-verify-runs/summary.json`.
+
 Env vars: `LLM_API_BASE_URL` (default `https://api.openai.com/v1`),
 `LLM_API_KEY` (falls back to `OPENAI_API_KEY`/`DEEPSEEK_API_KEY`), `LLM_MODEL`
 (default `gpt-5.6-terra`), `VERIFY_TEST_CASE_COUNT` (default 3),
@@ -237,9 +255,6 @@ Notes and deliberate scope limits:
 - Test-case generation asks for stdin inputs only, not expected outputs —
   there is no ground truth here, since both programs' actual outputs are
   compared against each other rather than against a stored expected result.
-- This script only handles a single input file per run; it does not (yet)
-  walk a dataset folder the way `deobfuscate.js`/`deobfuscate-baseline.js`
-  do.
 - Requires Docker on `PATH`. Execution is required here (unlike the other
   two scripts, which never run untrusted input) to compare real program
   behavior, so it always goes through the sandbox rather than the host.

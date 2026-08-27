@@ -14,7 +14,7 @@
 // string match, not an LLM judgment call - cheaper, reproducible, and only
 // the repair step needs the model.
 
-import { mkdir, readFile, writeFile } from "node:fs/promises";
+import { access, mkdir, readFile, readdir, rename, stat, writeFile } from "node:fs/promises";
 import path from "node:path";
 import process from "node:process";
 import { callChatCompletion, costBreakdown, estimateCost, langsmithUsage, loadApiKey, stripFences } from "./llm-client.js";
@@ -28,13 +28,22 @@ const TEST_CASE_COUNT = Number(process.env.VERIFY_TEST_CASE_COUNT || 3);
 const MAX_REPAIR_ATTEMPTS = Number(process.env.VERIFY_MAX_REPAIR_ATTEMPTS || 3);
 const TIMEOUT_MS = Number(process.env.VERIFY_TIMEOUT_MS || 10000);
 
-// No per-provider pricing table is maintained here since the model is
-// swappable (OpenAI, DeepSeek, ...); cost is reported only when usage data
-// is present and left null otherwise rather than guessing at rates.
-const PRICE_PER_MILLION_TOKENS = {};
+// Since the model is swappable (OpenAI, DeepSeek, ...) only prices we
+// actually know are listed here, matching the table already used by
+// deobfuscate.js/deobfuscate-baseline.js for gpt-5.6-terra; an unlisted
+// model (e.g. a DeepSeek model without a confirmed rate here yet) reports
+// cost as null rather than guessing.
+const PRICE_PER_MILLION_TOKENS = {
+  "gpt-5.6-terra": {
+    input: 1,
+    cachedInput: 0.1,
+    cacheWriteInput: 1.25,
+    output: 6
+  }
+};
 
 function usage() {
-  console.error("Usage: node src/verify-deobfuscation.js <obfuscated.js> [output.js]");
+  console.error("Usage: node src/verify-deobfuscation.js <input-file-or-folder> [output-file-or-folder]");
   console.error("Env: LLM_API_BASE_URL, LLM_API_KEY (falls back to OPENAI_API_KEY/DEEPSEEK_API_KEY), LLM_MODEL,");
   console.error("     VERIFY_TEST_CASE_COUNT, VERIFY_MAX_REPAIR_ATTEMPTS, VERIFY_TIMEOUT_MS, VERIFY_MAX_OUTPUT_TOKENS");
 }
@@ -43,6 +52,98 @@ function defaultOutputPath(inputPath) {
   const extension = path.extname(inputPath);
   const stem = path.basename(inputPath, extension);
   return path.join(path.dirname(inputPath), `${stem}.deobfuscated${extension || ".js"}`);
+}
+
+function isInside(parentPath, childPath) {
+  const relativePath = path.relative(parentPath, childPath);
+  return relativePath !== ".." && !relativePath.startsWith(`..${path.sep}`) && !path.isAbsolute(relativePath);
+}
+
+function isJavaScriptFile(filePath) {
+  return [".js", ".mjs", ".cjs"].includes(path.extname(filePath).toLowerCase());
+}
+
+function codeNetId(value) {
+  return String(value).match(/(?:codenet_)?(p\d+_\d+)/)?.[1] || null;
+}
+
+async function fileExists(filePath) {
+  try {
+    await access(filePath);
+    return true;
+  } catch {
+    return false;
+  }
+}
+
+async function findMetadataFile(inputDirectory) {
+  const candidates = (await readdir(inputDirectory, { withFileTypes: true }))
+    .filter((entry) => entry.isFile()
+      && entry.name.toLowerCase().endsWith(".jsonl")
+      && !/\.(deobfuscated|baseline|verify)(\.\w+)?\.jsonl$/i.test(entry.name))
+    .map((entry) => path.join(inputDirectory, entry.name));
+
+  if (candidates.length !== 1) {
+    throw new Error(`Folder verification requires exactly one source JSONL in ${inputDirectory}; found ${candidates.length}.`);
+  }
+  return candidates[0];
+}
+
+async function findJavaScriptFiles(directory, excludedDirectory) {
+  const files = [];
+  const entries = await readdir(directory, { withFileTypes: true });
+
+  for (const entry of entries) {
+    const entryPath = path.join(directory, entry.name);
+    if (entry.isDirectory()) {
+      if ([".git", "node_modules"].includes(entry.name) || entryPath === excludedDirectory) {
+        continue;
+      }
+      files.push(...await findJavaScriptFiles(entryPath, excludedDirectory));
+    } else if (entry.isFile() && isJavaScriptFile(entryPath)) {
+      files.push(entryPath);
+    }
+  }
+
+  return files.sort();
+}
+
+// Every per-file result is already durable on disk (the .verify.json report
+// next to each output file), so this dataset JSONL - like the aggregate
+// summary.json - is a reconstructible view over those files, not the only
+// copy of the data. Regenerating it from scratch by re-scanning outputDirectory
+// is always possible even if this write is interrupted or later overwritten,
+// which is the mitigation for the overwrite incident recorded in
+// results/baseline_gpt-5.6-terra.tex.
+async function writeDatasetJsonl(metadataPath, resultsById) {
+  const outputLines = [];
+  const matchedIds = new Set();
+  for (const line of (await readFile(metadataPath, "utf8")).split(/\r?\n/)) {
+    if (!line.trim()) continue;
+    const record = JSON.parse(line);
+    const identifier = codeNetId(record.filename ?? record.id ?? record.task_id ?? "");
+    const result = identifier ? resultsById.get(identifier) : null;
+    if (result) {
+      matchedIds.add(identifier);
+      record.obfuscated = await readFile(result.sourcePath, "utf8");
+      record.deobfuscated = result.report.finalDeobfuscated ?? null;
+      record.verifyStatus = result.report.status;
+      record.verifyAttempts = result.report.attempts?.length ?? null;
+      record.verifyEstimatedCostUsd = result.report.totalEstimatedCostUsd ?? null;
+    }
+    outputLines.push(JSON.stringify(record));
+  }
+
+  const unmatchedIds = [...resultsById.keys()].filter((identifier) => !matchedIds.has(identifier));
+  if (unmatchedIds.length > 0) {
+    console.error(`Warning: ${unmatchedIds.length} processed file(s) have no matching metadata record: ${unmatchedIds.join(", ")}`);
+  }
+
+  const outputPath = metadataPath.replace(/\.jsonl$/i, ".verify.jsonl");
+  const temporaryPath = `${outputPath}.tmp`;
+  await writeFile(temporaryPath, `${outputLines.join("\n")}\n`, "utf8");
+  await rename(temporaryPath, outputPath);
+  return outputPath;
 }
 
 function createDeobfuscatePrompt(obfuscatedSource) {
@@ -265,6 +366,98 @@ async function verifyOne(apiKey, inputPath, outputPath) {
   };
 }
 
+async function writeVerifyOutputs(outputPath, report) {
+  await mkdir(path.dirname(outputPath), { recursive: true });
+  await writeFile(outputPath, report.finalDeobfuscated ?? "", "utf8");
+  const { finalDeobfuscated, ...reportToWrite } = report;
+  await writeFile(`${outputPath}.verify.json`, `${JSON.stringify(reportToWrite, null, 2)}\n`, "utf8");
+}
+
+// A prior run's report is worth keeping (skip on resume) only if the pipeline
+// actually completed - "verified" or "unverified" both spent the LLM calls
+// and produced a real result. "failed" means it didn't get that far (e.g. a
+// transient API error), so it must stay eligible for retry - otherwise a
+// blip on file 30 of 50 would permanently "complete" that file as an empty
+// output with no way to resume it short of manually deleting files.
+async function loadPriorReport(destinationPath) {
+  const reportPath = `${destinationPath}.verify.json`;
+  if (!(await fileExists(reportPath))) return null;
+  const priorReport = JSON.parse(await readFile(reportPath, "utf8"));
+  if (priorReport.status === "failed") return null;
+  priorReport.finalDeobfuscated = await fileExists(destinationPath) ? await readFile(destinationPath, "utf8") : null;
+  return priorReport;
+}
+
+async function verifyFolder(apiKey, inputPath, outputDirectory) {
+  const metadataPath = await findMetadataFile(inputPath);
+  const inputFiles = await findJavaScriptFiles(inputPath, outputDirectory);
+  if (inputFiles.length === 0) {
+    console.error(`No JavaScript files found in ${inputPath}`);
+    return;
+  }
+
+  const resultsById = new Map();
+  const pendingFiles = [];
+  for (const sourcePath of inputFiles) {
+    const destinationPath = path.join(outputDirectory, path.relative(inputPath, sourcePath));
+    const priorReport = await loadPriorReport(destinationPath);
+    if (priorReport) {
+      console.error(`Skipping ${sourcePath}: already processed (status: ${priorReport.status}).`);
+      const identifier = codeNetId(sourcePath);
+      if (identifier) resultsById.set(identifier, { sourcePath, report: priorReport });
+    } else {
+      pendingFiles.push(sourcePath);
+    }
+  }
+
+  const skipped = inputFiles.length - pendingFiles.length;
+  console.error(`Found ${inputFiles.length} JavaScript file(s): ${pendingFiles.length} pending, ${skipped} already verified.`);
+
+  let failures = 0;
+  for (const sourcePath of pendingFiles) {
+    const destinationPath = path.join(outputDirectory, path.relative(inputPath, sourcePath));
+    console.error(`--- ${sourcePath} ---`);
+    const report = await verifyOne(apiKey, sourcePath, destinationPath);
+    await writeVerifyOutputs(destinationPath, report);
+    if (report.status !== "verified") failures += 1;
+    const identifier = codeNetId(sourcePath);
+    if (identifier) resultsById.set(identifier, { sourcePath, report });
+  }
+
+  const allResults = [...resultsById.values()];
+  const totalEstimatedCost = allResults.reduce((sum, r) => sum + (r.report.totalEstimatedCostUsd || 0), 0);
+  const telemetryDirectory = path.join(outputDirectory, ".majadeo-verify-runs");
+  await mkdir(telemetryDirectory, { recursive: true });
+  await writeFile(
+    path.join(telemetryDirectory, "summary.json"),
+    `${JSON.stringify({
+      schemaVersion: 1,
+      model: MODEL,
+      generatedAt: new Date().toISOString(),
+      filesDiscovered: inputFiles.length,
+      filesAttempted: pendingFiles.length,
+      filesSkipped: skipped,
+      filesVerified: allResults.filter((r) => r.report.status === "verified").length,
+      filesUnverified: allResults.filter((r) => r.report.status !== "verified").length,
+      totalEstimatedCostUsd: totalEstimatedCost,
+      runs: allResults.map((r) => ({
+        inputPath: r.sourcePath,
+        status: r.report.status,
+        totalEstimatedCostUsd: r.report.totalEstimatedCostUsd
+      }))
+    }, null, 2)}\n`,
+    "utf8"
+  );
+
+  const datasetJsonlPath = await writeDatasetJsonl(metadataPath, resultsById);
+
+  console.error(`Finished: ${pendingFiles.length - failures} verified this run, ${skipped} already done, ${failures} unverified.`);
+  console.error(`Total estimated cost (this run + prior): $${totalEstimatedCost.toFixed(6)}`);
+  console.error(`Telemetry: ${telemetryDirectory}`);
+  console.error(`Dataset JSONL: ${datasetJsonlPath}`);
+  if (failures > 0) process.exitCode = 1;
+}
+
 async function main() {
   const [inputArgument, outputArgument, ...extraArguments] = process.argv.slice(2);
   if (!inputArgument || extraArguments.length > 0 || ["-h", "--help"].includes(inputArgument)) {
@@ -274,16 +467,27 @@ async function main() {
   }
 
   const inputPath = path.resolve(inputArgument);
-  const outputPath = path.resolve(outputArgument || defaultOutputPath(inputPath));
   const apiKey = loadApiKey({ envVar: "LLM_API_KEY", fallbackEnvVars: ["OPENAI_API_KEY", "DEEPSEEK_API_KEY"] });
 
+  await access(inputPath);
+  const inputStats = await stat(inputPath);
+  if (!inputStats.isFile() && !inputStats.isDirectory()) {
+    throw new Error(`Input is not a file or directory: ${inputPath}`);
+  }
+
+  if (inputStats.isDirectory()) {
+    const outputDirectory = path.resolve(outputArgument || path.join(inputPath, "verify"));
+    if (outputDirectory === inputPath || !isInside(inputPath, outputDirectory)) {
+      throw new Error("Folder output must be a subdirectory of the input folder.");
+    }
+    await verifyFolder(apiKey, inputPath, outputDirectory);
+    await flushLangsmith();
+    return;
+  }
+
+  const outputPath = path.resolve(outputArgument || defaultOutputPath(inputPath));
   const report = await verifyOne(apiKey, inputPath, outputPath);
-
-  await mkdir(path.dirname(outputPath), { recursive: true });
-  await writeFile(outputPath, report.finalDeobfuscated ?? "", "utf8");
-
-  const { finalDeobfuscated, ...reportToWrite } = report;
-  await writeFile(`${outputPath}.verify.json`, `${JSON.stringify(reportToWrite, null, 2)}\n`, "utf8");
+  await writeVerifyOutputs(outputPath, report);
   await flushLangsmith();
 
   console.error(`Status: ${report.status}`);
