@@ -7,10 +7,10 @@
 // output JSONL schema as src/deobfuscate.js so evaluators/eval.py can
 // consume its output identically.
 
-import { readFileSync } from "node:fs";
 import { mkdir, readFile, readdir, rename, writeFile } from "node:fs/promises";
 import path from "node:path";
 import process from "node:process";
+import { callChatCompletion, costBreakdown, estimateCost, langsmithUsage, loadApiKey, stripFences } from "./llm-client.js";
 import { flushLangsmith, traceLlmRun } from "./langsmith-telemetry.js";
 
 const MODEL = process.env.BASELINE_MODEL || "gpt-5.6-terra";
@@ -28,18 +28,6 @@ const PRICE_PER_MILLION_TOKENS = {
 function usage() {
   console.error("Usage: node src/deobfuscate-baseline.js <dataset-folder>");
   console.error("Env: BASELINE_MODEL (default gpt-5.6-terra), BASELINE_LIMIT (pilot subset size), BASELINE_MAX_OUTPUT_TOKENS");
-}
-
-function loadApiKey() {
-  if (process.env.OPENAI_API_KEY) return process.env.OPENAI_API_KEY;
-  try {
-    const envText = readFileSync(path.resolve(".env"), "utf8");
-    const match = envText.match(/^OPENAI_API_KEY=(.*)$/m);
-    if (match) return match[1].trim();
-  } catch {
-    // fall through
-  }
-  throw new Error("OPENAI_API_KEY not found in environment or .env");
 }
 
 function codeNetId(value) {
@@ -89,59 +77,6 @@ Obfuscated source:
 ${obfuscatedSource}`;
 }
 
-function stripFences(text) {
-  const trimmed = text.trim();
-  const fenced = trimmed.match(/^```(?:javascript|js)?\r?\n([\s\S]*?)\r?\n```$/i);
-  return fenced ? fenced[1] : trimmed;
-}
-
-function costBreakdown(usage) {
-  const prices = PRICE_PER_MILLION_TOKENS[MODEL];
-  if (!usage || !prices) return null;
-  const cachedInputTokens = usage.prompt_tokens_details?.cached_tokens || 0;
-  const cacheWriteTokens = usage.prompt_tokens_details?.cache_write_tokens || 0;
-  const plainInputTokens = usage.prompt_tokens - cachedInputTokens - cacheWriteTokens;
-  const inputCost = (
-    plainInputTokens * prices.input
-    + cachedInputTokens * prices.cachedInput
-    + cacheWriteTokens * prices.cacheWriteInput
-  ) / 1_000_000;
-  const outputCost = (usage.completion_tokens * prices.output) / 1_000_000;
-  return { input_cost: inputCost, output_cost: outputCost, total_cost: inputCost + outputCost };
-}
-
-function estimateCost(usage) {
-  return costBreakdown(usage)?.total_cost ?? null;
-}
-
-// Maps OpenAI's usage shape to LangSmith's UsageMetadata shape so cost shows
-// up in LangSmith's dashboards without needing a custom model-pricing rule.
-function langsmithUsage(usage) {
-  if (!usage) return null;
-  return {
-    input_tokens: usage.prompt_tokens,
-    output_tokens: usage.completion_tokens,
-    total_tokens: usage.total_tokens
-  };
-}
-
-async function callModel(apiKey, prompt) {
-  const res = await fetch("https://api.openai.com/v1/chat/completions", {
-    method: "POST",
-    headers: { Authorization: `Bearer ${apiKey}`, "Content-Type": "application/json" },
-    body: JSON.stringify({
-      model: MODEL,
-      messages: [{ role: "user", content: prompt }],
-      max_completion_tokens: MAX_OUTPUT_TOKENS
-    })
-  });
-  const body = await res.json();
-  if (!res.ok) {
-    throw new Error(`API error ${res.status}: ${JSON.stringify(body)}`);
-  }
-  return body;
-}
-
 async function deobfuscateOne(apiKey, sourcePath, telemetryDir) {
   const obfuscatedSource = await readFile(sourcePath, "utf8");
   const prompt = createPrompt(obfuscatedSource);
@@ -152,7 +87,13 @@ async function deobfuscateOne(apiKey, sourcePath, telemetryDir) {
 
   console.error(`Baseline: ${sourcePath} ...`);
   try {
-    response = await callModel(apiKey, prompt);
+    response = await callChatCompletion({
+      baseUrl: "https://api.openai.com/v1",
+      apiKey,
+      model: MODEL,
+      messages: [{ role: "user", content: prompt }],
+      maxTokens: MAX_OUTPUT_TOKENS
+    });
     const content = response.choices?.[0]?.message?.content;
     if (!content || !content.trim()) {
       error = `Empty completion (finish_reason=${response.choices?.[0]?.finish_reason})`;
@@ -165,7 +106,7 @@ async function deobfuscateOne(apiKey, sourcePath, telemetryDir) {
 
   const finishedAt = new Date();
   const usage = response?.usage || null;
-  const estimatedCostUsd = estimateCost(usage);
+  const estimatedCostUsd = estimateCost(usage, PRICE_PER_MILLION_TOKENS[MODEL]);
   const report = {
     schemaVersion: 1,
     model: MODEL,
@@ -193,7 +134,7 @@ async function deobfuscateOne(apiKey, sourcePath, telemetryDir) {
     prompt,
     completion: deobfuscated,
     usage: langsmithUsage(usage),
-    cost: costBreakdown(usage),
+    cost: costBreakdown(usage, PRICE_PER_MILLION_TOKENS[MODEL]),
     model: MODEL,
     status: report.status,
     error,
@@ -246,7 +187,7 @@ async function main() {
   }
 
   const inputDirectory = path.resolve(inputArgument);
-  const apiKey = loadApiKey();
+  const apiKey = loadApiKey({ envVar: "OPENAI_API_KEY" });
   const metadataPath = await findMetadataFile(inputDirectory);
   const allSourceFiles = await findSourceFiles(inputDirectory);
   const sourceFiles = allSourceFiles.slice(0, FILE_LIMIT);

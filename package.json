@@ -11,11 +11,12 @@
     "add:metadata-field": "node src/add-file-field.js",
     "deobfuscate": "node src/deobfuscate.js",
     "deobfuscate:baseline": "node src/deobfuscate-baseline.js",
+    "verify": "node src/verify-deobfuscation.js",
     "filter:metadata": "node src/filter-metadata.js",
     "obfuscate:jsfuck": "node src/obfuscate-jsfuck.js",
     "select": "node src/select-files.js",
     "langsmith:sync": "node src/sync-langsmith.js",
-    "check": "node --check src/deobfuscate.js && node --check src/deobfuscate-baseline.js && node --check src/langsmith-telemetry.js && node --check src/sync-langsmith.js && node --check src/select-files.js && node --check src/obfuscate-jsfuck.js && node --check src/filter-metadata.js && node --check src/add-file-field.js"
+    "check": "node --check src/deobfuscate.js && node --check src/deobfuscate-baseline.js && node --check src/verify-deobfuscation.js && node --check src/llm-client.js && node --check src/sandbox-run.js && node --check src/langsmith-telemetry.js && node --check src/sync-langsmith.js && node --check src/select-files.js && node --check src/obfuscate-jsfuck.js && node --check src/filter-metadata.js && node --check src/add-file-field.js"
   },
   "dependencies": {
     "@openai/codex-sdk": "^0.148.0",

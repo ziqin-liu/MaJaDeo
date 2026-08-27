@@ -187,6 +187,63 @@ Responses API and a translation proxy (e.g. LiteLLM) in front of
 Chat-Completions-only providers like DeepSeek. Test with a throwaway file and
 check the run's `.run.json` log before trusting it for real work.
 
+## Self-verifying deobfuscation
+
+`src/verify-deobfuscation.js` is a second, independent pipeline that checks its
+own work instead of just producing text:
+
+1. An LLM deobfuscates the file (single raw chat-completion call, same style
+   as the baseline).
+2. A second LLM call, given the deobfuscated source, generates stdin test
+   inputs for it.
+3. Both the original obfuscated program and the deobfuscated program are run
+   against those inputs inside a Docker sandbox (`src/sandbox-run.js`) —
+   `--network none`, an ephemeral `--rm` container per run, and a timeout —
+   and their stdout is compared with a plain trimmed string match.
+4. On any mismatch, a third LLM call is given the failing input and both
+   outputs and asked to fix the deobfuscated program; this repeats up to a
+   capped number of attempts.
+
+```sh
+npm run verify -- path/to/obfuscated.js
+```
+
+Env vars: `LLM_API_BASE_URL` (default `https://api.openai.com/v1`),
+`LLM_API_KEY` (falls back to `OPENAI_API_KEY`/`DEEPSEEK_API_KEY`), `LLM_MODEL`
+(default `gpt-5.6-terra`), `VERIFY_TEST_CASE_COUNT` (default 3),
+`VERIFY_MAX_REPAIR_ATTEMPTS` (default 3), `VERIFY_TIMEOUT_MS` (default
+10000), `VERIFY_MAX_OUTPUT_TOKENS` (default 20000).
+
+Because DeepSeek's API is OpenAI-Chat-Completions-compatible, it can be used
+as a drop-in swap for GPT here (unlike the Codex-agent route above, whose
+DeepSeek compatibility is unverified):
+
+```sh
+LLM_API_BASE_URL=https://api.deepseek.com LLM_MODEL=deepseek-chat \
+LLM_API_KEY=$DEEPSEEK_API_KEY npm run verify -- path/to/obfuscated.js
+```
+
+Output: `<output>` (the final deobfuscated source, whether or not it
+verified) and `<output>.verify.json`, which records every attempt — the
+generated test cases, per-test-case obfuscated/deobfuscated output and
+match result, and any repair prompts, plus `status` (`verified`,
+`unverified`, or `failed`).
+
+Notes and deliberate scope limits:
+
+- The obfuscated-vs-deobfuscated comparison is a deterministic trimmed
+  string match, not an LLM judgment call — cheaper and reproducible; only
+  the repair step calls the model.
+- Test-case generation asks for stdin inputs only, not expected outputs —
+  there is no ground truth here, since both programs' actual outputs are
+  compared against each other rather than against a stored expected result.
+- This script only handles a single input file per run; it does not (yet)
+  walk a dataset folder the way `deobfuscate.js`/`deobfuscate-baseline.js`
+  do.
+- Requires Docker on `PATH`. Execution is required here (unlike the other
+  two scripts, which never run untrusted input) to compare real program
+  behavior, so it always goes through the sandbox rather than the host.
+
 ## Evaluation
 
 The evaluation is based on the JsDeObsBench
