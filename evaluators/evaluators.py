@@ -109,15 +109,22 @@ class CodeBLEUEvaluator(Evaluator):
 
 class SyntaxEvaluator(Evaluator):
     def is_valid_js(self, code: str) -> bool:
+        # `node --check` on stdin defaults to sloppy-mode CommonJS, which
+        # rejects otherwise-valid ES module syntax (`import`/`export`) as a
+        # syntax error. Deobfuscated output isn't guaranteed to be CommonJS,
+        # so a file only actually fails here if it parses as neither.
         if code is None or code.strip() == "":
             return False
         try:
-            run_process = subprocess.run(
-                ["node", "--check"],
-                input=code.encode(),
-                capture_output=True,
-            )
-            return run_process.returncode == 0
+            for extra_args in ([], ["--input-type=module"]):
+                run_process = subprocess.run(
+                    ["node", "--check", *extra_args],
+                    input=code.encode(),
+                    capture_output=True,
+                )
+                if run_process.returncode == 0:
+                    return True
+            return False
         except OSError:
             return False
 
